@@ -23,12 +23,12 @@ struct Domain {
         for i in 0..<parts.count{
             if parts[i]=="com"{
                 if i != 0{
-            self.contentBlockerAddress = ".*\(parts[i-1]).*"
-
+                    self.contentBlockerAddress = ".*\(parts[i-1]).*"
+                    
                 }
-
+                
             }
-
+            
         }
         add()
     }
@@ -36,21 +36,20 @@ struct Domain {
     func add() {
         
         let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "foo")
-        print(url?.absoluteString)
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
             "trigger":["url-filter": contentBlockerAddress],
             "action": ["type":"block"]
-        ])
+            ])
         json.appendIfArray(json: jsonElement)
         let string = JSON.makeProperFormat(json: json)
         let data = string.data(using: .utf8)
         try! data?.write(to: url!)
-        reloadExtension()
-
-   
-
+        ExtensionManager.reload()
+        
+        
+        
     }
     
     func remove() {
@@ -58,15 +57,9 @@ struct Domain {
     }
     
     
-    private func reloadExtension() {
-        let identifierHosts = "com.lukejmann.SiteBlocker.Extension"
-        SFContentBlockerManager.reloadContentBlocker(withIdentifier: identifierHosts) { (error) -> Void in
-            print(error ?? "")
-            print("Reloaded.")
-        }
-    }
     
-    }
+    
+}
 
 
 

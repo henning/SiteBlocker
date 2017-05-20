@@ -1,13 +1,8 @@
 import SwiftyJSON
+import SafariServices
 
 extension JSON{
-    
-    static func getTemplate() -> JSON {
-        let file = Bundle.main.path(forResource: "template", ofType: "json")
-        let data = try? Data(contentsOf: URL(fileURLWithPath: file!))
-        return JSON(data!)
-    }
-    
+
     static func makeProperFormat(json: JSON) -> String {
         var string = json.description
             .replacingOccurrences(of: "\n", with: "")
@@ -72,4 +67,35 @@ extension JSON{
     
 }
 
+struct ExtensionManager {
+    static func setupJSON() {
+
+        if UserDefaults.standard.bool(forKey: "hasLoaded"){ return }
+        else {
+            UserDefaults.standard.set(true, forKey: "hasLoaded")
+        let data = try! Data(contentsOf: (Bundle.main.url(forResource: "blockerList", withExtension: "json")!))
+          let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("blockerList.json")
+        
+        do {
+            try data.write(to: url!)
+        } catch let error as NSError {
+            print("Failed writing to URL: \(String(describing: url)), Error: " + error.localizedDescription)
+        }
+        
+        
+        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+        if let userDefaults = userDefaults {
+            userDefaults.set(url, forKey: "foo")
+        }
+        }
+
+    }
+    static func reload() {
+        let identifierHosts = "com.lukejmann.SiteBlocker.Extension"
+        SFContentBlockerManager.reloadContentBlocker(withIdentifier: identifierHosts) { (error) -> Void in
+            print(error ?? "")
+            print("Reloaded.")
+        }
+    }
+}
 

@@ -1,10 +1,10 @@
 version: "Apple Swift version 3.1 (swiftlang-802.0.51 clang-802.0.41)"
-options: "80492dfa3f01be4e06604d4cfe619156"
-build_time: [548604092, 263707000]
+options: "8b620e88350684383592251300a69cbd"
+build_time: [548608483, 623266000]
 inputs:
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Extension/ContentBlockerRequestHandler.swift": [548561796, 0]
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/SiteBlocker/ViewController.swift": [548561796, 0]
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/SiteBlocker/BlockerModel.swift": [548561796, 0]
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/SiteBlocker/DomainsTableViewController.swift": [548561796, 0]
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/SiteBlocker/AppDelegate.swift": [548561796, 0]
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/SiteBlocker/DRY.swift": [548561796, 0]
+  "/Users/lukemann/SiteBlocker/Extension/ContentBlockerRequestHandler.swift": [548606976, 0]
+  "/Users/lukemann/SiteBlocker/SiteBlocker/ViewController.swift": [548606976, 0]
+  "/Users/lukemann/SiteBlocker/SiteBlocker/BlockerModel.swift": [548608483, 0]
+  "/Users/lukemann/SiteBlocker/SiteBlocker/DomainsTableViewController.swift": [548606976, 0]
+  "/Users/lukemann/SiteBlocker/SiteBlocker/AppDelegate.swift": [548608483, 0]
+  "/Users/lukemann/SiteBlocker/SiteBlocker/DRY.swift": [548608483, 0]

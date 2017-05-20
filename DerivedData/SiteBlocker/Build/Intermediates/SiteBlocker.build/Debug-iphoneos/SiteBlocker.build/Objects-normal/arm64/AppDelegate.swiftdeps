@@ -9,14 +9,11 @@ provides-dynamic-lookup:
 - "application"
 - "window"
 depends-top-level:
-- !private "??"
 - "AppDelegate"
 - "AssignmentPrecedence"
 - "Bool"
 - !private "BooleanLiteralType"
-- !private "Bundle"
-- !private "SFContentBlockerManager"
-- !private "StringLiteralType"
+- !private "ExtensionManager"
 - "UIApplication"
 - "UIApplicationDelegate"
 - "UIApplicationLaunchOptionsKey"
@@ -24,17 +21,12 @@ depends-top-level:
 - "UIResponder"
 - !private "UIScreen"
 - "UIWindow"
-- !private "UserDefaults"
 - !private "ViewController"
-- !private "Void"
-- !private "print"
 depends-member:
-- !private ["Ps9AnyObject", "Bundle"]
-- !private ["Ps9AnyObject", "SFContentBlockerManager"]
+- !private ["Ps9AnyObject", "ExtensionManager"]
 - !private ["Ps9AnyObject", "UIColor"]
 - !private ["Ps9AnyObject", "UIScreen"]
 - !private ["Ps9AnyObject", "UIWindow"]
-- !private ["Ps9AnyObject", "UserDefaults"]
 - !private ["Ps9AnyObject", "ViewController"]
 - ["Ps9AnyObject", "application"]
 - ["Ps9AnyObject", "applicationDidBecomeActive"]
@@ -53,25 +45,18 @@ depends-member:
 - !private ["Ps9AnyObject", "init"]
 - !private ["Ps9AnyObject", "main"]
 - !private ["Ps9AnyObject", "makeKeyAndVisible"]
-- !private ["Ps9AnyObject", "print"]
-- !private ["Ps9AnyObject", "reloadContentBlocker"]
 - !private ["Ps9AnyObject", "rootViewController"]
-- !private ["Ps9AnyObject", "set"]
-- !private ["Ps9AnyObject", "url"]
 - !private ["Ps9AnyObject", "white"]
 - ["Ps9AnyObject", "window"]
 - ["Ps9AnyObject", ""]
 - ["C11SiteBlocker11AppDelegate", "Bool"]
-- !private ["C11SiteBlocker11AppDelegate", "Bundle"]
-- !private ["C11SiteBlocker11AppDelegate", "SFContentBlockerManager"]
+- !private ["C11SiteBlocker11AppDelegate", "ExtensionManager"]
 - ["C11SiteBlocker11AppDelegate", "UIApplication"]
 - ["C11SiteBlocker11AppDelegate", "UIApplicationLaunchOptionsKey"]
 - !private ["C11SiteBlocker11AppDelegate", "UIColor"]
 - !private ["C11SiteBlocker11AppDelegate", "UIScreen"]
 - ["C11SiteBlocker11AppDelegate", "UIWindow"]
-- !private ["C11SiteBlocker11AppDelegate", "UserDefaults"]
 - !private ["C11SiteBlocker11AppDelegate", "ViewController"]
-- !private ["C11SiteBlocker11AppDelegate", "Void"]
 - ["C11SiteBlocker11AppDelegate", "application"]
 - ["C11SiteBlocker11AppDelegate", "applicationDidBecomeActive"]
 - ["C11SiteBlocker11AppDelegate", "applicationDidEnterBackground"]
@@ -86,20 +71,15 @@ depends-member:
 - ["C11SiteBlocker11AppDelegate", "applicationWillTerminate"]
 - ["C11SiteBlocker11AppDelegate", "deinit"]
 - ["C11SiteBlocker11AppDelegate", "init"]
-- !private ["C11SiteBlocker11AppDelegate", "print"]
 - ["C11SiteBlocker11AppDelegate", "window"]
-- !private ["CSo6Bundle", "main"]
-- !private ["CSo6Bundle", "url"]
 - !private ["PSo15CALayerDelegate", "backgroundColor"]
 - !private ["PSo15CALayerDelegate", "init"]
 - !private ["PSo15CALayerDelegate", "makeKeyAndVisible"]
 - !private ["PSo15CALayerDelegate", "rootViewController"]
-- !private ["Ps7CVarArg", "Bundle"]
-- !private ["Ps7CVarArg", "SFContentBlockerManager"]
+- !private ["Ps7CVarArg", "ExtensionManager"]
 - !private ["Ps7CVarArg", "UIColor"]
 - !private ["Ps7CVarArg", "UIScreen"]
 - !private ["Ps7CVarArg", "UIWindow"]
-- !private ["Ps7CVarArg", "UserDefaults"]
 - !private ["Ps7CVarArg", "ViewController"]
 - ["Ps7CVarArg", "application"]
 - ["Ps7CVarArg", "applicationDidBecomeActive"]
@@ -118,25 +98,18 @@ depends-member:
 - !private ["Ps7CVarArg", "init"]
 - !private ["Ps7CVarArg", "main"]
 - !private ["Ps7CVarArg", "makeKeyAndVisible"]
-- !private ["Ps7CVarArg", "print"]
-- !private ["Ps7CVarArg", "reloadContentBlocker"]
 - !private ["Ps7CVarArg", "rootViewController"]
-- !private ["Ps7CVarArg", "set"]
-- !private ["Ps7CVarArg", "url"]
 - !private ["Ps7CVarArg", "white"]
 - ["Ps7CVarArg", "window"]
 - ["Ps7CVarArg", ""]
-- !private ["Ps10Comparable", "init"]
 - !private ["P7SnapKit25ConstraintRelatableTarget", "backgroundColor"]
 - !private ["P7SnapKit25ConstraintRelatableTarget", "init"]
 - !private ["P7SnapKit25ConstraintRelatableTarget", "makeKeyAndVisible"]
 - !private ["P7SnapKit25ConstraintRelatableTarget", "rootViewController"]
-- !private ["Ps28CustomDebugStringConvertible", "Bundle"]
-- !private ["Ps28CustomDebugStringConvertible", "SFContentBlockerManager"]
+- !private ["Ps28CustomDebugStringConvertible", "ExtensionManager"]
 - !private ["Ps28CustomDebugStringConvertible", "UIColor"]
 - !private ["Ps28CustomDebugStringConvertible", "UIScreen"]
 - !private ["Ps28CustomDebugStringConvertible", "UIWindow"]
-- !private ["Ps28CustomDebugStringConvertible", "UserDefaults"]
 - !private ["Ps28CustomDebugStringConvertible", "ViewController"]
 - ["Ps28CustomDebugStringConvertible", "application"]
 - ["Ps28CustomDebugStringConvertible", "applicationDidBecomeActive"]
@@ -155,22 +128,14 @@ depends-member:
 - !private ["Ps28CustomDebugStringConvertible", "init"]
 - !private ["Ps28CustomDebugStringConvertible", "main"]
 - !private ["Ps28CustomDebugStringConvertible", "makeKeyAndVisible"]
-- !private ["Ps28CustomDebugStringConvertible", "print"]
-- !private ["Ps28CustomDebugStringConvertible", "reloadContentBlocker"]
 - !private ["Ps28CustomDebugStringConvertible", "rootViewController"]
-- !private ["Ps28CustomDebugStringConvertible", "set"]
-- !private ["Ps28CustomDebugStringConvertible", "url"]
 - !private ["Ps28CustomDebugStringConvertible", "white"]
 - ["Ps28CustomDebugStringConvertible", "window"]
 - ["Ps28CustomDebugStringConvertible", ""]
-- !private ["Ps29CustomPlaygroundQuickLookable", "init"]
-- !private ["Ps17CustomReflectable", "init"]
-- !private ["Ps23CustomStringConvertible", "Bundle"]
-- !private ["Ps23CustomStringConvertible", "SFContentBlockerManager"]
+- !private ["Ps23CustomStringConvertible", "ExtensionManager"]
 - !private ["Ps23CustomStringConvertible", "UIColor"]
 - !private ["Ps23CustomStringConvertible", "UIScreen"]
 - !private ["Ps23CustomStringConvertible", "UIWindow"]
-- !private ["Ps23CustomStringConvertible", "UserDefaults"]
 - !private ["Ps23CustomStringConvertible", "ViewController"]
 - ["Ps23CustomStringConvertible", "application"]
 - ["Ps23CustomStringConvertible", "applicationDidBecomeActive"]
@@ -189,20 +154,14 @@ depends-member:
 - !private ["Ps23CustomStringConvertible", "init"]
 - !private ["Ps23CustomStringConvertible", "main"]
 - !private ["Ps23CustomStringConvertible", "makeKeyAndVisible"]
-- !private ["Ps23CustomStringConvertible", "print"]
-- !private ["Ps23CustomStringConvertible", "reloadContentBlocker"]
 - !private ["Ps23CustomStringConvertible", "rootViewController"]
-- !private ["Ps23CustomStringConvertible", "set"]
-- !private ["Ps23CustomStringConvertible", "url"]
 - !private ["Ps23CustomStringConvertible", "white"]
 - ["Ps23CustomStringConvertible", "window"]
 - ["Ps23CustomStringConvertible", ""]
-- !private ["Ps9Equatable", "Bundle"]
-- !private ["Ps9Equatable", "SFContentBlockerManager"]
+- !private ["Ps9Equatable", "ExtensionManager"]
 - !private ["Ps9Equatable", "UIColor"]
 - !private ["Ps9Equatable", "UIScreen"]
 - !private ["Ps9Equatable", "UIWindow"]
-- !private ["Ps9Equatable", "UserDefaults"]
 - !private ["Ps9Equatable", "ViewController"]
 - ["Ps9Equatable", "application"]
 - ["Ps9Equatable", "applicationDidBecomeActive"]
@@ -221,23 +180,16 @@ depends-member:
 - !private ["Ps9Equatable", "init"]
 - !private ["Ps9Equatable", "main"]
 - !private ["Ps9Equatable", "makeKeyAndVisible"]
-- !private ["Ps9Equatable", "print"]
-- !private ["Ps9Equatable", "reloadContentBlocker"]
 - !private ["Ps9Equatable", "rootViewController"]
-- !private ["Ps9Equatable", "set"]
-- !private ["Ps9Equatable", "url"]
 - !private ["Ps9Equatable", "white"]
 - ["Ps9Equatable", "window"]
 - ["Ps9Equatable", ""]
-- !private ["Ps43ExpressibleByExtendedGraphemeClusterLiteral", "init"]
-- !private ["Ps26ExpressibleByStringLiteral", "init"]
-- !private ["Ps33ExpressibleByUnicodeScalarLiteral", "init"]
-- !private ["Ps8Hashable", "Bundle"]
-- !private ["Ps8Hashable", "SFContentBlockerManager"]
+- !private ["V11SiteBlocker16ExtensionManager", "reload"]
+- !private ["V11SiteBlocker16ExtensionManager", "setupJSON"]
+- !private ["Ps8Hashable", "ExtensionManager"]
 - !private ["Ps8Hashable", "UIColor"]
 - !private ["Ps8Hashable", "UIScreen"]
 - !private ["Ps8Hashable", "UIWindow"]
-- !private ["Ps8Hashable", "UserDefaults"]
 - !private ["Ps8Hashable", "ViewController"]
 - ["Ps8Hashable", "application"]
 - ["Ps8Hashable", "applicationDidBecomeActive"]
@@ -256,41 +208,29 @@ depends-member:
 - !private ["Ps8Hashable", "init"]
 - !private ["Ps8Hashable", "main"]
 - !private ["Ps8Hashable", "makeKeyAndVisible"]
-- !private ["Ps8Hashable", "print"]
-- !private ["Ps8Hashable", "reloadContentBlocker"]
 - !private ["Ps8Hashable", "rootViewController"]
-- !private ["Ps8Hashable", "set"]
-- !private ["Ps8Hashable", "url"]
 - !private ["Ps8Hashable", "white"]
 - ["Ps8Hashable", "window"]
 - ["Ps8Hashable", ""]
-- !private ["P10SwiftyJSON17JSONSubscriptType", "init"]
 - !private ["P7SnapKit20LayoutConstraintItem", "backgroundColor"]
 - !private ["P7SnapKit20LayoutConstraintItem", "init"]
 - !private ["P7SnapKit20LayoutConstraintItem", "makeKeyAndVisible"]
 - !private ["P7SnapKit20LayoutConstraintItem", "rootViewController"]
-- !private ["Ps25LosslessStringConvertible", "init"]
-- !private ["Ps10MirrorPath", "init"]
 - !private ["PSo8NSCoding", "backgroundColor"]
 - !private ["PSo8NSCoding", "init"]
 - !private ["PSo8NSCoding", "makeKeyAndVisible"]
 - !private ["PSo8NSCoding", "rootViewController"]
 - !private ["PSo8NSCoding", "white"]
-- !private ["PSo9NSCopying", "init"]
 - !private ["PSo9NSCopying", "white"]
 - !private ["PSo26NSExtensionRequestHandling", "init"]
-- !private ["PSo16NSMutableCopying", "init"]
 - ["CSo8NSObject", "Bool"]
-- !private ["CSo8NSObject", "Bundle"]
-- !private ["CSo8NSObject", "SFContentBlockerManager"]
+- !private ["CSo8NSObject", "ExtensionManager"]
 - ["CSo8NSObject", "UIApplication"]
 - ["CSo8NSObject", "UIApplicationLaunchOptionsKey"]
 - !private ["CSo8NSObject", "UIColor"]
 - !private ["CSo8NSObject", "UIScreen"]
 - ["CSo8NSObject", "UIWindow"]
-- !private ["CSo8NSObject", "UserDefaults"]
 - !private ["CSo8NSObject", "ViewController"]
-- !private ["CSo8NSObject", "Void"]
 - ["CSo8NSObject", "application"]
 - ["CSo8NSObject", "applicationDidBecomeActive"]
 - ["CSo8NSObject", "applicationDidEnterBackground"]
@@ -308,19 +248,13 @@ depends-member:
 - ["CSo8NSObject", "init"]
 - !private ["CSo8NSObject", "main"]
 - !private ["CSo8NSObject", "makeKeyAndVisible"]
-- !private ["CSo8NSObject", "print"]
-- !private ["CSo8NSObject", "reloadContentBlocker"]
 - !private ["CSo8NSObject", "rootViewController"]
-- !private ["CSo8NSObject", "set"]
-- !private ["CSo8NSObject", "url"]
 - !private ["CSo8NSObject", "white"]
 - ["CSo8NSObject", "window"]
-- !private ["PSo16NSObjectProtocol", "Bundle"]
-- !private ["PSo16NSObjectProtocol", "SFContentBlockerManager"]
+- !private ["PSo16NSObjectProtocol", "ExtensionManager"]
 - !private ["PSo16NSObjectProtocol", "UIColor"]
 - !private ["PSo16NSObjectProtocol", "UIScreen"]
 - !private ["PSo16NSObjectProtocol", "UIWindow"]
-- !private ["PSo16NSObjectProtocol", "UserDefaults"]
 - !private ["PSo16NSObjectProtocol", "ViewController"]
 - ["PSo16NSObjectProtocol", "application"]
 - ["PSo16NSObjectProtocol", "applicationDidBecomeActive"]
@@ -339,23 +273,15 @@ depends-member:
 - !private ["PSo16NSObjectProtocol", "init"]
 - !private ["PSo16NSObjectProtocol", "main"]
 - !private ["PSo16NSObjectProtocol", "makeKeyAndVisible"]
-- !private ["PSo16NSObjectProtocol", "print"]
-- !private ["PSo16NSObjectProtocol", "reloadContentBlocker"]
 - !private ["PSo16NSObjectProtocol", "rootViewController"]
-- !private ["PSo16NSObjectProtocol", "set"]
-- !private ["PSo16NSObjectProtocol", "url"]
 - !private ["PSo16NSObjectProtocol", "white"]
 - ["PSo16NSObjectProtocol", "window"]
 - ["PSo16NSObjectProtocol", ""]
-- !private ["PSo14NSSecureCoding", "init"]
 - !private ["PSo14NSSecureCoding", "white"]
-- !private ["CSo8NSString", "init"]
-- !private ["P7RxSwift18ReactiveCompatible", "Bundle"]
-- !private ["P7RxSwift18ReactiveCompatible", "SFContentBlockerManager"]
+- !private ["P7RxSwift18ReactiveCompatible", "ExtensionManager"]
 - !private ["P7RxSwift18ReactiveCompatible", "UIColor"]
 - !private ["P7RxSwift18ReactiveCompatible", "UIScreen"]
 - !private ["P7RxSwift18ReactiveCompatible", "UIWindow"]
-- !private ["P7RxSwift18ReactiveCompatible", "UserDefaults"]
 - !private ["P7RxSwift18ReactiveCompatible", "ViewController"]
 - ["P7RxSwift18ReactiveCompatible", "application"]
 - ["P7RxSwift18ReactiveCompatible", "applicationDidBecomeActive"]
@@ -374,18 +300,10 @@ depends-member:
 - !private ["P7RxSwift18ReactiveCompatible", "init"]
 - !private ["P7RxSwift18ReactiveCompatible", "main"]
 - !private ["P7RxSwift18ReactiveCompatible", "makeKeyAndVisible"]
-- !private ["P7RxSwift18ReactiveCompatible", "print"]
-- !private ["P7RxSwift18ReactiveCompatible", "reloadContentBlocker"]
 - !private ["P7RxSwift18ReactiveCompatible", "rootViewController"]
-- !private ["P7RxSwift18ReactiveCompatible", "set"]
-- !private ["P7RxSwift18ReactiveCompatible", "url"]
 - !private ["P7RxSwift18ReactiveCompatible", "white"]
 - ["P7RxSwift18ReactiveCompatible", "window"]
 - ["P7RxSwift18ReactiveCompatible", ""]
-- !private ["CSo23SFContentBlockerManager", "reloadContentBlocker"]
-- !private ["SS", "init"]
-- !private ["Ps16TextOutputStream", "init"]
-- !private ["Ps20TextOutputStreamable", "init"]
 - !private ["PSo29UIAccessibilityIdentification", "backgroundColor"]
 - !private ["PSo29UIAccessibilityIdentification", "init"]
 - !private ["PSo29UIAccessibilityIdentification", "makeKeyAndVisible"]
@@ -398,12 +316,10 @@ depends-member:
 - !private ["PSo21UIAppearanceContainer", "init"]
 - !private ["PSo21UIAppearanceContainer", "makeKeyAndVisible"]
 - !private ["PSo21UIAppearanceContainer", "rootViewController"]
-- !private ["PSo21UIApplicationDelegate", "Bundle"]
-- !private ["PSo21UIApplicationDelegate", "SFContentBlockerManager"]
+- !private ["PSo21UIApplicationDelegate", "ExtensionManager"]
 - !private ["PSo21UIApplicationDelegate", "UIColor"]
 - !private ["PSo21UIApplicationDelegate", "UIScreen"]
 - !private ["PSo21UIApplicationDelegate", "UIWindow"]
-- !private ["PSo21UIApplicationDelegate", "UserDefaults"]
 - !private ["PSo21UIApplicationDelegate", "ViewController"]
 - ["PSo21UIApplicationDelegate", "application"]
 - ["PSo21UIApplicationDelegate", "applicationDidBecomeActive"]
@@ -417,7 +333,6 @@ depends-member:
 - ["PSo21UIApplicationDelegate", "applicationWillEnterForeground"]
 - ["PSo21UIApplicationDelegate", "applicationWillResignActive"]
 - ["PSo21UIApplicationDelegate", "applicationWillTerminate"]
-- !private ["PSo21UIApplicationDelegate", "print"]
 - ["PSo21UIApplicationDelegate", "window"]
 - ["PSo21UIApplicationDelegate", ""]
 - !private ["CSo7UIColor", "white"]
@@ -439,16 +354,13 @@ depends-member:
 - !private ["PSo11UIFocusItem", "makeKeyAndVisible"]
 - !private ["PSo11UIFocusItem", "rootViewController"]
 - ["CSo11UIResponder", "Bool"]
-- !private ["CSo11UIResponder", "Bundle"]
-- !private ["CSo11UIResponder", "SFContentBlockerManager"]
+- !private ["CSo11UIResponder", "ExtensionManager"]
 - ["CSo11UIResponder", "UIApplication"]
 - ["CSo11UIResponder", "UIApplicationLaunchOptionsKey"]
 - !private ["CSo11UIResponder", "UIColor"]
 - !private ["CSo11UIResponder", "UIScreen"]
 - ["CSo11UIResponder", "UIWindow"]
-- !private ["CSo11UIResponder", "UserDefaults"]
 - !private ["CSo11UIResponder", "ViewController"]
-- !private ["CSo11UIResponder", "Void"]
 - ["CSo11UIResponder", "application"]
 - ["CSo11UIResponder", "applicationDidBecomeActive"]
 - ["CSo11UIResponder", "applicationDidEnterBackground"]
@@ -464,16 +376,13 @@ depends-member:
 - !private ["CSo11UIResponder", "backgroundColor"]
 - ["CSo11UIResponder", "init"]
 - !private ["CSo11UIResponder", "makeKeyAndVisible"]
-- !private ["CSo11UIResponder", "print"]
 - !private ["CSo11UIResponder", "rootViewController"]
 - ["CSo11UIResponder", "window"]
 - ["CSo11UIResponder", ""]
-- !private ["PSo30UIResponderStandardEditActions", "Bundle"]
-- !private ["PSo30UIResponderStandardEditActions", "SFContentBlockerManager"]
+- !private ["PSo30UIResponderStandardEditActions", "ExtensionManager"]
 - !private ["PSo30UIResponderStandardEditActions", "UIColor"]
 - !private ["PSo30UIResponderStandardEditActions", "UIScreen"]
 - !private ["PSo30UIResponderStandardEditActions", "UIWindow"]
-- !private ["PSo30UIResponderStandardEditActions", "UserDefaults"]
 - !private ["PSo30UIResponderStandardEditActions", "ViewController"]
 - ["PSo30UIResponderStandardEditActions", "application"]
 - ["PSo30UIResponderStandardEditActions", "applicationDidBecomeActive"]
@@ -490,7 +399,6 @@ depends-member:
 - !private ["PSo30UIResponderStandardEditActions", "backgroundColor"]
 - !private ["PSo30UIResponderStandardEditActions", "init"]
 - !private ["PSo30UIResponderStandardEditActions", "makeKeyAndVisible"]
-- !private ["PSo30UIResponderStandardEditActions", "print"]
 - !private ["PSo30UIResponderStandardEditActions", "rootViewController"]
 - ["PSo30UIResponderStandardEditActions", "window"]
 - ["PSo30UIResponderStandardEditActions", ""]
@@ -514,26 +422,16 @@ depends-member:
 - !private ["CSo8UIWindow", "init"]
 - !private ["CSo8UIWindow", "makeKeyAndVisible"]
 - !private ["CSo8UIWindow", "rootViewController"]
-- !private ["CSo12UserDefaults", "init"]
-- !private ["CSo12UserDefaults", "set"]
 - !private ["C11SiteBlocker14ViewController", "init"]
 - !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "backgroundColor"]
 - !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "init"]
 - !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "makeKeyAndVisible"]
 - !private ["Ps37_DefaultCustomPlaygroundQuickLookable", "rootViewController"]
-- !private ["Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral", "init"]
-- !private ["Ps34_ExpressibleByBuiltinStringLiteral", "init"]
-- !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "init"]
-- !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "init"]
 - !private ["Ps26_ExpressibleByColorLiteral", "white"]
-- !private ["Ps33_ExpressibleByStringInterpolation", "init"]
-- !private ["Ps35_HasCustomAnyHashableRepresentation", "init"]
-- !private ["Ps9_Hashable", "Bundle"]
-- !private ["Ps9_Hashable", "SFContentBlockerManager"]
+- !private ["Ps9_Hashable", "ExtensionManager"]
 - !private ["Ps9_Hashable", "UIColor"]
 - !private ["Ps9_Hashable", "UIScreen"]
 - !private ["Ps9_Hashable", "UIWindow"]
-- !private ["Ps9_Hashable", "UserDefaults"]
 - !private ["Ps9_Hashable", "ViewController"]
 - ["Ps9_Hashable", "application"]
 - ["Ps9_Hashable", "applicationDidBecomeActive"]
@@ -552,49 +450,29 @@ depends-member:
 - !private ["Ps9_Hashable", "init"]
 - !private ["Ps9_Hashable", "main"]
 - !private ["Ps9_Hashable", "makeKeyAndVisible"]
-- !private ["Ps9_Hashable", "print"]
-- !private ["Ps9_Hashable", "reloadContentBlocker"]
 - !private ["Ps9_Hashable", "rootViewController"]
-- !private ["Ps9_Hashable", "set"]
-- !private ["Ps9_Hashable", "url"]
 - !private ["Ps9_Hashable", "white"]
 - ["Ps9_Hashable", "window"]
 - ["Ps9_Hashable", ""]
-- !private ["Ps21_ObjectiveCBridgeable", "init"]
 depends-nominal:
 - "Ps9AnyObject"
 - "C11SiteBlocker11AppDelegate"
-- !private "CSo6Bundle"
 - !private "PSo15CALayerDelegate"
 - "Ps7CVarArg"
-- !private "Ps10Comparable"
 - !private "P7SnapKit25ConstraintRelatableTarget"
 - "Ps28CustomDebugStringConvertible"
-- !private "Ps29CustomPlaygroundQuickLookable"
-- !private "Ps17CustomReflectable"
 - "Ps23CustomStringConvertible"
 - "Ps9Equatable"
-- !private "Ps43ExpressibleByExtendedGraphemeClusterLiteral"
-- !private "Ps26ExpressibleByStringLiteral"
-- !private "Ps33ExpressibleByUnicodeScalarLiteral"
+- !private "V11SiteBlocker16ExtensionManager"
 - "Ps8Hashable"
-- !private "P10SwiftyJSON17JSONSubscriptType"
 - !private "P7SnapKit20LayoutConstraintItem"
-- !private "Ps25LosslessStringConvertible"
-- !private "Ps10MirrorPath"
 - !private "PSo8NSCoding"
 - !private "PSo9NSCopying"
 - !private "PSo26NSExtensionRequestHandling"
-- !private "PSo16NSMutableCopying"
 - "CSo8NSObject"
 - "PSo16NSObjectProtocol"
 - !private "PSo14NSSecureCoding"
-- !private "CSo8NSString"
 - "P7RxSwift18ReactiveCompatible"
-- !private "CSo23SFContentBlockerManager"
-- !private "SS"
-- !private "Ps16TextOutputStream"
-- !private "Ps20TextOutputStreamable"
 - !private "PSo29UIAccessibilityIdentification"
 - !private "PSo12UIAppearance"
 - !private "PSo21UIAppearanceContainer"
@@ -615,18 +493,10 @@ depends-nominal:
 - !private "CSo6UIView"
 - !private "CSo16UIViewController"
 - !private "CSo8UIWindow"
-- !private "CSo12UserDefaults"
 - !private "C11SiteBlocker14ViewController"
 - !private "Ps37_DefaultCustomPlaygroundQuickLookable"
-- !private "Ps51_ExpressibleByBuiltinExtendedGraphemeClusterLiteral"
-- !private "Ps34_ExpressibleByBuiltinStringLiteral"
-- !private "Ps39_ExpressibleByBuiltinUTF16StringLiteral"
-- !private "Ps41_ExpressibleByBuiltinUnicodeScalarLiteral"
 - !private "Ps26_ExpressibleByColorLiteral"
-- !private "Ps33_ExpressibleByStringInterpolation"
-- !private "Ps35_HasCustomAnyHashableRepresentation"
 - "Ps9_Hashable"
-- !private "Ps21_ObjectiveCBridgeable"
 depends-dynamic-lookup:
 depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/Swift.swiftmodule"
@@ -646,40 +516,40 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.apinotesc"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/Chameleon.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIApplication+CHSharedApplication.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIAppearance+Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIView+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIImage+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UILabel+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIButton+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIViewController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UINavigationController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/NSArray+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonMacros.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonEnums.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonConstants.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon_.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Modules/Chameleon.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIApplication+CHSharedApplication.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIAppearance+Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIView+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIImage+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UILabel+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIButton+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIViewController+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UINavigationController+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/NSArray+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonMacros.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonEnums.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonConstants.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon_.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Modules/module.modulemap"
 interface-hash: "8cf6da2f8e1523ffd3f257636c5c3888"

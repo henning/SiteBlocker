@@ -12,28 +12,24 @@ depends-top-level:
 - !private "-"
 - !private "..<"
 - !private "=="
-- !private "??"
 - "Array"
 - "AssignmentPrecedence"
 - !private "Data"
 - !private "Dictionary"
 - "Domain"
+- !private "ExtensionManager"
 - !private "JSON"
-- !private "SFContentBlockerManager"
 - "String"
 - "StringLiteralType"
 - !private "UnicodeScalarType"
 - !private "UserDefaults"
 - "Variable"
-- !private "Void"
 - "domains"
-- !private "print"
 depends-member:
 - !private ["Ps9AnyObject", "components"]
 - !private ["Ps9AnyObject", "data"]
 - ["Ps9AnyObject", "init"]
 - !private ["Ps9AnyObject", "lowercased"]
-- !private ["Ps9AnyObject", "reloadContentBlocker"]
 - !private ["Ps9AnyObject", "url"]
 - !private ["Sa", "count"]
 - !private ["Sa", "subscript"]
@@ -47,7 +43,6 @@ depends-member:
 - !private ["Ps7CVarArg", "data"]
 - ["Ps7CVarArg", "init"]
 - !private ["Ps7CVarArg", "lowercased"]
-- !private ["Ps7CVarArg", "reloadContentBlocker"]
 - !private ["Ps7CVarArg", "subscript"]
 - !private ["Ps7CVarArg", "url"]
 - !private ["Ps10Collection", "appendIfArray"]
@@ -69,7 +64,6 @@ depends-member:
 - ["Ps28CustomDebugStringConvertible", "init"]
 - !private ["Ps28CustomDebugStringConvertible", "lowercased"]
 - !private ["Ps28CustomDebugStringConvertible", "makeProperFormat"]
-- !private ["Ps28CustomDebugStringConvertible", "reloadContentBlocker"]
 - !private ["Ps28CustomDebugStringConvertible", "subscript"]
 - !private ["Ps28CustomDebugStringConvertible", "url"]
 - !private ["Ps28CustomDebugStringConvertible", "write"]
@@ -94,7 +88,6 @@ depends-member:
 - ["Ps23CustomStringConvertible", "init"]
 - !private ["Ps23CustomStringConvertible", "lowercased"]
 - !private ["Ps23CustomStringConvertible", "makeProperFormat"]
-- !private ["Ps23CustomStringConvertible", "reloadContentBlocker"]
 - !private ["Ps23CustomStringConvertible", "subscript"]
 - !private ["Ps23CustomStringConvertible", "url"]
 - !private ["Ps23CustomStringConvertible", "utf8"]
@@ -102,16 +95,13 @@ depends-member:
 - !private ["V10Foundation4Data", "init"]
 - !private ["V10Foundation4Data", "write"]
 - !private ["V11SiteBlocker6Domain", "Data"]
+- !private ["V11SiteBlocker6Domain", "ExtensionManager"]
 - !private ["V11SiteBlocker6Domain", "JSON"]
-- !private ["V11SiteBlocker6Domain", "SFContentBlockerManager"]
 - ["V11SiteBlocker6Domain", "String"]
 - !private ["V11SiteBlocker6Domain", "UserDefaults"]
-- !private ["V11SiteBlocker6Domain", "Void"]
 - ["V11SiteBlocker6Domain", "add"]
 - ["V11SiteBlocker6Domain", "contentBlockerAddress"]
 - ["V11SiteBlocker6Domain", "init"]
-- !private ["V11SiteBlocker6Domain", "print"]
-- !private ["V11SiteBlocker6Domain", "reloadExtension"]
 - ["V11SiteBlocker6Domain", "remove"]
 - ["V11SiteBlocker6Domain", "simpleAddress"]
 - !private ["VE10FoundationSS8Encoding", "utf8"]
@@ -122,7 +112,6 @@ depends-member:
 - ["Ps9Equatable", "init"]
 - !private ["Ps9Equatable", "lowercased"]
 - !private ["Ps9Equatable", "makeProperFormat"]
-- !private ["Ps9Equatable", "reloadContentBlocker"]
 - !private ["Ps9Equatable", "url"]
 - !private ["Ps9Equatable", "utf8"]
 - !private ["Ps9Equatable", "write"]
@@ -165,12 +154,12 @@ depends-member:
 - ["Ps33ExpressibleByUnicodeScalarLiteral", "init"]
 - !private ["Ps33ExpressibleByUnicodeScalarLiteral", "lowercased"]
 - !private ["Ps33ExpressibleByUnicodeScalarLiteral", "makeProperFormat"]
+- !private ["V11SiteBlocker16ExtensionManager", "reload"]
 - !private ["Ps8Hashable", "_getBuiltinLogicValue"]
 - !private ["Ps8Hashable", "components"]
 - !private ["Ps8Hashable", "data"]
 - ["Ps8Hashable", "init"]
 - !private ["Ps8Hashable", "lowercased"]
-- !private ["Ps8Hashable", "reloadContentBlocker"]
 - !private ["Ps8Hashable", "url"]
 - !private ["Ps8Hashable", "utf8"]
 - !private ["Ps8Hashable", "write"]
@@ -211,13 +200,11 @@ depends-member:
 - !private ["CSo8NSObject", "data"]
 - !private ["CSo8NSObject", "init"]
 - !private ["CSo8NSObject", "lowercased"]
-- !private ["CSo8NSObject", "reloadContentBlocker"]
 - !private ["CSo8NSObject", "url"]
 - !private ["PSo16NSObjectProtocol", "components"]
 - !private ["PSo16NSObjectProtocol", "data"]
 - ["PSo16NSObjectProtocol", "init"]
 - !private ["PSo16NSObjectProtocol", "lowercased"]
-- !private ["PSo16NSObjectProtocol", "reloadContentBlocker"]
 - !private ["PSo16NSObjectProtocol", "url"]
 - !private ["PSo14NSSecureCoding", "components"]
 - !private ["PSo14NSSecureCoding", "data"]
@@ -243,11 +230,9 @@ depends-member:
 - !private ["P7RxSwift18ReactiveCompatible", "data"]
 - ["P7RxSwift18ReactiveCompatible", "init"]
 - !private ["P7RxSwift18ReactiveCompatible", "lowercased"]
-- !private ["P7RxSwift18ReactiveCompatible", "reloadContentBlocker"]
 - !private ["P7RxSwift18ReactiveCompatible", "url"]
 - !private ["P10Foundation20ReferenceConvertible", "init"]
 - !private ["P10Foundation20ReferenceConvertible", "write"]
-- !private ["CSo23SFContentBlockerManager", "reloadContentBlocker"]
 - !private ["Ps8Sequence", "appendIfArray"]
 - !private ["Ps8Sequence", "count"]
 - !private ["Ps8Sequence", "init"]
@@ -307,7 +292,6 @@ depends-member:
 - !private ["Ps9_Hashable", "data"]
 - ["Ps9_Hashable", "init"]
 - !private ["Ps9_Hashable", "lowercased"]
-- !private ["Ps9_Hashable", "reloadContentBlocker"]
 - !private ["Ps9_Hashable", "url"]
 - !private ["Ps9_Hashable", "utf8"]
 - !private ["Ps9_Hashable", "write"]
@@ -368,6 +352,7 @@ depends-nominal:
 - !private "Ps23ExpressibleByNilLiteral"
 - "Ps26ExpressibleByStringLiteral"
 - "Ps33ExpressibleByUnicodeScalarLiteral"
+- !private "V11SiteBlocker16ExtensionManager"
 - "Ps8Hashable"
 - !private "V10SwiftyJSON4JSON"
 - "P10SwiftyJSON17JSONSubscriptType"
@@ -387,7 +372,6 @@ depends-nominal:
 - !private "Ps16RawRepresentable"
 - "P7RxSwift18ReactiveCompatible"
 - !private "P10Foundation20ReferenceConvertible"
-- !private "CSo23SFContentBlockerManager"
 - !private "Ps8Sequence"
 - "SS"
 - "Ps16TextOutputStream"
@@ -430,40 +414,40 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/UIKit.apinotesc"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/QuartzCore.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos/arm64/CoreImage.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/Chameleon.swiftmodule/arm64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIApplication+CHSharedApplication.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIAppearance+Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIView+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIImage+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UILabel+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIButton+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIViewController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UINavigationController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/NSArray+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonMacros.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonEnums.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonConstants.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon_.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/module.modulemap"
-interface-hash: "7c5f0953dbd465053e9bae8d0872456e"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Modules/Chameleon.swiftmodule/arm64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIApplication+CHSharedApplication.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIAppearance+Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIView+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIImage+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+ChameleonPrivate.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UILabel+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIButton+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIViewController+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UINavigationController+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/NSArray+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonMacros.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonEnums.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonConstants.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon_.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/Chameleon.framework/Modules/module.modulemap"
+interface-hash: "e2c5202fa2bd7eca38f6f97b298a848d"

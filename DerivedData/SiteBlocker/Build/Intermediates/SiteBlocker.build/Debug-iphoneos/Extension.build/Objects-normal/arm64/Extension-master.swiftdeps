@@ -1,5 +1,5 @@
 version: "Apple Swift version 3.1 (swiftlang-802.0.51 clang-802.0.41)"
-options: "86cce49877d0d9b5668d486effacfea7"
-build_time: [548604089, 336720000]
+options: "2bf357f25d66433d45734f5936454bcb"
+build_time: [548607995, 967681000]
 inputs:
-  "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Extension/ContentBlockerRequestHandler.swift": [548561796, 0]
+  "/Users/lukemann/SiteBlocker/Extension/ContentBlockerRequestHandler.swift": [548606976, 0]
