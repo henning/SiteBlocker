@@ -53,7 +53,27 @@ struct Domain {
     }
     
     func remove() {
-        
+        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "foo")
+        let origData = try! Data(contentsOf: url!)
+        var json = JSON(origData)
+        let jsonElement = JSON([
+            "trigger":["url-filter": contentBlockerAddress],
+            "action": ["type":"block"]
+            ])
+        var i = 0
+        var array = json.array!
+        for element in array {
+            if element == jsonElement{
+                array.remove(at: i)
+            }
+            else {
+                i += 1
+            }
+        }
+        let string = JSON.makeProperFormat(json: JSON(array))
+        let data = string.data(using: .utf8)
+        try! data?.write(to: url!)
+        ExtensionManager.reload()
     }
     
     
