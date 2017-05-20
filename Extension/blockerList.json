@@ -1,0 +1,1 @@
+[{"action":{"type":"block"},"trigger":{"url-filter":"luke.com"}},{"action":{"type":"block"},"trigger":{"url-filter":"cnet.com"}}]
