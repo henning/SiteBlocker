@@ -47,7 +47,9 @@ class ViewController: UIViewController {
         }.addDisposableTo(disposeBag)
 
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
-            domains.value.append(Domain(simpleAddress: self.addNewTextBox.text!))
+            let d = Domain(simpleAddress: self.addNewTextBox.text!)
+            domains.value.append(d)
+            d.add()
             self.addNewTextBox.resignFirstResponder()
             }.addDisposableTo(disposeBag)
 

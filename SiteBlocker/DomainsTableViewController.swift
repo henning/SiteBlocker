@@ -44,8 +44,8 @@ class DomainCell: UITableViewCell {
             var i = 0
             for d in domains.value {
                 if self.domain?.simpleAddress == d.simpleAddress {
-                    d.remove()
                     domains.value.remove(at: i)
+                    d.remove()
                     break
                 }
                 i+=1

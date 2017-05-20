@@ -11,9 +11,9 @@ import SafariServices
 import RxSwift
 import SwiftyJSON
 
-let domains: Variable<[Domain]> = Variable([])
+var domains: Variable<[Domain]> = Variable([])
 
-struct Domain {
+class Domain:NSObject,NSCoding {
     var contentBlockerAddress: String = ""
     var simpleAddress: String = ""
     
@@ -30,7 +30,16 @@ struct Domain {
             }
             
         }
-        add()
+    }
+    
+    required convenience init(coder aDecoder: NSCoder) {
+        let simpleAddress = aDecoder.decodeObject(forKey: "simpleAddress") as! String
+        self.init(simpleAddress: simpleAddress)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(simpleAddress, forKey: "simpleAddress")
+
     }
     
     func add() {
@@ -47,6 +56,7 @@ struct Domain {
         let data = string.data(using: .utf8)
         try! data?.write(to: url!)
         ExtensionManager.reload()
+        Domain.setDomains()
         
         
         
@@ -74,10 +84,24 @@ struct Domain {
         let data = string.data(using: .utf8)
         try! data?.write(to: url!)
         ExtensionManager.reload()
+        Domain.setDomains()
     }
     
     
+    static func reloadDomains() {
+        let userDefaults = UserDefaults.standard
+        let decoded  = userDefaults.object(forKey: "domains") as! Data
+        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Domain]
+        domains = Variable(decodedTeams)
+    }
     
+    static func setDomains() {
+        let values = domains.value
+        let userDefaults = UserDefaults.standard
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: domains.value)
+        userDefaults.set(encodedData, forKey: "domains")
+        userDefaults.synchronize()
+    }
     
 }
 
