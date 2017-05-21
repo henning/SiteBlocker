@@ -99,3 +99,12 @@ struct ExtensionManager {
     }
 }
 
+
+extension UIColor {
+    static func customWhite()->UIColor {
+        return UIColor(red: 236/255, green: 240/255, blue: 241/255, alpha: 1.0)
+    }
+    static func customBlack()->UIColor {
+        return UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1.0)
+    }
+}

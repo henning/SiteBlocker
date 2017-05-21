@@ -9,7 +9,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import Chameleon
 
 class DomainCell: UITableViewCell {
     var domain:Domain? = nil
@@ -21,7 +20,7 @@ class DomainCell: UITableViewCell {
 
     override func layoutSubviews() {
         addSubview(containerView)
-        containerView.backgroundColor = UIColor.flatWhite()
+        containerView.backgroundColor = UIColor.customWhite()
         containerView.layer.cornerRadius = 10
         
         
@@ -57,7 +56,7 @@ class DomainCell: UITableViewCell {
         containerView.addSubview(simpleLabel)
         simpleLabel.text = domain?.simpleAddress
         simpleLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
-        simpleLabel.textColor = UIColor.flatBlack()
+        simpleLabel.textColor = UIColor.customBlack()
         self.simpleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(containerView.snp.left).offset(10)
             make.right.equalTo(containerView.snp.right).offset(-10)

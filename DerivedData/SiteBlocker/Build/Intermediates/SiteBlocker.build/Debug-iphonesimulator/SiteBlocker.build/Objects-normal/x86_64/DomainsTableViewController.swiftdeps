@@ -7,6 +7,7 @@ provides-member:
 - ["C11SiteBlocker10DomainCell", ""]
 provides-dynamic-lookup:
 - "containerView"
+- "domain"
 - "layoutSubviews"
 - "removeButton"
 - "simpleLabel"
@@ -38,11 +39,11 @@ depends-member:
 - !private ["Ps9AnyObject", "containerView"]
 - !private ["Ps9AnyObject", "contentMode"]
 - !private ["Ps9AnyObject", "cornerRadius"]
+- !private ["Ps9AnyObject", "customBlack"]
+- !private ["Ps9AnyObject", "customWhite"]
 - !private ["Ps9AnyObject", "domain"]
 - !private ["Ps9AnyObject", "domains"]
 - !private ["Ps9AnyObject", "equalTo"]
-- !private ["Ps9AnyObject", "flatBlack"]
-- !private ["Ps9AnyObject", "flatWhite"]
 - !private ["Ps9AnyObject", "font"]
 - !private ["Ps9AnyObject", "height"]
 - !private ["Ps9AnyObject", "imageView"]
@@ -51,10 +52,12 @@ depends-member:
 - !private ["Ps9AnyObject", "left"]
 - !private ["Ps9AnyObject", "multipliedBy"]
 - !private ["Ps9AnyObject", "offset"]
+- !private ["Ps9AnyObject", "remove"]
 - !private ["Ps9AnyObject", "removeButton"]
 - !private ["Ps9AnyObject", "right"]
 - !private ["Ps9AnyObject", "rx"]
 - !private ["Ps9AnyObject", "setImage"]
+- !private ["Ps9AnyObject", "simpleAddress"]
 - !private ["Ps9AnyObject", "simpleLabel"]
 - !private ["Ps9AnyObject", "snp"]
 - !private ["Ps9AnyObject", "text"]
@@ -101,10 +104,10 @@ depends-member:
 - !private ["Ps7CVarArg", "containerView"]
 - !private ["Ps7CVarArg", "contentMode"]
 - !private ["Ps7CVarArg", "cornerRadius"]
+- !private ["Ps7CVarArg", "customBlack"]
+- !private ["Ps7CVarArg", "customWhite"]
 - !private ["Ps7CVarArg", "domain"]
 - !private ["Ps7CVarArg", "domains"]
-- !private ["Ps7CVarArg", "flatBlack"]
-- !private ["Ps7CVarArg", "flatWhite"]
 - !private ["Ps7CVarArg", "font"]
 - !private ["Ps7CVarArg", "imageView"]
 - ["Ps7CVarArg", "init"]
@@ -113,6 +116,7 @@ depends-member:
 - !private ["Ps7CVarArg", "removeButton"]
 - !private ["Ps7CVarArg", "rx"]
 - !private ["Ps7CVarArg", "setImage"]
+- !private ["Ps7CVarArg", "simpleAddress"]
 - !private ["Ps7CVarArg", "simpleLabel"]
 - !private ["Ps7CVarArg", "snp"]
 - !private ["Ps7CVarArg", "text"]
@@ -202,10 +206,10 @@ depends-member:
 - !private ["Ps28CustomDebugStringConvertible", "containerView"]
 - !private ["Ps28CustomDebugStringConvertible", "contentMode"]
 - !private ["Ps28CustomDebugStringConvertible", "cornerRadius"]
+- !private ["Ps28CustomDebugStringConvertible", "customBlack"]
+- !private ["Ps28CustomDebugStringConvertible", "customWhite"]
 - !private ["Ps28CustomDebugStringConvertible", "domain"]
 - !private ["Ps28CustomDebugStringConvertible", "domains"]
-- !private ["Ps28CustomDebugStringConvertible", "flatBlack"]
-- !private ["Ps28CustomDebugStringConvertible", "flatWhite"]
 - !private ["Ps28CustomDebugStringConvertible", "font"]
 - !private ["Ps28CustomDebugStringConvertible", "imageView"]
 - ["Ps28CustomDebugStringConvertible", "init"]
@@ -214,6 +218,7 @@ depends-member:
 - !private ["Ps28CustomDebugStringConvertible", "removeButton"]
 - !private ["Ps28CustomDebugStringConvertible", "rx"]
 - !private ["Ps28CustomDebugStringConvertible", "setImage"]
+- !private ["Ps28CustomDebugStringConvertible", "simpleAddress"]
 - !private ["Ps28CustomDebugStringConvertible", "simpleLabel"]
 - !private ["Ps28CustomDebugStringConvertible", "snp"]
 - !private ["Ps28CustomDebugStringConvertible", "text"]
@@ -235,10 +240,10 @@ depends-member:
 - !private ["Ps23CustomStringConvertible", "containerView"]
 - !private ["Ps23CustomStringConvertible", "contentMode"]
 - !private ["Ps23CustomStringConvertible", "cornerRadius"]
+- !private ["Ps23CustomStringConvertible", "customBlack"]
+- !private ["Ps23CustomStringConvertible", "customWhite"]
 - !private ["Ps23CustomStringConvertible", "domain"]
 - !private ["Ps23CustomStringConvertible", "domains"]
-- !private ["Ps23CustomStringConvertible", "flatBlack"]
-- !private ["Ps23CustomStringConvertible", "flatWhite"]
 - !private ["Ps23CustomStringConvertible", "font"]
 - !private ["Ps23CustomStringConvertible", "imageView"]
 - ["Ps23CustomStringConvertible", "init"]
@@ -247,13 +252,14 @@ depends-member:
 - !private ["Ps23CustomStringConvertible", "removeButton"]
 - !private ["Ps23CustomStringConvertible", "rx"]
 - !private ["Ps23CustomStringConvertible", "setImage"]
+- !private ["Ps23CustomStringConvertible", "simpleAddress"]
 - !private ["Ps23CustomStringConvertible", "simpleLabel"]
 - !private ["Ps23CustomStringConvertible", "snp"]
 - !private ["Ps23CustomStringConvertible", "text"]
 - !private ["Ps23CustomStringConvertible", "textColor"]
 - ["Ps23CustomStringConvertible", ""]
-- !private ["V11SiteBlocker6Domain", "remove"]
-- !private ["V11SiteBlocker6Domain", "simpleAddress"]
+- !private ["C11SiteBlocker6Domain", "remove"]
+- !private ["C11SiteBlocker6Domain", "simpleAddress"]
 - ["C11SiteBlocker10DomainCell", "Domain"]
 - ["C11SiteBlocker10DomainCell", "UIButton"]
 - !private ["C11SiteBlocker10DomainCell", "UIColor"]
@@ -281,19 +287,21 @@ depends-member:
 - !private ["Ps9Equatable", "containerView"]
 - !private ["Ps9Equatable", "contentMode"]
 - !private ["Ps9Equatable", "cornerRadius"]
+- !private ["Ps9Equatable", "customBlack"]
+- !private ["Ps9Equatable", "customWhite"]
 - !private ["Ps9Equatable", "domain"]
 - !private ["Ps9Equatable", "domains"]
-- !private ["Ps9Equatable", "flatBlack"]
-- !private ["Ps9Equatable", "flatWhite"]
 - !private ["Ps9Equatable", "font"]
 - !private ["Ps9Equatable", "imageView"]
 - ["Ps9Equatable", "init"]
 - !private ["Ps9Equatable", "layer"]
 - !private ["Ps9Equatable", "normal"]
+- !private ["Ps9Equatable", "remove"]
 - !private ["Ps9Equatable", "removeButton"]
 - !private ["Ps9Equatable", "rx"]
 - !private ["Ps9Equatable", "scaleAspectFill"]
 - !private ["Ps9Equatable", "setImage"]
+- !private ["Ps9Equatable", "simpleAddress"]
 - !private ["Ps9Equatable", "simpleLabel"]
 - !private ["Ps9Equatable", "snp"]
 - !private ["Ps9Equatable", "text"]
@@ -316,18 +324,20 @@ depends-member:
 - !private ["Ps8Hashable", "containerView"]
 - !private ["Ps8Hashable", "contentMode"]
 - !private ["Ps8Hashable", "cornerRadius"]
+- !private ["Ps8Hashable", "customBlack"]
+- !private ["Ps8Hashable", "customWhite"]
 - !private ["Ps8Hashable", "domain"]
 - !private ["Ps8Hashable", "domains"]
-- !private ["Ps8Hashable", "flatBlack"]
-- !private ["Ps8Hashable", "flatWhite"]
 - !private ["Ps8Hashable", "font"]
 - !private ["Ps8Hashable", "imageView"]
 - ["Ps8Hashable", "init"]
 - !private ["Ps8Hashable", "layer"]
+- !private ["Ps8Hashable", "remove"]
 - !private ["Ps8Hashable", "removeButton"]
 - !private ["Ps8Hashable", "rx"]
 - !private ["Ps8Hashable", "scaleAspectFill"]
 - !private ["Ps8Hashable", "setImage"]
+- !private ["Ps8Hashable", "simpleAddress"]
 - !private ["Ps8Hashable", "simpleLabel"]
 - !private ["Ps8Hashable", "snp"]
 - !private ["Ps8Hashable", "text"]
@@ -372,24 +382,26 @@ depends-member:
 - !private ["PSo8NSCoding", "containerView"]
 - !private ["PSo8NSCoding", "contentMode"]
 - !private ["PSo8NSCoding", "cornerRadius"]
+- !private ["PSo8NSCoding", "customBlack"]
+- !private ["PSo8NSCoding", "customWhite"]
 - !private ["PSo8NSCoding", "domain"]
 - !private ["PSo8NSCoding", "domains"]
-- !private ["PSo8NSCoding", "flatBlack"]
-- !private ["PSo8NSCoding", "flatWhite"]
 - !private ["PSo8NSCoding", "font"]
 - !private ["PSo8NSCoding", "imageView"]
 - ["PSo8NSCoding", "init"]
 - !private ["PSo8NSCoding", "layer"]
+- !private ["PSo8NSCoding", "remove"]
 - !private ["PSo8NSCoding", "removeButton"]
 - !private ["PSo8NSCoding", "rx"]
 - !private ["PSo8NSCoding", "setImage"]
+- !private ["PSo8NSCoding", "simpleAddress"]
 - !private ["PSo8NSCoding", "simpleLabel"]
 - !private ["PSo8NSCoding", "snp"]
 - !private ["PSo8NSCoding", "text"]
 - !private ["PSo8NSCoding", "textColor"]
 - ["PSo8NSCoding", ""]
-- !private ["PSo9NSCopying", "flatBlack"]
-- !private ["PSo9NSCopying", "flatWhite"]
+- !private ["PSo9NSCopying", "customBlack"]
+- !private ["PSo9NSCopying", "customWhite"]
 - !private ["PSo9NSCopying", "init"]
 - !private ["PSo16NSMutableCopying", "init"]
 - ["CSo8NSObject", "Domain"]
@@ -403,18 +415,20 @@ depends-member:
 - ["CSo8NSObject", "containerView"]
 - !private ["CSo8NSObject", "contentMode"]
 - !private ["CSo8NSObject", "cornerRadius"]
+- !private ["CSo8NSObject", "customBlack"]
+- !private ["CSo8NSObject", "customWhite"]
 - ["CSo8NSObject", "domain"]
 - !private ["CSo8NSObject", "domains"]
-- !private ["CSo8NSObject", "flatBlack"]
-- !private ["CSo8NSObject", "flatWhite"]
 - !private ["CSo8NSObject", "font"]
 - !private ["CSo8NSObject", "imageView"]
 - ["CSo8NSObject", "init"]
 - !private ["CSo8NSObject", "layer"]
 - ["CSo8NSObject", "layoutSubviews"]
+- !private ["CSo8NSObject", "remove"]
 - ["CSo8NSObject", "removeButton"]
 - !private ["CSo8NSObject", "rx"]
 - !private ["CSo8NSObject", "setImage"]
+- !private ["CSo8NSObject", "simpleAddress"]
 - ["CSo8NSObject", "simpleLabel"]
 - !private ["CSo8NSObject", "snp"]
 - !private ["CSo8NSObject", "text"]
@@ -429,24 +443,26 @@ depends-member:
 - !private ["PSo16NSObjectProtocol", "containerView"]
 - !private ["PSo16NSObjectProtocol", "contentMode"]
 - !private ["PSo16NSObjectProtocol", "cornerRadius"]
+- !private ["PSo16NSObjectProtocol", "customBlack"]
+- !private ["PSo16NSObjectProtocol", "customWhite"]
 - !private ["PSo16NSObjectProtocol", "domain"]
 - !private ["PSo16NSObjectProtocol", "domains"]
-- !private ["PSo16NSObjectProtocol", "flatBlack"]
-- !private ["PSo16NSObjectProtocol", "flatWhite"]
 - !private ["PSo16NSObjectProtocol", "font"]
 - !private ["PSo16NSObjectProtocol", "imageView"]
 - ["PSo16NSObjectProtocol", "init"]
 - !private ["PSo16NSObjectProtocol", "layer"]
+- !private ["PSo16NSObjectProtocol", "remove"]
 - !private ["PSo16NSObjectProtocol", "removeButton"]
 - !private ["PSo16NSObjectProtocol", "rx"]
 - !private ["PSo16NSObjectProtocol", "setImage"]
+- !private ["PSo16NSObjectProtocol", "simpleAddress"]
 - !private ["PSo16NSObjectProtocol", "simpleLabel"]
 - !private ["PSo16NSObjectProtocol", "snp"]
 - !private ["PSo16NSObjectProtocol", "text"]
 - !private ["PSo16NSObjectProtocol", "textColor"]
 - ["PSo16NSObjectProtocol", ""]
-- !private ["PSo14NSSecureCoding", "flatBlack"]
-- !private ["PSo14NSSecureCoding", "flatWhite"]
+- !private ["PSo14NSSecureCoding", "customBlack"]
+- !private ["PSo14NSSecureCoding", "customWhite"]
 - !private ["PSo14NSSecureCoding", "init"]
 - !private ["CSo8NSString", "init"]
 - !private ["P7RxSwift25ObservableConvertibleType", "subscribe"]
@@ -467,17 +483,19 @@ depends-member:
 - !private ["P7RxSwift18ReactiveCompatible", "containerView"]
 - !private ["P7RxSwift18ReactiveCompatible", "contentMode"]
 - !private ["P7RxSwift18ReactiveCompatible", "cornerRadius"]
+- !private ["P7RxSwift18ReactiveCompatible", "customBlack"]
+- !private ["P7RxSwift18ReactiveCompatible", "customWhite"]
 - !private ["P7RxSwift18ReactiveCompatible", "domain"]
 - !private ["P7RxSwift18ReactiveCompatible", "domains"]
-- !private ["P7RxSwift18ReactiveCompatible", "flatBlack"]
-- !private ["P7RxSwift18ReactiveCompatible", "flatWhite"]
 - !private ["P7RxSwift18ReactiveCompatible", "font"]
 - !private ["P7RxSwift18ReactiveCompatible", "imageView"]
 - ["P7RxSwift18ReactiveCompatible", "init"]
 - !private ["P7RxSwift18ReactiveCompatible", "layer"]
+- !private ["P7RxSwift18ReactiveCompatible", "remove"]
 - !private ["P7RxSwift18ReactiveCompatible", "removeButton"]
 - !private ["P7RxSwift18ReactiveCompatible", "rx"]
 - !private ["P7RxSwift18ReactiveCompatible", "setImage"]
+- !private ["P7RxSwift18ReactiveCompatible", "simpleAddress"]
 - !private ["P7RxSwift18ReactiveCompatible", "simpleLabel"]
 - !private ["P7RxSwift18ReactiveCompatible", "snp"]
 - !private ["P7RxSwift18ReactiveCompatible", "text"]
@@ -562,8 +580,8 @@ depends-member:
 - !private ["CSo8UIButton", "rx"]
 - !private ["CSo8UIButton", "setImage"]
 - !private ["CSo8UIButton", "snp"]
-- !private ["CSo7UIColor", "flatBlack"]
-- !private ["CSo7UIColor", "flatWhite"]
+- !private ["CSo7UIColor", "customBlack"]
+- !private ["CSo7UIColor", "customWhite"]
 - !private ["PSo30UIContentSizeCategoryAdjusting", "font"]
 - ["PSo30UIContentSizeCategoryAdjusting", "init"]
 - !private ["PSo30UIContentSizeCategoryAdjusting", "snp"]
@@ -831,8 +849,8 @@ depends-member:
 - !private ["Ps34_ExpressibleByBuiltinStringLiteral", "init"]
 - !private ["Ps39_ExpressibleByBuiltinUTF16StringLiteral", "init"]
 - !private ["Ps41_ExpressibleByBuiltinUnicodeScalarLiteral", "init"]
-- !private ["Ps26_ExpressibleByColorLiteral", "flatBlack"]
-- !private ["Ps26_ExpressibleByColorLiteral", "flatWhite"]
+- !private ["Ps26_ExpressibleByColorLiteral", "customBlack"]
+- !private ["Ps26_ExpressibleByColorLiteral", "customWhite"]
 - !private ["Ps33_ExpressibleByStringInterpolation", "init"]
 - !private ["Ps35_HasCustomAnyHashableRepresentation", "init"]
 - ["Ps9_Hashable", "UIButton"]
@@ -846,18 +864,20 @@ depends-member:
 - !private ["Ps9_Hashable", "containerView"]
 - !private ["Ps9_Hashable", "contentMode"]
 - !private ["Ps9_Hashable", "cornerRadius"]
+- !private ["Ps9_Hashable", "customBlack"]
+- !private ["Ps9_Hashable", "customWhite"]
 - !private ["Ps9_Hashable", "domain"]
 - !private ["Ps9_Hashable", "domains"]
-- !private ["Ps9_Hashable", "flatBlack"]
-- !private ["Ps9_Hashable", "flatWhite"]
 - !private ["Ps9_Hashable", "font"]
 - !private ["Ps9_Hashable", "imageView"]
 - ["Ps9_Hashable", "init"]
 - !private ["Ps9_Hashable", "layer"]
+- !private ["Ps9_Hashable", "remove"]
 - !private ["Ps9_Hashable", "removeButton"]
 - !private ["Ps9_Hashable", "rx"]
 - !private ["Ps9_Hashable", "scaleAspectFill"]
 - !private ["Ps9_Hashable", "setImage"]
+- !private ["Ps9_Hashable", "simpleAddress"]
 - !private ["Ps9_Hashable", "simpleLabel"]
 - !private ["Ps9_Hashable", "snp"]
 - !private ["Ps9_Hashable", "text"]
@@ -899,7 +919,7 @@ depends-nominal:
 - !private "Ps29CustomPlaygroundQuickLookable"
 - !private "Ps17CustomReflectable"
 - "Ps23CustomStringConvertible"
-- !private "V11SiteBlocker6Domain"
+- !private "C11SiteBlocker6Domain"
 - "C11SiteBlocker10DomainCell"
 - "Ps9Equatable"
 - !private "Ps25ExpressibleByArrayLiteral"
@@ -994,40 +1014,21 @@ depends-external:
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/UIKit.apinotesc"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/QuartzCore.swiftmodule"
 - "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/x86_64/CoreImage.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/x86_64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/x86_64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/x86_64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/x86_64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/Chameleon.swiftmodule/x86_64.swiftmodule"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon-Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIApplication+CHSharedApplication.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIAppearance+Swift.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIView+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIImage+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+ChameleonPrivate.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UILabel+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIButton+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIViewController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UINavigationController+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/NSArray+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/UIColor+Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonMacros.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonEnums.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/ChameleonConstants.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon_.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Headers/Chameleon.h"
-- "/Users/lukemann/Downloads/SiteBlocker-3054b0198f878a9d96c4eba53d7c3f4d49b16ce5/Carthage/Build/iOS/Chameleon.framework/Modules/module.modulemap"
-interface-hash: "86972b0c1acac734fbf3e439266d0b8b"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/SnapKit.swiftmodule/x86_64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Headers/SnapKit.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SnapKit.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxSwift.framework/Modules/RxSwift.swiftmodule/x86_64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/RxCocoa.swiftmodule/x86_64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXObjCRuntime.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXKVOObserver.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RXDelegateProxy.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/_RX.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Headers/RxCocoa.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/RxCocoa.framework/Modules/module.modulemap"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/SwiftyJSON.swiftmodule/x86_64.swiftmodule"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON-Swift.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Headers/SwiftyJSON.h"
+- "/Users/lukemann/SiteBlocker/Carthage/Build/iOS/SwiftyJSON.framework/Modules/module.modulemap"
+interface-hash: "903ca7b593ad561608c10a7b16e20302"

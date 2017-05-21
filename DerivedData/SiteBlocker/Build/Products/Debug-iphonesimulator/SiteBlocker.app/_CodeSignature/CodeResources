@@ -6,25 +6,21 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		T5j0ErN6/332hsDKBtB4zcYg/8U=
+		7rPTtafz8BgEFOk2+MOsIddS/cU=
 		</data>
 		<key>ContentBlockerRequestHandler.d</key>
 		<data>
-		jgnfvmYKjVbcJncYpPP7UH8Qpk8=
+		0MjpkTlynHaRfetQUFSPVbsHzPM=
 		</data>
 		<key>ContentBlockerRequestHandler.dia</key>
 		<data>
-		334xV+vmwvGGnEQILG+zGKODHkU=
+		xdF0vYtRovsvb7izM8jTvk/QhEs=
 		</data>
 		<key>ContentBlockerRequestHandler.o</key>
 		<data>
-		5GlxAyCn3+RoxRzc7+GDUqk3zqw=
+		Zckw+bDN3H9sNqMIpV2oZOJte84=
 		</data>
 		<key>ContentBlockerRequestHandler.swiftdeps</key>
-		<data>
-		FfVI+aAl4cQlieJSILWvoRY3WJ0=
-		</data>
-		<key>ContentBlockerRequestHandler.swiftdeps~</key>
 		<data>
 		FfVI+aAl4cQlieJSILWvoRY3WJ0=
 		</data>
@@ -34,19 +30,7 @@
 		</data>
 		<key>ContentBlockerRequestHandler~partial.swiftmodule</key>
 		<data>
-		U/doWRM712GHo8Em8Wtb7TJJl98=
-		</data>
-		<key>Frameworks/Chameleon.framework/Chameleon</key>
-		<data>
-		ukbcyMJoajoGUXE2ncJfCwQzE1I=
-		</data>
-		<key>Frameworks/Chameleon.framework/Info.plist</key>
-		<data>
-		dxe/n6f7uvLG/zBemrcQ8bF/CDs=
-		</data>
-		<key>Frameworks/Chameleon.framework/_CodeSignature/CodeResources</key>
-		<data>
-		qJpoE/17ncm4VS42hG2TyyX8280=
+		oI8MzLsoUsqFYZpvxKfIdDQ53qc=
 		</data>
 		<key>Frameworks/RxCocoa.framework/Info.plist</key>
 		<data>
@@ -94,7 +78,7 @@
 		</data>
 		<key>Frameworks/SnapKit.framework/SnapKit</key>
 		<data>
-		OX8KUk1jBbulxEw6CddSrtkrnkw=
+		Amxe26PXy0gqfMPdKJhDkd2hlV0=
 		</data>
 		<key>Frameworks/SnapKit.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -106,7 +90,7 @@
 		</data>
 		<key>Frameworks/SwiftyJSON.framework/SwiftyJSON</key>
 		<data>
-		VwMJbgw0Lnk+JBf5z73swkdg3pc=
+		HDM6JfcZrBCNcU/IDhPM55ytPGg=
 		</data>
 		<key>Frameworks/SwiftyJSON.framework/_CodeSignature/CodeResources</key>
 		<data>
@@ -154,7 +138,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		lclYVcsahGuZPZegVrNo555xysI=
+		2AuiOn1VShD9ZhVeJOR40TVHqbM=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -162,15 +146,15 @@
 		</data>
 		<key>PlugIns/Extension.appex/Extension</key>
 		<data>
-		AtSXWnRlqkBGZR1PwRRjFfZ4Ngo=
+		9irnrvqjJC/YRtQrAhOozByK+7c=
 		</data>
 		<key>PlugIns/Extension.appex/Info.plist</key>
 		<data>
-		NliBlX3XLobtw4J1NOzSmzTxXHM=
+		9XgaPCzgt0zEN0WC8b3gLUh3QN8=
 		</data>
 		<key>PlugIns/Extension.appex/_CodeSignature/CodeResources</key>
 		<data>
-		6u5u/FKT7qG1MCXQsJBGpvHBZH4=
+		Xy6eAPA5fcg5EMHrY9tjYAHvA/M=
 		</data>
 		<key>PlugIns/Extension.appex/blockerList.json</key>
 		<data>
@@ -178,7 +162,7 @@
 		</data>
 		<key>SiteBlocker-OutputFileMap.json</key>
 		<data>
-		6r1k1atLe2UlZlKk3d3CJjy4lRc=
+		UmXHDVW8L59UGiBwxFkYi41NZpE=
 		</data>
 		<key>SiteBlocker-Swift.h</key>
 		<data>
@@ -186,11 +170,7 @@
 		</data>
 		<key>SiteBlocker-master.swiftdeps</key>
 		<data>
-		wByq403hLb5ymqumZwF8pOTg2is=
-		</data>
-		<key>SiteBlocker-master.swiftdeps~</key>
-		<data>
-		AySNe5qw32pkUatqsDlPzjdM+xY=
+		63nfEAb/kiEU204ajf0bNxE+jgs=
 		</data>
 		<key>SiteBlocker.swiftdoc</key>
 		<data>
@@ -198,11 +178,11 @@
 		</data>
 		<key>SiteBlocker.swiftmodule</key>
 		<data>
-		G1xVYOYrYFE+Z0J5A2bQnS2Fdis=
+		xBhjv8yBojN3YljiBjDg9wmjV+E=
 		</data>
 		<key>blockerList.json</key>
 		<data>
-		bEPCQ9ob4qL8rHuZPDejZf1zlNM=
+		8LT2GH+jIkfNrpbs6DinqteLOtI=
 		</data>
 		<key>libswiftRemoteMirror.dylib</key>
 		<data>
@@ -215,58 +195,47 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			T5j0ErN6/332hsDKBtB4zcYg/8U=
+			7rPTtafz8BgEFOk2+MOsIddS/cU=
 			</data>
 			<key>hash2</key>
 			<data>
-			JFuzZORSkFS7CptB3tKmuduU66R2clw9YiG1jf2g2b4=
+			US33wtgOEs9nE1UMJ9BtvAfio8LKpYrkWTgbjK3zohQ=
 			</data>
 		</dict>
 		<key>ContentBlockerRequestHandler.d</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			jgnfvmYKjVbcJncYpPP7UH8Qpk8=
+			0MjpkTlynHaRfetQUFSPVbsHzPM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Ryw5KfxcrKvAN+SAJ+kL7RKD5crPfvWTBBhFIvu2q3A=
+			RnXNZFmfpU/wSjEGJHwwPTOn4UlD6SWSjYQoPfjjBnc=
 			</data>
 		</dict>
 		<key>ContentBlockerRequestHandler.dia</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			334xV+vmwvGGnEQILG+zGKODHkU=
+			xdF0vYtRovsvb7izM8jTvk/QhEs=
 			</data>
 			<key>hash2</key>
 			<data>
-			hPHgTvsFcZgjUNy3a8b8EAGpeuJqCqewLuLt1Yg3EfM=
+			OltZtWtGLh+SaqR2J+xrX18rn6K2GbxoUDspzr9l8Ss=
 			</data>
 		</dict>
 		<key>ContentBlockerRequestHandler.o</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			5GlxAyCn3+RoxRzc7+GDUqk3zqw=
+			Zckw+bDN3H9sNqMIpV2oZOJte84=
 			</data>
 			<key>hash2</key>
 			<data>
-			Fh1G0R3y+gBXlknQAUsotmZN2seVuqsYAvZjyrZEaMY=
+			I93WZnNZihqwOBGgpR9tw+R8YyCAkMqF+mtyQa/Jvsg=
 			</data>
 		</dict>
 		<key>ContentBlockerRequestHandler.swiftdeps</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FfVI+aAl4cQlieJSILWvoRY3WJ0=
-			</data>
-			<key>hash2</key>
-			<data>
-			ELQ6rBy9XEm2aY1XIfSeB4AFpv5Li8Qk1n9byc0fLv0=
-			</data>
-		</dict>
-		<key>ContentBlockerRequestHandler.swiftdeps~</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -292,44 +261,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U/doWRM712GHo8Em8Wtb7TJJl98=
+			oI8MzLsoUsqFYZpvxKfIdDQ53qc=
 			</data>
 			<key>hash2</key>
 			<data>
-			RTnsADsuWRtcEZtUbkrZKTz4Yp3MT/c8WGrYUo3vqZY=
-			</data>
-		</dict>
-		<key>Frameworks/Chameleon.framework/Chameleon</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ukbcyMJoajoGUXE2ncJfCwQzE1I=
-			</data>
-			<key>hash2</key>
-			<data>
-			NwRwoGZdFMxJtzV8CWXHUiJhHtLN7wwGk01ecjEAv2A=
-			</data>
-		</dict>
-		<key>Frameworks/Chameleon.framework/Info.plist</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dxe/n6f7uvLG/zBemrcQ8bF/CDs=
-			</data>
-			<key>hash2</key>
-			<data>
-			OTNEX7NRXdEYkKmXGr3zj9Cs9y5TZ5gpZBOHzYsaqd8=
-			</data>
-		</dict>
-		<key>Frameworks/Chameleon.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			qJpoE/17ncm4VS42hG2TyyX8280=
-			</data>
-			<key>hash2</key>
-			<data>
-			+YeP71fPMnhhOZdTJjTdyxNgb8on/8ckDuT5JI3sq90=
+			0pCWKCNv1iNJ6weuhtViuCBrQDZC6QianBtjxbPrH3Y=
 			</data>
 		</dict>
 		<key>Frameworks/RxCocoa.framework/Info.plist</key>
@@ -457,11 +393,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OX8KUk1jBbulxEw6CddSrtkrnkw=
+			Amxe26PXy0gqfMPdKJhDkd2hlV0=
 			</data>
 			<key>hash2</key>
 			<data>
-			NiSK9OkT+IR7FWp8FmHDpWLuo9r6GIb4KYGZKGKLrC4=
+			r1IN7fr//nWsOVGYe2qneZB5lOJ9Uf5aO/7mXcXwVS4=
 			</data>
 		</dict>
 		<key>Frameworks/SnapKit.framework/_CodeSignature/CodeResources</key>
@@ -490,11 +426,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			VwMJbgw0Lnk+JBf5z73swkdg3pc=
+			HDM6JfcZrBCNcU/IDhPM55ytPGg=
 			</data>
 			<key>hash2</key>
 			<data>
-			6mAn/L23SH1t3gFkzGDiCQoEDfIOmJGgyg+s5SMx8yQ=
+			a8PC7Bq4C+T5bmStyxIGYJBf6dK2HXT4P2x6kvLsJ4A=
 			</data>
 		</dict>
 		<key>Frameworks/SwiftyJSON.framework/_CodeSignature/CodeResources</key>
@@ -622,33 +558,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AtSXWnRlqkBGZR1PwRRjFfZ4Ngo=
+			9irnrvqjJC/YRtQrAhOozByK+7c=
 			</data>
 			<key>hash2</key>
 			<data>
-			V40d54XOOb9PBlzPLpat3dZAX4weE+LKjg9spdXzvsk=
+			2as+2FYN3s63Htn9owef4SJ0rzjGlWWilbGeU5ByuDA=
 			</data>
 		</dict>
 		<key>PlugIns/Extension.appex/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			NliBlX3XLobtw4J1NOzSmzTxXHM=
+			9XgaPCzgt0zEN0WC8b3gLUh3QN8=
 			</data>
 			<key>hash2</key>
 			<data>
-			3VH4kaghU737yiqKjCPvxAYeeaXKS4PMedrkFsk0D9E=
+			cchCuQSCfaC0PCh4n084feM6wV7pc6JmsH8FsoMo1TE=
 			</data>
 		</dict>
 		<key>PlugIns/Extension.appex/_CodeSignature/CodeResources</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			6u5u/FKT7qG1MCXQsJBGpvHBZH4=
+			Xy6eAPA5fcg5EMHrY9tjYAHvA/M=
 			</data>
 			<key>hash2</key>
 			<data>
-			RlgFn3IjKH6r0RwgFEA0PPraxfj22k1h8STeGPrORmA=
+			sJtKMH20qgt2h2CSXr7worPzR2tvUrjF3LqWex2K4D0=
 			</data>
 		</dict>
 		<key>PlugIns/Extension.appex/blockerList.json</key>
@@ -666,11 +602,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			6r1k1atLe2UlZlKk3d3CJjy4lRc=
+			UmXHDVW8L59UGiBwxFkYi41NZpE=
 			</data>
 			<key>hash2</key>
 			<data>
-			cmdLrMOZgjtwGu8fMXEIuaxCjSegrJks6unUgfjTNr8=
+			kdYr1A82moMs3SUXpVtamuoaI7cChDY9Ukz5suHclX0=
 			</data>
 		</dict>
 		<key>SiteBlocker-Swift.h</key>
@@ -688,22 +624,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wByq403hLb5ymqumZwF8pOTg2is=
+			63nfEAb/kiEU204ajf0bNxE+jgs=
 			</data>
 			<key>hash2</key>
 			<data>
-			MZf9fJo7mZlyZWPvzhBWgOl52Zo5Bqv4d5FkwyaZjtA=
-			</data>
-		</dict>
-		<key>SiteBlocker-master.swiftdeps~</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			AySNe5qw32pkUatqsDlPzjdM+xY=
-			</data>
-			<key>hash2</key>
-			<data>
-			A3zcqse/DeuMjq7jGh0dRwvOhHVmem5tzf1ig+vhjPA=
+			gkYpKZoxlpDr2PO/ukWE4Nq2cX6N2DOCX6rZ9VnzAD0=
 			</data>
 		</dict>
 		<key>SiteBlocker.swiftdoc</key>
@@ -721,22 +646,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G1xVYOYrYFE+Z0J5A2bQnS2Fdis=
+			xBhjv8yBojN3YljiBjDg9wmjV+E=
 			</data>
 			<key>hash2</key>
 			<data>
-			UUBs+PvlhUGoqEdnmCeRYeJCOVeYGnCdGYPeSBC8V9A=
+			DdpXaaTVFMipzrXV4yqRbbwwOFujWNmKrQ/SmZBC02U=
 			</data>
 		</dict>
 		<key>blockerList.json</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			bEPCQ9ob4qL8rHuZPDejZf1zlNM=
+			8LT2GH+jIkfNrpbs6DinqteLOtI=
 			</data>
 			<key>hash2</key>
 			<data>
-			oA67L/9x3pu6p5PF5FSUtMowOQf/xZCDnidpuEbYAF0=
+			4zrWFiou1q9/u/f6CXwW+QC0KmCs3YANy554bHNfmGI=
 			</data>
 		</dict>
 		<key>libswiftRemoteMirror.dylib</key>

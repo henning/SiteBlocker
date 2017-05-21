@@ -10,24 +10,19 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import Hero
 
 
 class ViewController: UIViewController {
-
+    
     var addNewTextBox = UITextField()
-    var addNeButton = UIButton()
+    var addNewView = UIButton()
     var separatorLine = UIView()
     var tableView = UITableView()
     var disposeBag = DisposeBag()
     var lastDomainsCount = 0
     
-    override func viewDidLoad() {
-        self.tableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
-        tableView.delegate = self
-        bindAddButtonTap()
-        bindTableView()
-        self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
-    }
+    
     
     private func bindTableView() {
         domains.asObservable()
@@ -36,67 +31,111 @@ class ViewController: UIViewController {
                 domainCell.backgroundColor = self.view.backgroundColor
                 domainCell.domain = domain
                 
-               
+                
             }
             .addDisposableTo(disposeBag)
     }
     
     private func bindAddButtonTap() {
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingChanged).subscribe { _ in
-//            self.expandText()
-        }.addDisposableTo(disposeBag)
-
+            self.addNewTextBox.text = self.addNewTextBox.text?.lowercased()
+            }.addDisposableTo(disposeBag)
+        
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
             let d = Domain(simpleAddress: self.addNewTextBox.text!)
             domains.value.append(d)
             d.add()
             self.addNewTextBox.resignFirstResponder()
+            self.addNewTextBox.text = "Add New"
             }.addDisposableTo(disposeBag)
-
+        self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidBegin).subscribe{ _ in
+            self.expandTextBox()
+            self.addNewTextBox.text = ""
+            }.addDisposableTo(disposeBag)
+        
     }
     
-
     
-    override func viewWillLayoutSubviews() {
-        view.addSubview(addNewTextBox)
-        addNewTextBox.layer.borderColor = view.backgroundColor?.cgColor
-        addNewTextBox.textColor = UIColor(red: 211/255, green: 207/255, blue: 207/255, alpha: 1.0)
-        addNewTextBox.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
-        addNewTextBox.text = "Add New"
-        addNewTextBox.textAlignment = .left
-        addNewTextBox.snp.makeConstraints { (make) -> Void in
+    
+    override func viewDidLoad() {
+        bindAddButtonTap()
+        bindTableView()
+        setupViews()
+    }
+    
+    func setupViews(){
+        self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
+//        view.addSubview(tableView)
+//        tableView.isHidden = true
+
+        
+        //MARK: - Add New View
+        view.addSubview(addNewView)
+        addNewView.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(view.snp.left).offset(16)
             make.right.equalTo(view.snp.right).offset(-16)
             make.top.equalTo(view.snp.top).offset(40)
             make.height.equalTo(50)
             make.centerX.equalTo(view.snp.centerX)
-}
+        }
         
+        //MARK: - Add New Textbox
+        addNewTextBox.layer.borderColor = view.backgroundColor?.cgColor
+        addNewTextBox.textColor = UIColor(red: 211/255, green: 207/255, blue: 207/255, alpha: 1.0)
+        addNewTextBox.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
+        addNewTextBox.text = "Add New"
+        addNewTextBox.textAlignment = .left
+        addNewView.addSubview(addNewTextBox)
+        addNewTextBox.autocorrectionType = .no
+        addNewTextBox.autocapitalizationType = .none
+        addNewTextBox.snp.makeConstraints { (make) in
+            make.top.equalTo(addNewView.snp.top).offset(2)
+            make.left.equalTo(addNewView.snp.left).offset(2)
+            make.right.equalTo(addNewView.snp.right).offset(-2)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
+        }
+        
+        //MARK: - Separator Line
         view.addSubview(separatorLine)
         separatorLine.snp.makeConstraints { (make) in
             make.height.equalTo(1)
-            make.width.equalTo(addNewTextBox.snp.width)
-            make.centerX.equalTo(addNewTextBox.snp.centerX)
-            make.top.equalTo(addNewTextBox.snp.bottom).offset(10)
+            make.width.equalTo(addNewView.snp.width)
+            make.centerX.equalTo(addNewView.snp.centerX)
+            make.top.equalTo(addNewView.snp.bottom).offset(2)
         }
         separatorLine.backgroundColor = addNewTextBox.textColor
         
-        view.addSubview(tableView)
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = view.backgroundColor
-        tableView.separatorColor = view.backgroundColor
-        tableView.allowsSelection = false
-        tableView.snp.makeConstraints({ (make) in
-            make.top.equalTo(separatorLine.snp.bottom).offset(16)
-            make.bottom.equalTo(view.snp.bottom).offset(-16)
-            make.width.equalTo(addNewTextBox.snp.width)
-            make.centerX.equalTo(addNewTextBox.snp.centerX)
-
-        })
+        //MARK: - Tableview
+//        self.tableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
+//        tableView.delegate = self
+//        tableView.tableFooterView = UIView()
+//        tableView.backgroundColor = view.backgroundColor
+//        tableView.separatorColor = view.backgroundColor
+//        tableView.allowsSelection = false
+//        tableView.snp.makeConstraints({ (make) in
+//            make.top.equalTo(separatorLine.snp.bottom).offset(16)
+//            make.bottom.equalTo(view.snp.bottom).offset(-16)
+//            make.width.equalTo(addNewView.snp.width)
+//            make.centerX.equalTo(addNewView.snp.centerX)
+//        })
     }
-
-//    func
-
+    
+    
+    func expandTextBox() {
+        self.addNewView.backgroundColor = UIColor.customWhite()
+        let time = 2.0
+        for i in 0..<30000{
+            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.025))
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                let origFrame = self.addNewView.frame
+                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.01)
+                self.addNewView.frame = newFrame
+                
+            }
+        }
+    }
+    
+    
 }
 
 extension ViewController:UITableViewDelegate {

@@ -158,19 +158,41 @@ SWIFT_CLASS("_TtC11SiteBlocker28ContentBlockerRequestHandler")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class NSCoder;
+
+SWIFT_CLASS("_TtC11SiteBlocker6Domain")
+@interface Domain : NSObject <NSCoding>
+@property (nonatomic, copy) NSString * _Nonnull contentBlockerAddress;
+@property (nonatomic, copy) NSString * _Nonnull simpleAddress;
+- (nonnull instancetype)initWithSimpleAddress:(NSString * _Nonnull)simpleAddress OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)aCoder;
+- (void)add;
+- (void)remove;
++ (void)reloadDomains;
++ (void)setDomains;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
+@end
+
 @class UIView;
 @class UILabel;
 @class UIButton;
-@class NSCoder;
 
 SWIFT_CLASS("_TtC11SiteBlocker10DomainCell")
 @interface DomainCell : UITableViewCell
+@property (nonatomic, strong) Domain * _Nullable domain;
 @property (nonatomic, strong) UIView * _Nonnull containerView;
 @property (nonatomic, strong) UILabel * _Nonnull simpleLabel;
 @property (nonatomic, readonly, strong) UIButton * _Nonnull removeButton;
 - (void)layoutSubviews;
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier OBJC_DESIGNATED_INITIALIZER SWIFT_AVAILABILITY(ios,introduced=3.0);
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface UIColor (SWIFT_EXTENSION(SiteBlocker))
++ (UIColor * _Nonnull)customWhite SWIFT_WARN_UNUSED_RESULT;
++ (UIColor * _Nonnull)customBlack SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class UITextField;
@@ -180,12 +202,13 @@ SWIFT_CLASS("_TtC11SiteBlocker10DomainCell")
 SWIFT_CLASS("_TtC11SiteBlocker14ViewController")
 @interface ViewController : UIViewController
 @property (nonatomic, strong) UITextField * _Nonnull addNewTextBox;
-@property (nonatomic, strong) UIButton * _Nonnull addNeButton;
+@property (nonatomic, strong) UIButton * _Nonnull addNewView;
 @property (nonatomic, strong) UIView * _Nonnull separatorLine;
 @property (nonatomic, strong) UITableView * _Nonnull tableView;
 @property (nonatomic) NSInteger lastDomainsCount;
 - (void)viewDidLoad;
-- (void)viewWillLayoutSubviews;
+- (void)setupViews;
+- (void)expandTextBox;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 @end
