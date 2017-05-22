@@ -43,9 +43,9 @@ class ViewController: UIViewController {
         
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
             let d = Domain(simpleAddress: self.addNewTextBox.text!)
-            domains.value.append(d)
-            d.add()
-            self.addNewTextBox.resignFirstResponder()
+//            domains.value.append(d)
+//            d.add()
+//            self.addNewTextBox.resignFirstResponder()
 //            self.addNewTextBox.text = "Add New"
             self.shrinkTextBox()
             }.addDisposableTo(disposeBag)
@@ -140,22 +140,18 @@ class ViewController: UIViewController {
     }
     
     private func shrinkTextBox() {
-//        self.addNewView.backgroundColor = UIColor.clear
-        var count = 0
-        for i in 0..<2000{
-            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                let origFrame = self.addNewView.frame
-                print(origFrame.height)
-                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-                self.addNewView.frame = newFrame
-                self.addNewView.layer.cornerRadius = 12
-                count += 1
-                if count == 2000 {
-//                    self.addNewTextBox.text = nil
-                }
-            }
-        }
+        self.addNewView.backgroundColor = UIColor.customWhite()
+//        fadeFromClear()
+//        for i in 0..<2000{
+//            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+//            DispatchQueue.main.asyncAfter(deadline: when) {
+//                let origFrame = self.addNewView.frame
+//                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
+//                self.addNewView.frame = newFrame
+//                self.addNewView.layer.cornerRadius = 12
+//                
+//            }
+//        }
 
     }
     
