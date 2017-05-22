@@ -1,5 +1,0 @@
-version: "Apple Swift version 3.1 (swiftlang-802.0.51 clang-802.0.41)"
-options: "2bf357f25d66433d45734f5936454bcb"
-build_time: [548607995, 967681000]
-inputs:
-  "/Users/lukemann/SiteBlocker/Extension/ContentBlockerRequestHandler.swift": [548606976, 0]
