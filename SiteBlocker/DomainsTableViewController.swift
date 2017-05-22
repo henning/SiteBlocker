@@ -16,6 +16,7 @@ class DomainCell: UITableViewCell {
     var containerView = UIView()
     var simpleLabel = UILabel()
     let removeButton = UIButton()
+    var disposeBag = DisposeBag()
     
 
     override func layoutSubviews() {
@@ -51,8 +52,7 @@ class DomainCell: UITableViewCell {
             }
 
 //            domains.value.remove(at: domains.value.i))
-        }
-        
+        }.addDisposableTo(disposeBag)
         containerView.addSubview(simpleLabel)
         simpleLabel.text = domain?.simpleAddress
         simpleLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
