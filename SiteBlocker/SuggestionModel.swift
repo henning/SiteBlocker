@@ -9,7 +9,11 @@
 import UIKit
 import RxSwift
 
-let suggestions: Variable<[Suggestion]> = Variable([Suggestion(color: UIColor.black, title:"HERE")])
+let suggestions: Variable<[Suggestion]> = Variable([
+    Suggestion(color: UIColor.black, title:"HERE"),
+    Suggestion(color: UIColor.black, title:"HERE"),
+
+    ])
 
 
 struct Suggestion {

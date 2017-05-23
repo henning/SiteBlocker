@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         suggestions.asObservable()
             .bind(to: addNewTableView.rx.items(cellIdentifier: "SuggestionCell")) { _, suggestion, cell in
                 let suggestionCell = cell as! SuggestionCell
-                suggestionCell.backgroundColor = self.view.backgroundColor
+                suggestionCell.backgroundColor = self.addNewView.backgroundColor
                 suggestionCell.suggestion = suggestion
                 cell.clipsToBounds = true
             }.addDisposableTo(disposeBag)
@@ -78,7 +78,6 @@ class ViewController: UIViewController {
         bindAddButtonTap()
         bindTableView()
         setupViews()
-        suggestions.value.append(Suggestion(color: UIColor.purple, title: "wddwdw"))
     }
     
     func setupViews(){
@@ -150,10 +149,11 @@ class ViewController: UIViewController {
             v.clipsToBounds = true
         }
         addNewTableView.snp.makeConstraints({ (make) in
-           make.top.equalTo(addNewView.snp.top).offset(60)
-            make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
-            make.left.equalTo(addNewView.snp.left)
-            make.right.equalTo(addNewView.snp.right)
+            let offset = 20
+           make.top.equalTo(addNewView.snp.top).offset(60 + offset)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(Int(2000 * 0.15) - offset)
+            make.left.equalTo(addNewView.snp.left).offset(4)
+            make.right.equalTo(addNewView.snp.right).offset(-4)
         })
         addNewTableView.clipsToBounds = true
         addNewView.clipsToBounds = true

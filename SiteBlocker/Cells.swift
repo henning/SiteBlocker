@@ -86,7 +86,8 @@ class SuggestionCell: DomainCell {
     
     override func customSetup() {
          simpleLabel.text = suggestion?.title
-        backgroundColor = suggestion?.color
+        simpleLabel.textColor = UIColor.customWhite()
+        containerView.backgroundColor = suggestion?.color
     }
     
 }
