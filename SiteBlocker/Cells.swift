@@ -90,6 +90,7 @@ class SuggestionCell: DomainCell {
             make.size.equalTo(snp.size)
             make.left.equalTo(snp.left)
             make.top.equalTo(snp.top)
+            
         }
         removeButton.rx.tap.subscribe{ _ in
             print("TAPPED")

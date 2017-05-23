@@ -74,6 +74,7 @@ class ViewController: UIViewController {
     func setupViews(){
         self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
         view.addSubview(mainTableView)
+        addNewView.addSubview(addNewTableView)
         
         
         //MARK: - Add New View
@@ -103,19 +104,7 @@ class ViewController: UIViewController {
             make.right.equalTo(addNewView.snp.right).offset(-2)
             make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
         }
-        addNewView.addSubview(addNewTableView)
-        addNewTableView.delegate = self
-        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "SuggestionCell")
-        addNewTableView.tableFooterView = UIView()
-        addNewTableView.backgroundColor = addNewView.backgroundColor
-        addNewTableView.separatorColor = addNewView.backgroundColor
-        addNewTableView.allowsSelection = false
-        addNewView.snp.makeConstraints { (make) in
-            make.top.equalTo(addNewTextBox.snp.bottom).offset(2)
-            make.width.equalTo(addNewView.snp.width)
-            make.centerX.equalTo(addNewView.snp.centerX)
-            make.height.equalTo(300)
-        }
+
 
         
         //MARK: - Separator Line
@@ -130,12 +119,24 @@ class ViewController: UIViewController {
         
         //        MARK: - Tableview
         self.mainTableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
+        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "SuggestionCell")
         mainTableView.delegate = self
+        addNewTableView.delegate = self
         mainTableView.tableFooterView = UIView()
+        addNewTableView.tableFooterView = UIView()
         mainTableView.backgroundColor = view.backgroundColor
+        addNewTableView.backgroundColor = view.backgroundColor
         mainTableView.separatorColor = view.backgroundColor
+        addNewTableView.separatorColor = view.backgroundColor
         mainTableView.allowsSelection = false
+        addNewTableView.allowsSelection = false
         mainTableView.snp.makeConstraints({ (make) in
+            make.top.equalTo(separatorLine.snp.bottom).offset(16)
+            make.bottom.equalTo(view.snp.bottom).offset(-16)
+            make.width.equalTo(addNewView.snp.width)
+            make.centerX.equalTo(addNewView.snp.centerX)
+        })
+        addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(separatorLine.snp.bottom).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(-16)
             make.width.equalTo(addNewView.snp.width)
