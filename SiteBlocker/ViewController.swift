@@ -23,7 +23,6 @@ class ViewController: UIViewController {
     var disposeBag = DisposeBag()
     
     
-    var lastDomainsCount = 0
     
     
     
@@ -36,7 +35,7 @@ class ViewController: UIViewController {
 
             }.addDisposableTo(disposeBag)
        suggestions.asObservable()
-            .bind(to: addNewTableView.rx.items(cellIdentifier: "Suggestion")) { _, suggestion, cell in
+            .bind(to: addNewTableView.rx.items(cellIdentifier: "SuggestionCell")) { _, suggestion, cell in
                 let suggestionCell = cell as! SuggestionCell
                 suggestionCell.backgroundColor = self.view.backgroundColor
                 suggestionCell.suggestion = suggestion
@@ -69,6 +68,7 @@ class ViewController: UIViewController {
         bindAddButtonTap()
         bindTableView()
         setupViews()
+        suggestions.value.append(Suggestion(color: UIColor.purple, title: "wddwdw"))
     }
     
     func setupViews(){
@@ -105,15 +105,16 @@ class ViewController: UIViewController {
         }
         addNewView.addSubview(addNewTableView)
         addNewTableView.delegate = self
-        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "Suggestion")
+        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "SuggestionCell")
         addNewTableView.tableFooterView = UIView()
         addNewTableView.backgroundColor = addNewView.backgroundColor
         addNewTableView.separatorColor = addNewView.backgroundColor
         addNewTableView.allowsSelection = false
         addNewView.snp.makeConstraints { (make) in
             make.top.equalTo(addNewTextBox.snp.bottom).offset(2)
-            make.width.equalTo(mainTableView.snp.width)
+            make.width.equalTo(addNewView.snp.width)
             make.centerX.equalTo(addNewView.snp.centerX)
+            make.height.equalTo(300)
         }
 
         

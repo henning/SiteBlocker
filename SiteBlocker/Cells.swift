@@ -93,7 +93,7 @@ class SuggestionCell: DomainCell {
         }
         removeButton.rx.tap.subscribe{ _ in
             print("TAPPED")
-        }
+        }.addDisposableTo(disposeBag)
         simpleLabel.text = suggestion?.title
         backgroundColor = suggestion?.color
     }
