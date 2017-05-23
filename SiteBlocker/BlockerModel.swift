@@ -96,7 +96,6 @@ class Domain:NSObject,NSCoding {
     }
     
     static func setDomains() {
-        let values = domains.value
         let userDefaults = UserDefaults.standard
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: domains.value)
         userDefaults.set(encodedData, forKey: "domains")

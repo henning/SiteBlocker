@@ -33,12 +33,10 @@ class ViewController: UIViewController {
                 let domainCell = cell as! DomainCell
                 domainCell.backgroundColor = self.view.backgroundColor
                 domainCell.domain = domain
-                
-                
-            }
-            .addDisposableTo(disposeBag)
-        suggestions.asObservable()
-            .bind(to: mainTableView.rx.items(cellIdentifier: "Suggestion")) { _, suggestion, cell in
+
+            }.addDisposableTo(disposeBag)
+       suggestions.asObservable()
+            .bind(to: addNewTableView.rx.items(cellIdentifier: "Suggestion")) { _, suggestion, cell in
                 let suggestionCell = cell as! SuggestionCell
                 suggestionCell.backgroundColor = self.view.backgroundColor
                 suggestionCell.suggestion = suggestion
@@ -105,7 +103,7 @@ class ViewController: UIViewController {
             make.right.equalTo(addNewView.snp.right).offset(-2)
             make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
         }
-        addNewTextBox.addSubview(addNewTableView)
+        addNewView.addSubview(addNewTableView)
         addNewTableView.delegate = self
         self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "Suggestion")
         addNewTableView.tableFooterView = UIView()

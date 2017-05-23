@@ -95,6 +95,7 @@ class SuggestionCell: DomainCell {
             print("TAPPED")
         }
         simpleLabel.text = suggestion?.title
+        backgroundColor = suggestion?.color
     }
     
 }
