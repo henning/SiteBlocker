@@ -85,17 +85,7 @@ class SuggestionCell: DomainCell {
     var suggestion:Suggestion? = nil
     
     override func customSetup() {
-        addSubview(button)
-        removeButton.snp.makeConstraints { (make) in
-            make.size.equalTo(snp.size)
-            make.left.equalTo(snp.left)
-            make.top.equalTo(snp.top)
-            
-        }
-        removeButton.rx.tap.subscribe{ _ in
-            print("TAPPED")
-        }.addDisposableTo(disposeBag)
-        simpleLabel.text = suggestion?.title
+         simpleLabel.text = suggestion?.title
         backgroundColor = suggestion?.color
     }
     

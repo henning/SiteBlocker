@@ -16,7 +16,7 @@ import Hero
 class ViewController: UIViewController {
     
     var addNewTextBox = UITextField()
-    var addNewView = UIButton()
+    var addNewView = UIView()
     var separatorLine = UIView()
     var mainTableView = UITableView()
     var addNewTableView = UITableView()
@@ -32,13 +32,14 @@ class ViewController: UIViewController {
                 let domainCell = cell as! DomainCell
                 domainCell.backgroundColor = self.view.backgroundColor
                 domainCell.domain = domain
-
+                
             }.addDisposableTo(disposeBag)
-       suggestions.asObservable()
+        suggestions.asObservable()
             .bind(to: addNewTableView.rx.items(cellIdentifier: "SuggestionCell")) { _, suggestion, cell in
                 let suggestionCell = cell as! SuggestionCell
                 suggestionCell.backgroundColor = self.view.backgroundColor
                 suggestionCell.suggestion = suggestion
+                cell.clipsToBounds = true
             }.addDisposableTo(disposeBag)
     }
     
@@ -74,11 +75,12 @@ class ViewController: UIViewController {
     func setupViews(){
         self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
         view.addSubview(mainTableView)
+        view.addSubview(addNewView)
+        addNewView.addSubview(addNewTextBox)
         addNewView.addSubview(addNewTableView)
-        
+
         
         //MARK: - Add New View
-        view.addSubview(addNewView)
         addNewView.autoresizesSubviews = false
         addNewView.translatesAutoresizingMaskIntoConstraints = false
         addNewView.snp.makeConstraints { (make) -> Void in
@@ -95,7 +97,6 @@ class ViewController: UIViewController {
         addNewTextBox.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
         addNewTextBox.textAlignment = .left
         addNewTextBox.text = "Add New"
-        addNewView.addSubview(addNewTextBox)
         addNewTextBox.autocorrectionType = .no
         addNewTextBox.autocapitalizationType = .none
         addNewTextBox.snp.makeConstraints { (make) in
@@ -104,8 +105,8 @@ class ViewController: UIViewController {
             make.right.equalTo(addNewView.snp.right).offset(-2)
             make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
         }
-
-
+        
+        
         
         //MARK: - Separator Line
         view.addSubview(separatorLine)
@@ -136,11 +137,12 @@ class ViewController: UIViewController {
             make.width.equalTo(addNewView.snp.width)
             make.centerX.equalTo(addNewView.snp.centerX)
         })
+        addNewTableView.clipsToBounds = true
         addNewTableView.snp.makeConstraints({ (make) in
-            make.top.equalTo(separatorLine.snp.bottom).offset(16)
-            make.bottom.equalTo(view.snp.bottom).offset(-16)
-            make.width.equalTo(addNewView.snp.width)
-            make.centerX.equalTo(addNewView.snp.centerX)
+           make.top.equalTo(addNewView.snp.top).offset(60)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(0.15*2000)
+            make.left.equalTo(addNewView.snp.left)
+            make.right.equalTo(addNewView.snp.right)
         })
     }
     
@@ -148,6 +150,7 @@ class ViewController: UIViewController {
     private func expandTextBox() {
         self.addNewView.backgroundColor = UIColor.customWhite()
         self.fadeFromClear()
+        var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
             DispatchQueue.main.asyncAfter(deadline: when) {
@@ -155,12 +158,26 @@ class ViewController: UIViewController {
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
-                
+//                self.addNewTableView.snp.makeConstraints({ (make) in
+//                    make.bottom.equalTo(self.addNewView.snp.bottom)
+//                })
+                count += 1
+                if count == 2000 {
+                    print("HEREERER LHWIUFYBE")
+                }
             }
         }
     }
     
-    
+    private func resizeTable() {
+        addNewTableView.snp.makeConstraints({ (make) in
+            make.top.equalTo(separatorLine.snp.bottom).offset(16)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(-16)
+            make.width.equalTo(addNewView.snp.width)
+            make.centerX.equalTo(addNewView.snp.centerX)
+        })
+        addNewView.layoutSubviews()
+    }
     
 }
 
