@@ -10,15 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class DomainCell: UITableViewCell {
-    var domain:Domain? = nil
-    
+class CustomTableCell: UITableViewCell{
     var containerView = UIView()
     var simpleLabel = UILabel()
-    let removeButton = UIButton()
     var disposeBag = DisposeBag()
-    
 
+    func customSetup() {
+        //
+    }
+    
     override func layoutSubviews() {
         addSubview(containerView)
         containerView.backgroundColor = UIColor.customWhite()
@@ -30,7 +30,27 @@ class DomainCell: UITableViewCell {
             make.bottom.equalTo(snp.bottom).offset(-5)
             make.width.equalTo(snp.width)
         }
-        
+        containerView.addSubview(simpleLabel)
+        simpleLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        simpleLabel.textColor = UIColor.customBlack()
+        self.simpleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(containerView.snp.left).offset(10)
+            make.right.equalTo(containerView.snp.right).offset(-10)
+            make.height.equalTo(containerView.snp.height)
+            make.centerY.equalTo(containerView.snp.centerY)
+        }
+        customSetup()
+    }
+}
+
+
+class DomainCell: CustomTableCell {
+    var domain:Domain? = nil
+    
+     let removeButton = UIButton()
+    
+    override func customSetup(){
+        simpleLabel.text = domain?.simpleAddress
         addSubview(removeButton)
         removeButton.setImage(#imageLiteral(resourceName: "remove"), for: .normal)
         removeButton.imageView?.contentMode = .scaleAspectFill
@@ -50,21 +70,32 @@ class DomainCell: UITableViewCell {
                 }
                 i+=1
             }
-
-//            domains.value.remove(at: domains.value.i))
-        }.addDisposableTo(disposeBag)
-        containerView.addSubview(simpleLabel)
-        simpleLabel.text = domain?.simpleAddress
-        simpleLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
-        simpleLabel.textColor = UIColor.customBlack()
-        self.simpleLabel.snp.makeConstraints { (make) in
-            make.left.equalTo(containerView.snp.left).offset(10)
-            make.right.equalTo(containerView.snp.right).offset(-10)
-            make.height.equalTo(containerView.snp.height)
-            make.centerY.equalTo(containerView.snp.centerY)
-        }
-        
-        
+            
+            }.addDisposableTo(disposeBag)
 
     }
+    
+
+
 }
+
+class SuggestionCell: DomainCell {
+    let button = UIButton()
+    
+    var suggestion:Suggestion? = nil
+    
+    override func customSetup() {
+        addSubview(button)
+        removeButton.snp.makeConstraints { (make) in
+            make.size.equalTo(snp.size)
+            make.left.equalTo(snp.left)
+            make.top.equalTo(snp.top)
+        }
+        removeButton.rx.tap.subscribe{ _ in
+            print("TAPPED")
+        }
+        simpleLabel.text = suggestion?.title
+    }
+    
+}
+

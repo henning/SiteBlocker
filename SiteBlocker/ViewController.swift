@@ -18,15 +18,18 @@ class ViewController: UIViewController {
     var addNewTextBox = UITextField()
     var addNewView = UIButton()
     var separatorLine = UIView()
-    var tableView = UITableView()
+    var mainTableView = UITableView()
+    var addNewTableView = UITableView()
     var disposeBag = DisposeBag()
+    
+    
     var lastDomainsCount = 0
     
     
     
     private func bindTableView() {
         domains.asObservable()
-            .bind(to: tableView.rx.items(cellIdentifier: "Cell")) { _, domain, cell in
+            .bind(to: mainTableView.rx.items(cellIdentifier: "Cell")) { _, domain, cell in
                 let domainCell = cell as! DomainCell
                 domainCell.backgroundColor = self.view.backgroundColor
                 domainCell.domain = domain
@@ -34,6 +37,12 @@ class ViewController: UIViewController {
                 
             }
             .addDisposableTo(disposeBag)
+        suggestions.asObservable()
+            .bind(to: mainTableView.rx.items(cellIdentifier: "Suggestion")) { _, suggestion, cell in
+                let suggestionCell = cell as! SuggestionCell
+                suggestionCell.backgroundColor = self.view.backgroundColor
+                suggestionCell.suggestion = suggestion
+            }.addDisposableTo(disposeBag)
     }
     
     private func bindAddButtonTap() {
@@ -46,12 +55,12 @@ class ViewController: UIViewController {
             domains.value.append(d)
             d.add()
             self.addNewTextBox.resignFirstResponder()
-             self.addNewTextBox.text = "Add New"
+            self.addNewTextBox.text = "Add New"
             self.shrinkTextBox()
             }.addDisposableTo(disposeBag)
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidBegin).subscribe{ _ in
             self.expandTextBox()
-                        self.addNewTextBox.text = nil
+            self.addNewTextBox.text = nil
             }.addDisposableTo(disposeBag)
         
     }
@@ -66,7 +75,7 @@ class ViewController: UIViewController {
     
     func setupViews(){
         self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
-                view.addSubview(tableView)
+        view.addSubview(mainTableView)
         
         
         //MARK: - Add New View
@@ -96,6 +105,19 @@ class ViewController: UIViewController {
             make.right.equalTo(addNewView.snp.right).offset(-2)
             make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
         }
+        addNewTextBox.addSubview(addNewTableView)
+        addNewTableView.delegate = self
+        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "Suggestion")
+        addNewTableView.tableFooterView = UIView()
+        addNewTableView.backgroundColor = addNewView.backgroundColor
+        addNewTableView.separatorColor = addNewView.backgroundColor
+        addNewTableView.allowsSelection = false
+        addNewView.snp.makeConstraints { (make) in
+            make.top.equalTo(addNewTextBox.snp.bottom).offset(2)
+            make.width.equalTo(mainTableView.snp.width)
+            make.centerX.equalTo(addNewView.snp.centerX)
+        }
+
         
         //MARK: - Separator Line
         view.addSubview(separatorLine)
@@ -107,25 +129,25 @@ class ViewController: UIViewController {
         }
         separatorLine.backgroundColor = addNewTextBox.textColor
         
-//        MARK: - Tableview
-                self.tableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
-                tableView.delegate = self
-                tableView.tableFooterView = UIView()
-                tableView.backgroundColor = view.backgroundColor
-                tableView.separatorColor = view.backgroundColor
-                tableView.allowsSelection = false
-                tableView.snp.makeConstraints({ (make) in
-                    make.top.equalTo(separatorLine.snp.bottom).offset(16)
-                    make.bottom.equalTo(view.snp.bottom).offset(-16)
-                    make.width.equalTo(addNewView.snp.width)
-                    make.centerX.equalTo(addNewView.snp.centerX)
-                })
+        //        MARK: - Tableview
+        self.mainTableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
+        mainTableView.delegate = self
+        mainTableView.tableFooterView = UIView()
+        mainTableView.backgroundColor = view.backgroundColor
+        mainTableView.separatorColor = view.backgroundColor
+        mainTableView.allowsSelection = false
+        mainTableView.snp.makeConstraints({ (make) in
+            make.top.equalTo(separatorLine.snp.bottom).offset(16)
+            make.bottom.equalTo(view.snp.bottom).offset(-16)
+            make.width.equalTo(addNewView.snp.width)
+            make.centerX.equalTo(addNewView.snp.centerX)
+        })
     }
     
     
     private func expandTextBox() {
         self.addNewView.backgroundColor = UIColor.customWhite()
-        fadeFromClear()
+        self.fadeFromClear()
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
             DispatchQueue.main.asyncAfter(deadline: when) {
@@ -138,39 +160,6 @@ class ViewController: UIViewController {
         }
     }
     
-    private func shrinkTextBox() {
-                self.addNewView.backgroundColor = UIColor.clear
-//        var count = 0
-//        for i in 0..<2000{
-//            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-//            DispatchQueue.main.asyncAfter(deadline: when) {
-//                let origFrame = self.addNewView.frame
-//                print(origFrame.height)
-//                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-//                self.addNewView.frame = newFrame
-//                self.addNewView.layer.cornerRadius = 12
-//                count += 1
-//                if count == h {
-//                    //                    self.addNewTextBox.text = nil
-//                }
-//            }
-//        }
-        
-    }
-    
-    private func fadeToClear(){
-        
-    }
-    private func fadeFromClear() {
-        //        for i in 1..<2000{
-        //            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-        //            DispatchQueue.main.asyncAfter(deadline: when) {
-        //            let float = CGFloat((Double(i)/2000))
-        //            self.addNewTextBox.backgroundColor = UIColor.customWhite(alpha: float)
-        //                
-        //            }
-        //        }
-    }
     
     
 }
@@ -180,5 +169,43 @@ extension ViewController:UITableViewDelegate {
         return 70
     }
     
+}
+
+
+//MARK:- Crap
+extension ViewController {
+    func shrinkTextBox() {
+        self.addNewView.backgroundColor = UIColor.clear
+        //        var count = 0
+        //        for i in 0..<2000{
+        //            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+        //            DispatchQueue.main.asyncAfter(deadline: when) {
+        //                let origFrame = self.addNewView.frame
+        //                print(origFrame.height)
+        //                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
+        //                self.addNewView.frame = newFrame
+        //                self.addNewView.layer.cornerRadius = 12
+        //                count += 1
+        //                if count == h {
+        //                    //                    self.addNewTextBox.text = nil
+        //                }
+        //            }
+        //        }
+        
+    }
+    
+    func fadeToClear(){
+        
+    }
+    func fadeFromClear() {
+        //        for i in 1..<2000{
+        //            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+        //            DispatchQueue.main.asyncAfter(deadline: when) {
+        //            let float = CGFloat((Double(i)/2000))
+        //            self.addNewTextBox.backgroundColor = UIColor.customWhite(alpha: float)
+        //
+        //            }
+        //        }
+    }
     
 }
