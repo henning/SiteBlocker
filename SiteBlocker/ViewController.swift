@@ -149,9 +149,8 @@ class ViewController: UIViewController {
             v.clipsToBounds = true
         }
         addNewTableView.snp.makeConstraints({ (make) in
-            let offset = 20
-           make.top.equalTo(addNewView.snp.top).offset(60 + offset)
-            make.bottom.equalTo(addNewView.snp.bottom).offset(Int(2000 * 0.15) - offset)
+           make.top.equalTo(addNewView.snp.top).offset(60 + 10)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
