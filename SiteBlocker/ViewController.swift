@@ -41,6 +41,15 @@ class ViewController: UIViewController {
                 suggestionCell.suggestion = suggestion
                 cell.clipsToBounds = true
             }.addDisposableTo(disposeBag)
+        
+//        self.addNewView
+//            .rx.observe(CGRect.self, "frame")
+//            .subscribe(onNext: { frame in
+//                self.addNewTableView.frame = CGRect(x:self.addNewTableView.frame.minX ,
+//                                               y: self.addNewTableView.frame.minY,
+//                                               width: self.addNewTableView.frame.width,
+//                                               height: frame!.height - 60)
+//            })
     }
     
     private func bindAddButtonTap() {
@@ -126,7 +135,7 @@ class ViewController: UIViewController {
         mainTableView.tableFooterView = UIView()
         addNewTableView.tableFooterView = UIView()
         mainTableView.backgroundColor = view.backgroundColor
-        addNewTableView.backgroundColor = view.backgroundColor
+        addNewTableView.backgroundColor = addNewView.backgroundColor
         mainTableView.separatorColor = view.backgroundColor
         addNewTableView.separatorColor = view.backgroundColor
         mainTableView.allowsSelection = false
@@ -137,13 +146,18 @@ class ViewController: UIViewController {
             make.width.equalTo(addNewView.snp.width)
             make.centerX.equalTo(addNewView.snp.centerX)
         })
-        addNewTableView.clipsToBounds = true
+        for v in addNewView.subviews{
+            v.clipsToBounds = true
+        }
         addNewTableView.snp.makeConstraints({ (make) in
            make.top.equalTo(addNewView.snp.top).offset(60)
-            make.bottom.equalTo(addNewView.snp.bottom).offset(0.15*2000)
+            make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
             make.left.equalTo(addNewView.snp.left)
             make.right.equalTo(addNewView.snp.right)
         })
+        addNewTableView.clipsToBounds = true
+        addNewView.clipsToBounds = true
+
     }
     
     
