@@ -82,12 +82,27 @@ class DomainCell: CustomTableCell {
 class SuggestionCell: DomainCell {
     let button = UIButton()
     
+    var vc:ViewController? = nil
+    
     var suggestion:Suggestion? = nil
     
     override func customSetup() {
          simpleLabel.text = suggestion?.title
         simpleLabel.textColor = UIColor.customWhite()
         containerView.backgroundColor = suggestion?.color
+        addSubview(button)
+        button.snp.makeConstraints { (make) in
+            make.left.equalTo(containerView.snp.left)
+            make.right.equalTo(containerView.snp.right)
+            make.top.equalTo(containerView.snp.top)
+            make.bottom.equalTo(containerView.snp.bottom)
+        }
+        button.rx.tap.subscribe { _ in
+            let d = Domain(simpleAddress: self.suggestion!.title)
+            domains.value.append(d)
+            d.add()
+            self.vc?.shrinkTextBox()
+        }.addDisposableTo(disposeBag)
     }
     
 }

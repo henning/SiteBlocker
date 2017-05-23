@@ -40,36 +40,27 @@ class ViewController: UIViewController {
                 suggestionCell.backgroundColor = self.addNewView.backgroundColor
                 suggestionCell.suggestion = suggestion
                 cell.clipsToBounds = true
+                suggestionCell.vc = self
             }.addDisposableTo(disposeBag)
         
-//        self.addNewView
-//            .rx.observe(CGRect.self, "frame")
-//            .subscribe(onNext: { frame in
-//                self.addNewTableView.frame = CGRect(x:self.addNewTableView.frame.minX ,
-//                                               y: self.addNewTableView.frame.minY,
-//                                               width: self.addNewTableView.frame.width,
-//                                               height: frame!.height - 60)
-//            })
+
     }
     
     private func bindAddButtonTap() {
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingChanged).subscribe { _ in
-            //            self.addNewTextBox.text = self.addNewTextBox.text?.lowercased()
             }.addDisposableTo(disposeBag)
         
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
             let d = Domain(simpleAddress: self.addNewTextBox.text!)
             domains.value.append(d)
             d.add()
-            self.addNewTextBox.resignFirstResponder()
-            self.addNewTextBox.text = "Add New"
             self.shrinkTextBox()
             }.addDisposableTo(disposeBag)
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidBegin).subscribe{ _ in
             self.expandTextBox()
             self.addNewTextBox.text = nil
             }.addDisposableTo(disposeBag)
-        
+
     }
     
     
@@ -126,28 +117,27 @@ class ViewController: UIViewController {
         }
         separatorLine.backgroundColor = addNewTextBox.textColor
         
-        //        MARK: - Tableview
+        //MARK: - Tableview
         self.mainTableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
-        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "SuggestionCell")
         mainTableView.delegate = self
-        addNewTableView.delegate = self
         mainTableView.tableFooterView = UIView()
-        addNewTableView.tableFooterView = UIView()
         mainTableView.backgroundColor = view.backgroundColor
-        addNewTableView.backgroundColor = addNewView.backgroundColor
         mainTableView.separatorColor = view.backgroundColor
-        addNewTableView.separatorColor = view.backgroundColor
         mainTableView.allowsSelection = false
-        addNewTableView.allowsSelection = false
         mainTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(separatorLine.snp.bottom).offset(16)
             make.bottom.equalTo(view.snp.bottom).offset(-16)
             make.width.equalTo(addNewView.snp.width)
             make.centerX.equalTo(addNewView.snp.centerX)
         })
-        for v in addNewView.subviews{
-            v.clipsToBounds = true
-        }
+        
+        // MARK: - Suggestion TableView
+        self.addNewTableView.register(SuggestionCell.self as AnyClass, forCellReuseIdentifier: "SuggestionCell")
+        addNewTableView.delegate = self
+        addNewTableView.tableFooterView = UIView()
+        addNewTableView.backgroundColor = addNewView.backgroundColor
+        addNewTableView.separatorColor = view.backgroundColor
+        addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
            make.top.equalTo(addNewView.snp.top).offset(60 + 10)
             make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
@@ -163,7 +153,6 @@ class ViewController: UIViewController {
     private func expandTextBox() {
         self.addNewView.backgroundColor = UIColor.customWhite()
         self.fadeFromClear()
-        var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
             DispatchQueue.main.asyncAfter(deadline: when) {
@@ -171,13 +160,7 @@ class ViewController: UIViewController {
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
-//                self.addNewTableView.snp.makeConstraints({ (make) in
-//                    make.bottom.equalTo(self.addNewView.snp.bottom)
-//                })
-                count += 1
-                if count == 2000 {
-                    print("HEREERER LHWIUFYBE")
-                }
+
             }
         }
     }
@@ -205,22 +188,24 @@ extension ViewController:UITableViewDelegate {
 //MARK:- Crap
 extension ViewController {
     func shrinkTextBox() {
-        self.addNewView.backgroundColor = UIColor.clear
-        //        var count = 0
-        //        for i in 0..<2000{
-        //            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-        //            DispatchQueue.main.asyncAfter(deadline: when) {
-        //                let origFrame = self.addNewView.frame
-        //                print(origFrame.height)
-        //                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-        //                self.addNewView.frame = newFrame
-        //                self.addNewView.layer.cornerRadius = 12
-        //                count += 1
-        //                if count == h {
-        //                    //                    self.addNewTextBox.text = nil
-        //                }
-        //            }
-        //        }
+//        self.addNewView.backgroundColor = UIColor.clear
+//        self.addNewTextBox.text = "Add New"
+//        self.addNewView.resignFirstResponder()
+
+
+                var count = 0
+                for i in 0..<2000{
+                    let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+                    DispatchQueue.main.asyncAfter(deadline: when) {
+                        let origFrame = self.addNewView.frame
+                        print(origFrame.height)
+                        let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
+                        self.addNewView.frame = newFrame
+                        self.addNewView.layer.cornerRadius = 12
+                        count += 1
+                        
+                    }
+                }
         
     }
     
