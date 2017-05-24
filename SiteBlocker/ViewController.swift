@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var separatorLine = UIView()
     var mainTableView = UITableView()
     var addNewTableView = UITableView()
+    var addNewLabel = UILabel()
     var disposeBag = DisposeBag()
     
     
@@ -50,9 +51,7 @@ class ViewController: UIViewController {
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingChanged).subscribe { _ in
             }.addDisposableTo(disposeBag)
         
-//        self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
-//            
-//            }.addDisposableTo(disposeBag)
+        
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidBegin).subscribe{ _ in
             self.expandTextBox()
             self.addNewTextBox.text = nil
@@ -69,10 +68,13 @@ class ViewController: UIViewController {
     }
     
     func setupViews(){
+        
+        
         self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
         view.addSubview(mainTableView)
         view.addSubview(addNewView)
         addNewView.addSubview(addNewTextBox)
+        addNewView.addSubview(addNewLabel)
         addNewView.addSubview(addNewTableView)
         addNewTextBox.delegate = self
         
@@ -93,7 +95,7 @@ class ViewController: UIViewController {
         addNewTextBox.textColor = UIColor(red: 211/255, green: 207/255, blue: 207/255, alpha: 1.0)
         addNewTextBox.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
         addNewTextBox.textAlignment = .left
-        addNewTextBox.text = "Add New"
+        addNewTextBox.text = nil
         addNewTextBox.autocorrectionType = .no
         addNewTextBox.autocapitalizationType = .none
         addNewTextBox.snp.makeConstraints { (make) in
@@ -101,6 +103,17 @@ class ViewController: UIViewController {
             make.left.equalTo(addNewView.snp.left).offset(2)
             make.right.equalTo(addNewView.snp.right).offset(-2)
             make.bottom.equalTo(addNewView.snp.bottom).offset(-2)
+        }
+        addNewLabel.layer.borderColor = view.backgroundColor?.cgColor
+        addNewLabel.textColor = UIColor(red: 211/255, green: 207/255, blue: 207/255, alpha: 1.0)
+        addNewLabel.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
+        addNewLabel.textAlignment = .left
+        addNewLabel.text = "Add New"
+        addNewLabel.snp.makeConstraints { (make) in
+            make.size.equalTo(addNewTextBox.snp.size)
+            make.left.equalTo(addNewTextBox.snp.left)
+            make.top.equalTo(addNewTextBox.snp.top)
+
         }
         
         
@@ -145,20 +158,28 @@ class ViewController: UIViewController {
         addNewTableView.clipsToBounds = true
         addNewView.clipsToBounds = true
         
+//        self.addNewView.backgroundColor = UIColor.customWhite()
+//        self.addNewTextBox.textColor = UIColor.customBlack()
+//        self.addNewView.layer.cornerRadius = 9
+
+        
     }
     
     
     private func expandTextBox() {
-        self.addNewView.backgroundColor = UIColor.customWhite()
+//        self.addNewView.backgroundColor = UIColor.customWhite()
         self.fadeFromClear()
+        var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
             DispatchQueue.main.asyncAfter(deadline: when) {
                 let origFrame = self.addNewView.frame
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
+                self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(count)/2000)
+                self.addNewLabel.alpha = CGFloat(2000-count)/2000
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
-                
+                count += 1
             }
         }
     }
@@ -184,7 +205,8 @@ extension ViewController:UITableViewDelegate,UITextFieldDelegate {
         let d = Domain(simpleAddress: self.addNewTextBox.text!)
         domains.value.append(d)
         d.add()
-        addNewTextBox.resignFirstResponder()
+//        addNewTextBox.resignFirstResponder()
+        shrinkTextBox()
         return false
     }
     
@@ -206,11 +228,14 @@ extension ViewController {
                 let origFrame = self.addNewView.frame
                 print(origFrame.height)
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
+                self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(2000-count)/2000)
+                self.addNewLabel.alpha = CGFloat(count)/2000
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
                 count += 1
                 if count == 2000 {
-                    //                            self.addNewTextBox.resignFirstResponder()
+                  self.addNewTextBox.resignFirstResponder()
+                    self.addNewTextBox.text = nil
                 }
             }
         }

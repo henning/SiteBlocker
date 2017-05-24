@@ -101,7 +101,7 @@ class SuggestionCell: DomainCell {
             let d = Domain(simpleAddress: self.suggestion!.title)
             domains.value.append(d)
             d.add()
-            self.vc?.addNewTextBox.resignFirstResponder()
+            self.vc?.shrinkTextBox()
             }.addDisposableTo(disposeBag)
     }
     
