@@ -20,16 +20,25 @@ class Domain:NSObject,NSCoding {
     init(simpleAddress: String) {
         self.simpleAddress=simpleAddress.lowercased()
         let parts = self.simpleAddress.components(separatedBy: ".")
-        for i in 0..<parts.count{
-            if parts[i]=="com"{
-                if i != 0{
-                    self.contentBlockerAddress = ".*\(parts[i-1]).*"
-                    
-                }
-                
-            }
+//        for i in 0..<parts.count{
+//            if parts[i]=="com"{
+//                if i != 0{
+//                    self.contentBlockerAddress = ".*\(parts[i-1]).*"
+//
+//                }
+//                
+//            }
+//            
+//        }
+        var priorParts = ""
+        for i in 0..<parts.count-1 {
+            priorParts.append(parts[i])
+            priorParts.append(".")
             
         }
+        priorParts.append((parts.last?.components(separatedBy: "/").first)!)
+        self.contentBlockerAddress = ".*\(priorParts).*"
+
     }
     
     required convenience init(coder aDecoder: NSCoder) {
