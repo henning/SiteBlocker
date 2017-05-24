@@ -43,24 +43,21 @@ class ViewController: UIViewController {
                 suggestionCell.vc = self
             }.addDisposableTo(disposeBag)
         
-
+        
     }
     
     private func bindAddButtonTap() {
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingChanged).subscribe { _ in
             }.addDisposableTo(disposeBag)
         
-        self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
-            let d = Domain(simpleAddress: self.addNewTextBox.text!)
-            domains.value.append(d)
-            d.add()
-            self.shrinkTextBox()
-            }.addDisposableTo(disposeBag)
+//        self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidEndOnExit).subscribe { _ in
+//            
+//            }.addDisposableTo(disposeBag)
         self.addNewTextBox.rx.controlEvent(UIControlEvents.editingDidBegin).subscribe{ _ in
             self.expandTextBox()
             self.addNewTextBox.text = nil
             }.addDisposableTo(disposeBag)
-
+        
     }
     
     
@@ -77,7 +74,8 @@ class ViewController: UIViewController {
         view.addSubview(addNewView)
         addNewView.addSubview(addNewTextBox)
         addNewView.addSubview(addNewTableView)
-
+        addNewTextBox.delegate = self
+        
         
         //MARK: - Add New View
         addNewView.autoresizesSubviews = false
@@ -139,14 +137,14 @@ class ViewController: UIViewController {
         addNewTableView.separatorColor = view.backgroundColor
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
-           make.top.equalTo(addNewView.snp.top).offset(60 + 10)
+            make.top.equalTo(addNewView.snp.top).offset(60 + 10)
             make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
         addNewTableView.clipsToBounds = true
         addNewView.clipsToBounds = true
-
+        
     }
     
     
@@ -160,7 +158,7 @@ class ViewController: UIViewController {
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
-
+                
             }
         }
     }
@@ -177,9 +175,17 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController:UITableViewDelegate {
+extension ViewController:UITableViewDelegate,UITextFieldDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let d = Domain(simpleAddress: self.addNewTextBox.text!)
+        domains.value.append(d)
+        d.add()
+        addNewTextBox.resignFirstResponder()
+        return false
     }
     
 }
@@ -188,24 +194,26 @@ extension ViewController:UITableViewDelegate {
 //MARK:- Crap
 extension ViewController {
     func shrinkTextBox() {
-//        self.addNewView.backgroundColor = UIColor.clear
-//        self.addNewTextBox.text = "Add New"
-//        self.addNewView.resignFirstResponder()
-
-
-                var count = 0
-                for i in 0..<2000{
-                    let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-                    DispatchQueue.main.asyncAfter(deadline: when) {
-                        let origFrame = self.addNewView.frame
-                        print(origFrame.height)
-                        let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-                        self.addNewView.frame = newFrame
-                        self.addNewView.layer.cornerRadius = 12
-                        count += 1
-                        
-                    }
+        //        self.addNewView.backgroundColor = UIColor.clear
+        //        self.addNewTextBox.text = "Add New"
+        //        self.addNewView.resignFirstResponder()
+        print("runnnnnununun")
+        
+        var count = 0
+        for i in 0..<2000{
+            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                let origFrame = self.addNewView.frame
+                print(origFrame.height)
+                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
+                self.addNewView.frame = newFrame
+                self.addNewView.layer.cornerRadius = 12
+                count += 1
+                if count == 2000 {
+                    //                            self.addNewTextBox.resignFirstResponder()
                 }
+            }
+        }
         
     }
     
