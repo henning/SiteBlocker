@@ -219,14 +219,12 @@ extension ViewController {
         //        self.addNewView.backgroundColor = UIColor.clear
         //        self.addNewTextBox.text = "Add New"
         //        self.addNewView.resignFirstResponder()
-        print("runnnnnununun")
         
         var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
             DispatchQueue.main.asyncAfter(deadline: when) {
                 let origFrame = self.addNewView.frame
-                print(origFrame.height)
                 let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
                 self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(2000-count)/2000)
                 self.addNewLabel.alpha = CGFloat(count)/2000
