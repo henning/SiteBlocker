@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         
         //MARK: - Add New Textbox
         addNewTextBox.layer.borderColor = view.backgroundColor?.cgColor
-        addNewTextBox.textColor = UIColor(red: 211/255, green: 207/255, blue: 207/255, alpha: 1.0)
+        addNewTextBox.textColor = UIColor.customBlack()
         addNewTextBox.font = UIFont(name: "AvenirNext-UltraLight", size: 36)
         addNewTextBox.textAlignment = .left
         addNewTextBox.text = nil
@@ -202,12 +202,25 @@ extension ViewController:UITableViewDelegate,UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if correctFormat(string: self.addNewTextBox.text!){
         let d = Domain(simpleAddress: self.addNewTextBox.text!)
         domains.value.append(d)
         d.add()
 //        addNewTextBox.resignFirstResponder()
         shrinkTextBox()
+        }
         return false
+    }
+    
+    private func correctFormat(string:String)->Bool{
+        let s = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
+        let characterSet = CharacterSet(charactersIn: s).inverted
+         let words = string.components(separatedBy: characterSet)
+        if words.count > 1 {
+            return false
+        }
+        return true
+        
     }
     
 }

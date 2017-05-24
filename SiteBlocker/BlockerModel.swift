@@ -63,11 +63,11 @@ class Domain:NSObject,NSCoding {
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
-            "trigger":["url-filter": contentBlockerAddress],
+            "trigger":["url-filter": ".*","if-domain":[contentBlockerAddress]],
             "action": ["type":"block"]
             ])
         var i = 0
-        var array = json.array!
+        if var array = json.array {
         for element in array {
             if element == jsonElement{
                 array.remove(at: i)
@@ -81,6 +81,7 @@ class Domain:NSObject,NSCoding {
         try! data?.write(to: url!)
         ExtensionManager.reload()
         Domain.setDomains()
+        }
     }
     
     
