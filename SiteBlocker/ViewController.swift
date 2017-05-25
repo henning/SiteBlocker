@@ -22,11 +22,12 @@ class ViewController: UIViewController {
     var addNewTableView = UITableView()
     var addNewLabel = UILabel()
     var disposeBag = DisposeBag()
+    var errorMessage = UILabel()
     
     
     
     
-    
+    //MARK:- Bindings
     private func bindTableView() {
         domains.asObservable()
             .bind(to: mainTableView.rx.items(cellIdentifier: "Cell")) { _, domain, cell in
@@ -59,8 +60,7 @@ class ViewController: UIViewController {
         
     }
     
-    
-    
+//MARK:- Beginning views
     override func viewDidLoad() {
         bindAddButtonTap()
         bindTableView()
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
         addNewView.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(view.snp.left).offset(16)
             make.right.equalTo(view.snp.right).offset(-16)
-            make.top.equalTo(view.snp.top).offset(30)
+            make.top.equalTo(view.snp.top).offset(40)
             make.height.equalTo(60)
             make.centerX.equalTo(view.snp.centerX)
         }
@@ -158,17 +158,24 @@ class ViewController: UIViewController {
         addNewTableView.clipsToBounds = true
         addNewView.clipsToBounds = true
         
-//        self.addNewView.backgroundColor = UIColor.customWhite()
-//        self.addNewTextBox.textColor = UIColor.customBlack()
-//        self.addNewView.layer.cornerRadius = 9
-
+        view.addSubview(errorMessage)
+        errorMessage.textColor = UIColor.customWhite()
+        errorMessage.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
+        errorMessage.text = "Make sure the address is in the following format: \"domain.com(or .org, etc.)\""
+        errorMessage.alpha = 0
+        errorMessage.snp.makeConstraints { (make) in
+            make.bottom.equalTo(addNewView.snp.top).offset(4)
+            make.height.equalTo(22)
+            make.left.equalTo(addNewView.snp.left).offset(12)
+            make.right.equalTo(addNewView.snp.right).offset(-12)
+        }
         
+
     }
     
     
+    //MARK:- Show/hide animations
     private func expandTextBox() {
-//        self.addNewView.backgroundColor = UIColor.customWhite()
-        self.fadeFromClear()
         var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
@@ -182,56 +189,12 @@ class ViewController: UIViewController {
                 count += 1
             }
         }
-    }
-    
-    private func resizeTable() {
-        addNewTableView.snp.makeConstraints({ (make) in
-            make.top.equalTo(separatorLine.snp.bottom).offset(16)
-            make.bottom.equalTo(addNewView.snp.bottom).offset(-16)
-            make.width.equalTo(addNewView.snp.width)
-            make.centerX.equalTo(addNewView.snp.centerX)
-        })
-        addNewView.layoutSubviews()
-    }
-    
-}
 
-extension ViewController:UITableViewDelegate,UITextFieldDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if correctFormat(string: self.addNewTextBox.text!){
-        let d = Domain(simpleAddress: self.addNewTextBox.text!)
-        domains.value.append(d)
-        d.add()
-//        addNewTextBox.resignFirstResponder()
-        shrinkTextBox()
-        }
-        return false
-    }
-    
-    private func correctFormat(string:String)->Bool{
-        let s = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
-        let characterSet = CharacterSet(charactersIn: s).inverted
-         let words = string.components(separatedBy: characterSet)
-        if words.count > 1 {
-            return false
-        }
-        return true
         
     }
     
-}
-
-
-//MARK:- Crap
-extension ViewController {
     func shrinkTextBox() {
-        //        self.addNewView.backgroundColor = UIColor.clear
-        //        self.addNewTextBox.text = "Add New"
-        //        self.addNewView.resignFirstResponder()
+        hideErrorMessage()
         
         var count = 0
         for i in 0..<2000{
@@ -245,7 +208,7 @@ extension ViewController {
                 self.addNewView.layer.cornerRadius = 12
                 count += 1
                 if count == 2000 {
-                  self.addNewTextBox.resignFirstResponder()
+                    self.addNewTextBox.resignFirstResponder()
                     self.addNewTextBox.text = nil
                 }
             }
@@ -253,18 +216,55 @@ extension ViewController {
         
     }
     
-    func fadeToClear(){
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if correctFormat(string: self.addNewTextBox.text!){
+            let d = Domain(simpleAddress: self.addNewTextBox.text!)
+            domains.value.append(d)
+            d.add()
+            shrinkTextBox()
+        }
+        else {
+            showErrorMessage()
+        }
+        return false
+    }
+    
+    private func correctFormat(string:String)->Bool{
+        let s = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
+        let characterSet = CharacterSet(charactersIn: s).inverted
+        let words = string.components(separatedBy: characterSet)
+        if words.count > 1 || words[0] == ""{
+            return false
+        }
+        return true
         
     }
-    func fadeFromClear() {
-        //        for i in 1..<2000{
-        //            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-        //            DispatchQueue.main.asyncAfter(deadline: when) {
-        //            let float = CGFloat((Double(i)/2000))
-        //            self.addNewTextBox.backgroundColor = UIColor.customWhite(alpha: float)
-        //
-        //            }
-        //        }
+    
+    private func showErrorMessage(){
+        UIView.animate(withDuration: 0.5) {
+            self.errorMessage.alpha = 1.0
+        }
+    }
+    
+    private func hideErrorMessage(){
+        UIView.animate(withDuration: 0.5) {
+            self.errorMessage.alpha = 0
+        }
+    }
+
+    
+
+    
+}
+
+
+//MARK: - Table Cell Height
+extension ViewController:UITableViewDelegate,UITextFieldDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
     }
     
 }
+
+
