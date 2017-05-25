@@ -53,7 +53,7 @@ class Domain:NSObject,NSCoding {
         try! data?.write(to: url!)
         ExtensionManager.reload()
         Domain.setDomains()
-        
+        Suggestion.loadInitialSuggestions()
         
         
     }
@@ -81,6 +81,7 @@ class Domain:NSObject,NSCoding {
         try! data?.write(to: url!)
         ExtensionManager.reload()
         Domain.setDomains()
+            Suggestion.loadInitialSuggestions()
         }
     }
     
@@ -90,6 +91,7 @@ class Domain:NSObject,NSCoding {
         let decoded  = userDefaults.object(forKey: "domains") as! Data
         let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Domain]
         domains = Variable(decodedTeams)
+        Suggestion.loadInitialSuggestions()
     }
     
     static func setDomains() {

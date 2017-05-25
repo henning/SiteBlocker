@@ -14,7 +14,7 @@ class CustomTableCell: UITableViewCell{
     var containerView = UIView()
     var simpleLabel = UILabel()
     var disposeBag = DisposeBag()
-
+    
     func customSetup() {
         //
     }
@@ -47,7 +47,7 @@ class CustomTableCell: UITableViewCell{
 class DomainCell: CustomTableCell {
     var domain:Domain? = nil
     
-     let removeButton = UIButton()
+    let removeButton = UIButton()
     
     override func customSetup(){
         simpleLabel.text = domain?.simpleAddress
@@ -72,11 +72,11 @@ class DomainCell: CustomTableCell {
             }
             
             }.addDisposableTo(disposeBag)
-
+        
     }
     
-
-
+    
+    
 }
 
 class SuggestionCell: DomainCell {
@@ -89,7 +89,7 @@ class SuggestionCell: DomainCell {
     var suggestion:Suggestion? = nil
     
     override func customSetup() {
-         simpleLabel.text = suggestion?.title
+        simpleLabel.text = suggestion?.title
         simpleLabel.textColor = UIColor.customWhite()
         containerView.backgroundColor = suggestion?.color
         addSubview(button)
@@ -100,22 +100,25 @@ class SuggestionCell: DomainCell {
             make.bottom.equalTo(containerView.snp.bottom)
         }
         button.rx.tap.subscribe { _ in
-            self.suggestion?.shouldShow = false
-//            if self.canLoadAgain {
-            let d = Domain(simpleAddress: self.suggestion!.title)
-            domains.value.append(d)
-            d.add()
-            self.vc?.shrinkTextBox()
-//            for i in 0..<suggestions.value.count{
-//                if suggestions.value[i].title == self.suggestion?.title{
-//                    suggestions.value.remove(at: i)
-////                    self.canLoadAgain=false
-//                    break
-//                }
-//            }
-//            }
+            if (self.suggestion?.shouldShow)!{
+                self.suggestion?.shouldShow = false
+                //            if self.canLoadAgain {
+                let d = Domain(simpleAddress: self.suggestion!.title)
+                domains.value.append(d)
+                d.add()
+                self.vc?.shrinkTextBox()
+                //            for i in 0..<suggestions.value.count{
+                //                if suggestions.value[i].title == self.suggestion?.title{
+                //                    suggestions.value.remove(at: i)
+                ////                    self.canLoadAgain=false
+                //                    break
+                //                }
+                //            }
+                //            }
+            }
             }.addDisposableTo(disposeBag)
     }
-    
 }
+
+
 

@@ -48,39 +48,39 @@ class Suggestion: Equatable {
     init(color: UIColor, title:String,shouldShow:Bool) {
         self.color = color
         self.title = title
-        self.shouldShow = false
+        self.shouldShow = shouldShow
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        let color = aDecoder.decodeObject(forKey: "color") as! UIColor
-        let title = aDecoder.decodeObject(forKey: "title") as! String
-        let shouldShow = aDecoder.decodeObject(forKey: "shouldShow") as! Bool
-        self.init(color: color, title: title,shouldShow:shouldShow)
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(color, forKey: "color")
-        aCoder.encode(title, forKey: "title")
-        aCoder.encode(shouldShow, forKey: "shouldShow")
-    }
-    
-    static func loadSuggestions(){
-        
-    }
-    
-    static func reloadSuggestions() {
-        let userDefaults = UserDefaults.standard
-        let decoded  = userDefaults.object(forKey: "suggestions") as! Data
-        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Suggestion]
-        suggestions = Variable(decodedTeams)
-    }
-    
-    static func setSuggestions() {
-        let userDefaults = UserDefaults.standard
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: suggestions.value)
-        userDefaults.set(encodedData, forKey: "suggestions")
-        userDefaults.synchronize()
-    }
+//    required convenience init(coder aDecoder: NSCoder) {
+//        let color = aDecoder.decodeObject(forKey: "color") as! UIColor
+//        let title = aDecoder.decodeObject(forKey: "title") as! String
+//        let shouldShow = aDecoder.decodeObject(forKey: "shouldShow") as! Bool
+//        self.init(color: color, title: title,shouldShow:shouldShow)
+//    }
+//    
+//    func encode(with aCoder: NSCoder) {
+//        aCoder.encode(color, forKey: "color")
+//        aCoder.encode(title, forKey: "title")
+//        aCoder.encode(shouldShow, forKey: "shouldShow")
+//    }
+//    
+//    static func loadSuggestions(){
+//        
+//    }
+//    
+//    static func reloadSuggestions() {
+//        let userDefaults = UserDefaults.standard
+//        let decoded  = userDefaults.object(forKey: "suggestions") as! Data
+//        let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Suggestion]
+//        suggestions = Variable(decodedTeams)
+//    }
+//    
+//    static func setSuggestions() {
+//        let userDefaults = UserDefaults.standard
+//        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: suggestions.value)
+//        userDefaults.set(encodedData, forKey: "suggestions")
+//        userDefaults.synchronize()
+//    }
     
     static func loadInitialSuggestions() {
          suggestions = Variable([
@@ -110,7 +110,22 @@ class Suggestion: Equatable {
             ),
             
             ])
-        suggestionsToLoad.value = suggestionsToLoad.value.map {$0}
+        suggestionsToLoad.value = []
+        for suggestion in suggestions.value {
+            suggestionsToLoad.value.append(suggestion)
+        }
+        let sug = suggestions
+        let sugl = suggestionsToLoad
+        for suggestion in suggestions.value {
+            for domain in domains.value {
+                if suggestion.title == domain.simpleAddress {
+                    suggestion.shouldShow = false
+                }
+            }
+        }
+        
+        Suggestion.bindSuggestionsToLoad()
+        
     }
     
      static func bindSuggestionsToLoad() {
@@ -131,6 +146,7 @@ class Suggestion: Equatable {
                     }
                 }
         }
+        
     }
 }
 
