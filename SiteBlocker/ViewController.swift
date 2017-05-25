@@ -70,11 +70,7 @@ class ViewController: UIViewController {
         bindAddButtonTap()
         bindTableView()
         setupViews()
-        
-        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
-        //tap.cancelsTouchesInView = false
-        
-        
+
     }
     
     
@@ -138,7 +134,7 @@ class ViewController: UIViewController {
             make.centerX.equalTo(addNewView.snp.centerX)
             make.top.equalTo(addNewView.snp.bottom).offset(2)
         }
-        separatorLine.backgroundColor = addNewTextBox.textColor
+        separatorLine.backgroundColor = UIColor.customWhite(alpha: 0.8)
         
         //MARK: - Tableview
         self.mainTableView.register(DomainCell.self as AnyClass, forCellReuseIdentifier: "Cell")
@@ -159,7 +155,7 @@ class ViewController: UIViewController {
         addNewTableView.delegate = self
         addNewTableView.tableFooterView = UIView()
         addNewTableView.backgroundColor = addNewView.backgroundColor
-        addNewTableView.separatorColor = view.backgroundColor
+        addNewTableView.separatorColor = addNewView.backgroundColor
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(addNewView.snp.top).offset(60 + 10)
@@ -194,6 +190,9 @@ class ViewController: UIViewController {
 
         }
         
+        view.bringSubview(toFront: backgroundButton)
+        view.bringSubview(toFront: addNewView)
+        
 
     }
     
@@ -213,6 +212,7 @@ class ViewController: UIViewController {
                 self.addNewLabel.alpha = CGFloat(2000-count)/2000
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
+                self.addNewTableView.separatorColor = self.addNewView.backgroundColor
                 count += 1
             }
         }
@@ -223,7 +223,6 @@ class ViewController: UIViewController {
     func shrinkTextBox() {
         backgroundButton.isEnabled = false
         hideErrorMessage()
-        
         var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
@@ -234,6 +233,7 @@ class ViewController: UIViewController {
                 self.addNewLabel.alpha = CGFloat(count)/2000
                 self.addNewView.frame = newFrame
                 self.addNewView.layer.cornerRadius = 12
+                self.addNewTableView.separatorColor = self.addNewView.backgroundColor
                 count += 1
                 if count == 2000 {
                     self.addNewTextBox.resignFirstResponder()

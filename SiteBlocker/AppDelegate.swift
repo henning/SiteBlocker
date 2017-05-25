@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.bool(forKey: "hasLoaded"){
             Domain.reloadDomains()
         }
+        Suggestion.loadInitialSuggestions()
 
         ExtensionManager.setupJSON()
         ExtensionManager.reload()

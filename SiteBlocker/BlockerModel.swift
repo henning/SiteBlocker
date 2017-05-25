@@ -81,7 +81,6 @@ class Domain:NSObject,NSCoding {
         try! data?.write(to: url!)
         ExtensionManager.reload()
         Domain.setDomains()
-            Suggestion.loadInitialSuggestions()
         }
     }
     

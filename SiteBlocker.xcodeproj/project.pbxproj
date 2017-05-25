@@ -28,7 +28,7 @@
 		4897CDA11ECD0A9A00A0E13A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9C1ECD0A9500A0E13A /* SnapKit.framework */; };
 		4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9D1ECD0A9500A0E13A /* SwiftyJSON.framework */; };
 		48D0679D1ED23BA600AB1B1C /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D0679C1ED23BA600AB1B1C /* Hero.framework */; };
-		48E219F31ED3B2D900B9BDCC /* SuggestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E219F21ED3B2D900B9BDCC /* SuggestionViewModel.swift */; };
+		48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +87,7 @@
 		4897CD9C1ECD0A9500A0E13A /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		4897CD9D1ECD0A9500A0E13A /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		48D0679C1ED23BA600AB1B1C /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = Carthage/Build/iOS/Hero.framework; sourceTree = "<group>"; };
-		48E219F21ED3B2D900B9BDCC /* SuggestionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionViewModel.swift; sourceTree = "<group>"; };
+		48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuggestionModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 				48670A791ECD1B9200F2765E /* Cells.swift */,
 				481BE5CC1ECFC8600099C724 /* blockerList.json */,
 				487DDCD51ED0084500C9A217 /* DRY.swift */,
-				48E219F21ED3B2D900B9BDCC /* SuggestionViewModel.swift */,
+				48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */,
 			);
 			path = SiteBlocker;
 			sourceTree = "<group>";
@@ -317,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				48E219F31ED3B2D900B9BDCC /* SuggestionViewModel.swift in Sources */,
+				48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */,
 				489560B71ECE961600674432 /* ContentBlockerRequestHandler.swift in Sources */,
 				48218A831ECE66A4003F82F9 /* blockerList.json in Sources */,
 				4897CD761ECCF23300A0E13A /* ViewController.swift in Sources */,
