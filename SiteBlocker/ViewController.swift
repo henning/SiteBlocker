@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     var addNewLabel = UILabel()
     var disposeBag = DisposeBag()
     var errorMessage = UILabel()
+    let backgroundButton = UIButton()
     
     
     
@@ -36,7 +37,7 @@ class ViewController: UIViewController {
                 domainCell.domain = domain
                 
             }.addDisposableTo(disposeBag)
-        suggestions.asObservable()
+        suggestionsToLoad.asObservable()
             .bind(to: addNewTableView.rx.items(cellIdentifier: "SuggestionCell")) { _, suggestion, cell in
                 let suggestionCell = cell as! SuggestionCell
                 suggestionCell.backgroundColor = self.addNewView.backgroundColor
@@ -58,6 +59,10 @@ class ViewController: UIViewController {
             self.addNewTextBox.text = nil
             }.addDisposableTo(disposeBag)
         
+        self.backgroundButton.rx.tap.subscribe{ _ in
+        self.shrinkTextBox()
+        }
+        
     }
     
 //MARK:- Beginning views
@@ -65,12 +70,19 @@ class ViewController: UIViewController {
         bindAddButtonTap()
         bindTableView()
         setupViews()
+        
+        //Uncomment the line below if you want the tap not not interfere and cancel other interactions.
+        //tap.cancelsTouchesInView = false
+        
+        
     }
+    
     
     func setupViews(){
         
         
         self.view.backgroundColor = UIColor(red: 52/255, green: 73/255, blue: 93/255, alpha: 1.0)
+        view.addSubview(backgroundButton)
         view.addSubview(mainTableView)
         view.addSubview(addNewView)
         addNewView.addSubview(addNewTextBox)
@@ -158,6 +170,7 @@ class ViewController: UIViewController {
         addNewTableView.clipsToBounds = true
         addNewView.clipsToBounds = true
         
+        //MARK:- Error Message
         view.addSubview(errorMessage)
         errorMessage.textColor = UIColor.customWhite()
         errorMessage.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
@@ -170,12 +183,26 @@ class ViewController: UIViewController {
             make.right.equalTo(addNewView.snp.right).offset(-12)
         }
         
+        //MARK:- background button
+        backgroundButton.setTitle("", for: .normal)
+        backgroundButton.isEnabled = false
+        backgroundButton.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.bottom.equalTo(view.snp.bottom)
+
+        }
+        
 
     }
     
     
     //MARK:- Show/hide animations
     private func expandTextBox() {
+        backgroundButton.isEnabled = true
+        view.bringSubview(toFront: backgroundButton)
+        view.bringSubview(toFront: addNewView)
         var count = 0
         for i in 0..<2000{
             let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
@@ -194,6 +221,7 @@ class ViewController: UIViewController {
     }
     
     func shrinkTextBox() {
+        backgroundButton.isEnabled = false
         hideErrorMessage()
         
         var count = 0
@@ -213,6 +241,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+        
         
     }
     

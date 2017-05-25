@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         ExtensionManager.setupJSON()
         ExtensionManager.reload()
+        Suggestion.loadInitialSuggestions()
+        
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = ViewController()
