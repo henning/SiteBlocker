@@ -13,7 +13,7 @@ import RxCocoa
 import Hero
 
 
-class ViewController: UIViewController {
+class CenterViewController: UIViewController {
     
     var addNewTextBox = UITextField()
     var addNewView = UIView()
@@ -289,7 +289,7 @@ class ViewController: UIViewController {
 
 
 //MARK: - Table Cell Height
-extension ViewController:UITableViewDelegate,UITextFieldDelegate {
+extension CenterViewController:UITableViewDelegate,UITextFieldDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }

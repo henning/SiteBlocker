@@ -82,7 +82,7 @@ class DomainCell: CustomTableCell {
 class SuggestionCell: DomainCell {
     let button = UIButton()
     
-    var vc:ViewController? = nil
+    var vc:CenterViewController? = nil
     
     var canLoadAgain = true
     
