@@ -69,16 +69,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let scheduleStartTimePickerLabel = UILabel()
     let scheduleEndTimePickerLabel = UILabel()
     var pickerViewsToHide = [UIView]()
+    let hours = ["12 A.M.", "1 A.M.", "2 A.M.", "3 A.M.", "4 A.M.", "5 A.M.", "6 A.M.", "7 A.M.", "8 A.M.", "9 A.M.", "10 A.M.", "11 A.M.", "12 P.M.","1 P.M.","2 P.M.","3 P.M.","4 P.M.","5 P.M.","6 P.M.","7 P.M.","8 P.M.","9 P.M.","10 P.M.","11 P.M.",]
     
-
-//    let datePicker = UIPickerView()
+    
     
     override func viewDidLoad() {
-        //        timerSwitch = PaperSwitch(view: timerBox, color: UIColor.blue)
-        //        scheduleSwitch = PaperSwitch(view:scheduleBox, color: UIColor.orange)
-        //        lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.purple)
         
-//        scheduleBox.isHidden = true
+        
         lockInBox.isHidden = true
         
         
@@ -96,7 +93,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             if self.timerSwitch.isOn {
                 
             }
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
         timerButton.rx.tap.subscribe{ _ in
             self.timerPicker.dataSource = self
             self.timerPicker.delegate = self
@@ -105,40 +102,85 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         pickerTapOffButton.rx.tap.subscribe{ _ in
             self.hidePickerView(picker: self.timerPicker, labels: [self.pickerDayLabel,self.pickerHoursLabel,self.pickerMinutesLabel,self.pickerSecondsLabel])
-
             
-        }.addDisposableTo(disposeBag)
+            
+            }.addDisposableTo(disposeBag)
         
         scheduleStartTimeButton.rx.tap.subscribe{ _ in
-            let pickerManager = DateStartPickerDelegate()
-            pickerManager.label = self.scheduleStartNumberLabel
-            self.scheduleStartTimePicker.delegate = pickerManager
-            self.scheduleStartTimePicker.dataSource = pickerManager
-            
-
-        self.showPickerView(picker: self.scheduleStartTimePicker, labels: [self.scheduleStartTimePickerLabel])
-        }.addDisposableTo(disposeBag)
+            self.scheduleStartTimePicker.delegate = self
+            self.scheduleStartTimePicker.dataSource = self
+            self.showPickerView(picker: self.scheduleStartTimePicker, labels: [self.scheduleStartTimePickerLabel])
+            }.addDisposableTo(disposeBag)
         
-    
+        
         scheduleEndTimeButton.rx.tap.subscribe{ _ in
-            let pickerManager = DateEndPickerDelegate()
-            pickerManager.label = self.scheduleEndNumberLabel
-            self.scheduleEndTimePicker.delegate = pickerManager
-            self.scheduleEndTimePicker.dataSource = pickerManager
-
+            self.scheduleEndTimePicker.delegate = self
+            self.scheduleEndTimePicker.dataSource = self
+            
             self.showPickerView(picker: self.scheduleEndTimePicker, labels: [self.scheduleEndTimePickerLabel])
             }.addDisposableTo(disposeBag)
         
         
         timerStartButton.rx.tap.subscribe { _ in
             let seconds = Int(self.dayNumberLabel.text!)! * 86400 +
-            Int(self.hoursNumberLabel.text!)! * 3600 +
-            Int(self.minutesNumberLabel.text!)! * 60 +
-            Int(self.secondsNumberLabel.text!)!
+                Int(self.hoursNumberLabel.text!)! * 3600 +
+                Int(self.minutesNumberLabel.text!)! * 60 +
+                Int(self.secondsNumberLabel.text!)!
             
             self.triggerNotifications(seconds: seconds)
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
         
+        scheduleButton.rx.tap.subscribe { _ in
+            let end = Int(
+                (self.scheduleStartNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
+            )
+            let start = Int(
+                (self.scheduleEndNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
+            )
+            self.scheduleNotification(start: start!, end: end!)
+        
+        }
+        
+    }
+    
+    private func scheduleNotification (start: Int, end: Int){
+        
+        
+        let center = UNUserNotificationCenter.current()
+        
+        center.removeAllPendingNotificationRequests()
+        let startContent = UNMutableNotificationContent()
+        startContent.title = "Time to start blocking!"
+        startContent.body = "To block sites, either tap the notification or the notification button"
+        startContent.sound = UNNotificationSound.default()
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = start
+        dateComponents.minute = 26
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let request = UNNotificationRequest(identifier: "scheduledStart", content: startContent, trigger: trigger)
+        center.add(request)
+        
+        
+        
+        let endContent = UNMutableNotificationContent()
+        endContent.title = "Blocking time is over!"
+        endContent.body = "To unblock sites, either tap the notification or the notification button"
+        endContent.sound = UNNotificationSound.default()
+        
+        var dateComponentsEnd = DateComponents()
+        dateComponentsEnd.hour = end
+        let endTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsEnd, repeats: true)
+        let endRequest = UNNotificationRequest(identifier: "scheduledEnd", content: endContent, trigger: endTrigger)
+        center.add(endRequest)
+
+        
+        
+
+        
+        
+        
+
     }
     
     private func triggerNotifications(seconds: Int){
@@ -155,7 +197,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 intentIdentifiers: [],
                 options: [])
             
-UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
+            UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
             
             
             
@@ -164,7 +206,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
             
             let content = UNMutableNotificationContent()
             content.title = "Timer Done"
-            content.body = "To unlock sites, either tap the notification or the notification button"
+            content.body = "To unblock sites, either tap the notification or the notification button"
             content.sound = UNNotificationSound.default()
             content.categoryIdentifier = "timer.category"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
@@ -172,13 +214,13 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
             let identifier = "TimerLocalNotification"
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: content, trigger: trigger)
-           center.delegate = self
+            center.delegate = self
             center.add(request, withCompletionHandler: { (error) in
                 if let error = error {
                     // Something went wrong
                 }
                 else {
-                Domain.switchToOn()
+                    Domain.switchToOn()
                 }
             })
             
@@ -198,76 +240,83 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
         }
     }
     
-    private class DateStartPickerDelegate:NSObject, UIPickerViewDelegate,UIPickerViewDataSource {
-        var label = UILabel()
-
-        let hours = ["12 A.M.", "1 A.M.", "2 A.M.", "3 A.M.", "4 A.M.", "5 A.M.", "6 A.M.", "7 A.M.", "8 A.M.", "9 A.M.", "10 A.M.", "11 A.M.", "12 P.M.","1 P.M.","2 P.M.","3 P.M.","4 P.M.","5 P.M.","6 P.M.","7 P.M.","8 P.M.","9 P.M.","10 P.M.","11 P.M.",]
-        func numberOfComponents(in pickerView: UIPickerView) -> Int{
-            return 1
-        }
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return 24
-        }
-        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return hours[row]
-        }
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            label.text = hours[row]
-        }
-    }
-    private class DateEndPickerDelegate:NSObject, UIPickerViewDelegate,UIPickerViewDataSource {
-        var label = UILabel()
-        
-        let hours = ["12 A.M.", "1 A.M.", "2 A.M.", "3 A.M.", "4 A.M.", "5 A.M.", "6 A.M.", "7 A.M.", "8 A.M.", "9 A.M.", "10 A.M.", "11 A.M.", "12 P.M.","1 P.M.","2 P.M.","3 P.M.","4 P.M.","5 P.M.","6 P.M.","7 P.M.","8 P.M.","9 P.M.","10 P.M.","11 P.M.",]
-        func numberOfComponents(in pickerView: UIPickerView) -> Int{
-            return 1
-        }
-        func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return 24
-        }
-        func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-            return hours[row]
-        }
-        func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-            label.text = hours[row]
-        }
-    }
     
     
     //MARK:- Timer Picker Delegate
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        if pickerView == scheduleStartTimePicker{
+            return 1
+        }
+        if pickerView == scheduleEndTimePicker{
+            return 1
+        }
         return 4
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
-            return 7
-        case 1:
-            return 24
-        case 2:
-            return 60
-        default:
-            return 60
+        if pickerView == timerPicker {
+            switch component {
+            case 0:
+                return 7
+            case 1:
+                return 24
+            case 2:
+                return 60
+            default:
+                return 60
+            }
         }
+        if pickerView == scheduleStartTimePicker{
+            return 24
+            
+        }
+        if pickerView == scheduleEndTimePicker{
+            return 24
+            
+        }
+        return 0
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(row)"
+        if pickerView == timerPicker {
+            
+            return "\(row)"
+        }
+        if pickerView == scheduleStartTimePicker{
+            return hours[row]
+            
+            
+        }
+        if pickerView == scheduleEndTimePicker{
+            return hours[row]
+            
+        }
+        return "error"
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            dayNumberLabel.text = "\(row)"
-        case 1:
-            hoursNumberLabel.text = "\(row)"
-        case 2:
-            minutesNumberLabel.text = "\(row)"
-        case 3:
-            secondsNumberLabel.text = "\(row)"
-        default:
-            break
+        if pickerView == timerPicker {
+            
+            switch component {
+            case 0:
+                dayNumberLabel.text = "\(row)"
+            case 1:
+                hoursNumberLabel.text = "\(row)"
+            case 2:
+                minutesNumberLabel.text = "\(row)"
+            case 3:
+                secondsNumberLabel.text = "\(row)"
+            default:
+                break
+            }
+        }
+        if pickerView == scheduleStartTimePicker{
+            scheduleStartNumberLabel.text = hours[row]
+            
+        }
+        if pickerView == scheduleEndTimePicker{
+            scheduleEndNumberLabel.text = hours[row]
+            
         }
     }
-
+    
     private func startNotifications() {
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
             
@@ -489,7 +538,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
         pickerViewsToHide.append(scheduleStartTimePickerLabel)
         pickerViewsToHide.append(scheduleEndTimePicker)
         pickerViewsToHide.append(scheduleStartTimePicker)
-      
+        
         
         scheduleStartTimePickerLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -506,7 +555,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
         
         
         
-
+        
         
         
     }
@@ -514,7 +563,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
     private func setupTimerView() {
         timerBox.addSubview(timerLabel)
         timerLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
-//        timerLabel.text = "Timer"
+        //        timerLabel.text = "Timer"
         timerLabel.text = "\(UserDefaults.standard.bool(forKey: "test"))"
         timerLabel.textAlignment = .center
         timerLabel.textColor = UIColor.customBlack()
@@ -699,7 +748,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
         pickerContainer.addSubview(pickerHoursLabel)
         pickerContainer.addSubview(pickerMinutesLabel)
         pickerContainer.addSubview(pickerSecondsLabel)
-
+        
         pickerDayLabel.text = "Days"
         pickerHoursLabel.text = "Hours"
         pickerMinutesLabel.text = "Minutes"
@@ -750,7 +799,7 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
         pickerViewsToHide.append(pickerSecondsLabel)
         pickerViewsToHide.append(pickerHoursLabel)
         pickerViewsToHide.append(timerPicker)
-
+        
         
     }
     
@@ -772,8 +821,8 @@ UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
     }
     private func hidePickerView(picker: UIPickerView, labels: [UILabel]?){
         pickerTapOffButton.isEnabled = false
-
-        UIView.animate(withDuration: 0.4, animations: { 
+        
+        UIView.animate(withDuration: 0.4, animations: {
             self.pickerContainer.frame = CGRect(x: self.pickerContainer.frame.minX,
                                                 y: self.view.frame.height,
                                                 width: self.pickerContainer.frame.width,
@@ -838,7 +887,7 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void){
-    
+        
         Domain.switchToOff()
     }
 }
