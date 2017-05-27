@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import PaperSwitch
+import UserNotifications
+import RxSwift
+import RxCocoa
 
-class LeftViewController:UIViewController {
+class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
     
     let timerBox = UIView()
     let scheduleBox = UIView()
     let lockInBox = UIView()
-    let timerSwitch = UISwitch()
-    let scheduleSwitch = UISwitch()
-    let lockInSwitch = UISwitch()
+    var timerSwitch = PaperSwitch(view: UIView(), color: UIColor.orange)
+    var scheduleSwitch = PaperSwitch(view: UIView(), color: UIColor.orange)
+    var lockInSwitch = PaperSwitch(view: UIView(), color: UIColor.purple)
     let dayView = UIView()
     let dayNumberLabel = UILabel()
     let dayIDLabel = UILabel()
@@ -43,13 +47,162 @@ class LeftViewController:UIViewController {
     let lockInDescription = UILabel()
     let lockInTextBox = UITextField()
     let lockInSecondLabel = UILabel()
+    let timerButton = UIButton()
+    let disposeBag = DisposeBag()
+    let timerPicker = UIPickerView()
+    let pickerContainer = UIVisualEffectView(effect: UIBlurEffect())
+    let pickerDayLabel = UILabel()
+    let pickerDayView = UIView()
+    let pickerHoursLabel = UILabel()
+    let pickerHoursView = UIView()
+    let pickerMinutesView = UIView()
+    let pickerMinutesLabel = UILabel()
+    let pickerSecondsLabel = UILabel()
+    let pickerSecondsView = UIView()
+    let pickerTapOffButton = UIButton()
     
     override func viewDidLoad() {
+        //        timerSwitch = PaperSwitch(view: timerBox, color: UIColor.blue)
+        //        scheduleSwitch = PaperSwitch(view:scheduleBox, color: UIColor.orange)
+        //        lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.purple)
+        scheduleBox.isHidden = true
+        lockInBox.isHidden = true
+        
+        
         setupMainViews()
         setupTimerView()
         setupScheduleView()
         setupLockInView()
+        bindSwitchs()
     }
+    
+    
+    private func bindSwitchs() {
+        timerSwitch.rx.isOn.subscribe{ _ in
+            if self.timerSwitch.isOn {
+                
+            }
+        }.addDisposableTo(disposeBag)
+        timerButton.rx.tap.subscribe{ _ in
+            self.timerPicker.dataSource = self
+            self.timerPicker.delegate = self
+            self.showPickerView()
+            }.addDisposableTo(disposeBag)
+        
+        pickerTapOffButton.rx.tap.subscribe{ _ in
+            self.hidePickerView()
+            
+        }.addDisposableTo(disposeBag)
+        
+        
+        
+        
+        timerStartButton.rx.tap.subscribe { _ in
+            let seconds = Int(self.dayNumberLabel.text!)! * 86400 +
+            Int(self.hoursNumberLabel.text!)! * 3600 +
+            Int(self.minutesNumberLabel.text!)! * 60 +
+            Int(self.secondsNumberLabel.text!)!
+            
+            self.triggerNotifications(seconds: seconds)
+        }
+        
+    }
+    
+    private func triggerNotifications(seconds: Int){
+        if UserDefaults.standard.bool(forKey: "grantedPNP"){
+            
+                    //add notification code here
+            
+            //Set the content of the notification
+            let content = UNMutableNotificationContent()
+            content.title = "10 Second Notification Demo"
+            content.subtitle = "From MakeAppPie.com"
+            content.body = "Notification after 10 seconds - Your pizza is Ready!!"
+            
+            //Set the trigger of the notification -- here a timer.
+            let trigger = UNTimeIntervalNotificationTrigger(
+                timeInterval: TimeInterval(seconds),
+                repeats: false)
+            
+            //Set the request for the notification from the above
+            let request = UNNotificationRequest(
+                identifier: "timerDoneNotifiaction",
+                content: content,
+                trigger: trigger
+            )
+            
+            //Add the notification to the currnet notification center
+            UNUserNotificationCenter.current().add(
+                request, withCompletionHandler: nil)
+            
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert]) { (granted, error) in
+            if granted {
+                UserDefaults.standard.set(true, forKey: "grantedPNP")
+            }
+            else {
+                UserDefaults.standard.set(false, forKey: "grantedPNP")
+            }
+        }
+    }
+    
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int{
+        return 4
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return 7
+        case 1:
+            return 24
+        case 2:
+            return 60
+        default:
+            return 60
+        }
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row)"
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            dayNumberLabel.text = "\(row)"
+        case 1:
+            hoursNumberLabel.text = "\(row)"
+        case 2:
+            minutesNumberLabel.text = "\(row)"
+        case 3:
+            secondsNumberLabel.text = "\(row)"
+        default:
+            break
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    private func startNotifications() {
+        if UserDefaults.standard.bool(forKey: "grantedPNP"){
+            
+        }
+    }
+    
+    
+    
+    
+    
     
     private func setupLockInView() {
         lockInBox.addSubview(lockInButton)
@@ -125,9 +278,9 @@ class LeftViewController:UIViewController {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(34)
         }
-
+        
     }
-
+    
     private func setupScheduleView() {
         scheduleBox.addSubview(scheduleButton)
         scheduleButton.layer.cornerRadius = 12
@@ -341,7 +494,7 @@ class LeftViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.2)
             make.centerX.equalToSuperview()
         }
-        dayNumberLabel.text = "2"
+        dayNumberLabel.text = "0"
         dayNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         dayNumberLabel.textColor = UIColor.customBlack()
         dayNumberLabel.snp.makeConstraints { (make) in
@@ -350,7 +503,7 @@ class LeftViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        hoursNumberLabel.text = "6"
+        hoursNumberLabel.text = "0"
         hoursNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         hoursNumberLabel.textColor = UIColor.customBlack()
         hoursNumberLabel.snp.makeConstraints { (make) in
@@ -359,7 +512,7 @@ class LeftViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        minutesNumberLabel.text = "36"
+        minutesNumberLabel.text = "0"
         minutesNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         minutesNumberLabel.textColor = UIColor.customBlack()
         minutesNumberLabel.snp.makeConstraints { (make) in
@@ -368,7 +521,7 @@ class LeftViewController:UIViewController {
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        secondsNumberLabel.text = "42"
+        secondsNumberLabel.text = "0"
         secondsNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         secondsNumberLabel.textColor = UIColor.customBlack()
         secondsNumberLabel.snp.makeConstraints { (make) in
@@ -378,6 +531,116 @@ class LeftViewController:UIViewController {
             make.centerX.equalToSuperview()
         }
         
+        
+        //MARK: - HERE!!!!
+        timerBox.addSubview(timerButton)
+        timerButton.backgroundColor = UIColor.clear
+        timerButton.snp.makeConstraints { (make) in
+            make.top.equalTo(hoursView.snp.top)
+            make.bottom.equalTo(hoursView.snp.bottom)
+            make.left.equalTo(dayView.snp.left)
+            make.right.equalTo(secondsView.snp.right)
+        }
+        view.addSubview(pickerContainer)
+        pickerContainer.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.top.equalTo(view.snp.bottom)
+            make.height.equalTo(lockInBox.snp.height)
+        }
+        pickerContainer.addSubview(timerPicker)
+        timerPicker.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+        }
+        
+        pickerContainer.addSubview(pickerDayLabel)
+        //        pickerDayView.addSubview(pickerDayLabel)
+        pickerContainer.addSubview(pickerHoursLabel)
+        //        pickerHoursView.addSubview(pickerHoursLabel)
+        pickerContainer.addSubview(pickerMinutesLabel)
+        //        pickerMinutesView.addSubview(pickerMinutesLabel)
+        pickerContainer.addSubview(pickerSecondsLabel)
+        //        pickerSecondsView.addSubview(pickerSecondsLabel)
+        
+        //        pickerDayView.snp.makeConstraints { (make) in
+        //            make.top.equalToSuperview()
+        //            make.left.equalToSuperview()
+        //            make.bottom.equalToSuperview()
+        //            make
+        //        }
+        //
+        pickerDayLabel.text = "Days"
+        pickerHoursLabel.text = "Hours"
+        pickerMinutesLabel.text = "Minutes"
+        pickerSecondsLabel.text = "Seconds"
+        pickerDayLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        pickerHoursLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        pickerMinutesLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        pickerSecondsLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 12)
+        pickerDayLabel.textAlignment = .center
+        pickerHoursLabel.textAlignment = .center
+        pickerMinutesLabel.textAlignment = .center
+        pickerSecondsLabel.textAlignment = .center
+        pickerDayLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(2)
+            make.left.equalToSuperview()
+            make.bottom.equalTo(timerPicker.snp.top)
+            make.width.equalTo(pickerContainer.snp.width).dividedBy(4)
+        }
+        pickerHoursLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalTo(pickerDayLabel.snp.right)
+            make.bottom.equalTo(timerPicker.snp.top)
+            make.width.equalTo(pickerContainer.snp.width).dividedBy(4)
+        }
+        pickerMinutesLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalTo(pickerHoursLabel.snp.right)
+            make.bottom.equalTo(timerPicker.snp.top)
+            make.width.equalTo(pickerContainer.snp.width).dividedBy(4)
+        }
+        pickerSecondsLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalTo(timerPicker.snp.top)
+            make.width.equalTo(pickerContainer.snp.width).dividedBy(4)
+        }
+        view.addSubview(pickerTapOffButton)
+        pickerTapOffButton.backgroundColor = UIColor.clear
+        pickerTapOffButton.isEnabled = false
+        pickerTapOffButton.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.bottom.equalTo(lockInBox.snp.top)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            
+        }
+        
+    }
+    
+    private func showPickerView() {
+        pickerTapOffButton.isEnabled = true
+        UIView.animate(withDuration: 0.2, animations: {
+            self.pickerContainer.frame = CGRect(x: self.pickerContainer.frame.minX,
+                                                y: self.view.frame.height-self.pickerContainer.frame.height,
+                                                width: self.pickerContainer.frame.width,
+                                                height: self.pickerContainer.frame.height)
+            
+        })
+        
+    }
+    private func hidePickerView(){
+        pickerTapOffButton.isEnabled = false
+        UIView.animate(withDuration: 0.4, animations: {
+            self.pickerContainer.frame = CGRect(x: self.pickerContainer.frame.minX,
+                                                y: self.view.frame.height,
+                                                width: self.pickerContainer.frame.width,
+                                                height: self.pickerContainer.frame.height)
+            
+        })
         
     }
     
@@ -417,9 +680,22 @@ class LeftViewController:UIViewController {
             make.right.equalToSuperview()
             make.height.equalToSuperview().dividedBy(3)
         }
+        
     }
     
-    
-    
+}
+
+extension LeftViewController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        print("Notification being triggered")
+        //You can either present alert ,sound or increase badge while the app is in foreground too with ios 10
+        //to distinguish between notifications
+        //        if notification.request.identifier == requestIdentifier{
+        //            
+        //            completionHandler( [.alert,.sound,.badge])
+        //            
+        //        }
+    }
     
 }
