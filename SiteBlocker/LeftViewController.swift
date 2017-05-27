@@ -103,37 +103,40 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             Int(self.minutesNumberLabel.text!)! * 60 +
             Int(self.secondsNumberLabel.text!)!
             
-            self.triggerNotifications(seconds: seconds)
+            self.triggerNotifications(days: Int(self.dayNumberLabel.text!)!,
+                                      hours:Int(self.hoursNumberLabel.text!)!,
+                                      minutes: Int(self.minutesNumberLabel.text!)!,
+                                      seconds: Int(self.secondsNumberLabel.text!)!)
         }
         
     }
     
-    private func triggerNotifications(seconds: Int){
+    private func triggerNotifications(days:Int,hours:Int, minutes: Int, seconds: Int){
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
+            let today = Date()
+            let calendar = NSCalendar.current
+            let components = calendar.dateComponents([.day, .hour, .minute,.second], from: today)
             
-                    //add notification code here
-            
-            //Set the content of the notification
-            let content = UNMutableNotificationContent()
-            content.title = "10 Second Notification Demo"
-            content.subtitle = "From MakeAppPie.com"
-            content.body = "Notification after 10 seconds - Your pizza is Ready!!"
-            
-            //Set the trigger of the notification -- here a timer.
-            let trigger = UNTimeIntervalNotificationTrigger(
-                timeInterval: TimeInterval(seconds),
-                repeats: false)
-            
-            //Set the request for the notification from the above
-            let request = UNNotificationRequest(
-                identifier: "timerDoneNotifiaction",
-                content: content,
-                trigger: trigger
-            )
-            
-            //Add the notification to the currnet notification center
-            UNUserNotificationCenter.current().add(
-                request, withCompletionHandler: nil)
+            var dateComp:DateComponents = DateComponents()
+            dateComp.second = components.second! + seconds
+            dateComp.minute = components.minute! + minutes
+            dateComp.hour = components.hour! + hours
+            dateComp.day = components.day! + days
+            let date = calendar.date(from: dateComp)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd MM yyyy hh:mm:ss"
+            let fireDate = dateFormatter.string(from: date!)
+            print("fireDate: \(fireDate)")
+            let localNotificationSilent = UILocalNotification()
+            localNotificationSilent.fireDate = date
+            // no need to set time zone Remove bellow line
+            localNotificationSilent.timeZone = NSCalendar.current.timeZone
+            localNotificationSilent.fireDate = date
+            localNotificationSilent.repeatInterval = .day
+            localNotificationSilent.alertBody = "Started!"
+            localNotificationSilent.alertAction = "swipe to hear!"
+            localNotificationSilent.category = "PLAY_CATEGORY"
+            UIApplication.shared.scheduleLocalNotification(localNotificationSilent)
             
         }
     }
