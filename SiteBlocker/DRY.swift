@@ -90,16 +90,7 @@ struct ExtensionManager {
                 print("Failed writing to URL: \(String(describing: url2)), Error: " + error.localizedDescription)
             }
             
-            
 
-            
-            
-            
-            
-            
-            
-            
-            
             let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
             if let userDefaults = userDefaults {
                 userDefaults.set(url, forKey: "blockerList")

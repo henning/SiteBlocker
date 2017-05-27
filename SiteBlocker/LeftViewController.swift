@@ -110,13 +110,30 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     private func triggerNotifications(seconds: Int){
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
+            
+            let stopBlockingAction = UNNotificationAction(
+                identifier: "stopBlocking",
+                title: "Stop Blocking",
+                options: [])
+            
+            let alarmCategory = UNNotificationCategory(
+                identifier: "timer.category",
+                actions: [stopBlockingAction],
+                intentIdentifiers: [],
+                options: [])
+            
+UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
+            
+            
+            
             let center = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.alert, .sound];
             
             let content = UNMutableNotificationContent()
             content.title = "Timer Done"
-            content.body = "Sites are now unlocked"
+            content.body = "To unlock sites, either tap the notification or the notification button"
             content.sound = UNNotificationSound.default()
+            content.categoryIdentifier = "timer.category"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
                                                             repeats: false)
             let identifier = "TimerLocalNotification"
@@ -688,9 +705,14 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        withCompletionHandler([.alert, .sound, .badge])
         UserDefaults.standard.set(true, forKey: "test")
-        
+        withCompletionHandler([.alert, .sound, .badge])
+        Domain.switchToOff()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void){
+    
+        Domain.switchToOff()
     }
 }
 
