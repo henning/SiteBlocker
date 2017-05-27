@@ -11,6 +11,7 @@ import PaperSwitch
 import UserNotifications
 import RxSwift
 import RxCocoa
+import RxKeyboard
 
 
 
@@ -76,7 +77,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     override func viewDidLoad() {
         
         
-        lockInBox.isHidden = true
         
         let stopBlockingAction = UNNotificationAction(
             identifier: "stopBlocking",
@@ -164,8 +164,21 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             self.scheduleNotification(start: start!, end: end!)
         
         }
-        
+        RxKeyboard.instance.frame
+            .drive(onNext: { frame in
+                self.view.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY-frame.height, width: self.view.frame.width, height: self.view.frame.height)
+            })
+            .disposed(by: disposeBag)
+        lockInTextBox.rx.controlEvent(.editingDidEndOnExit).subscribe { _ in
+            Domain.switchOnLockIn(site: self.lockInTextBox.text!)
+        }
+        lockInButton.rx.tap.subscribe{ _ in
+            self.lockInTextBox.resignFirstResponder()
+            Domain.switchOnLockIn(site: self.lockInTextBox.text!)
+        }
     }
+    
+    
     
     private func scheduleNotification (start: Int, end: Int){
         Domain.switchToOff()
@@ -182,7 +195,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         var dateComponents = DateComponents()
         dateComponents.hour = start
-        dateComponents.minute = 29
+        dateComponents.minute = 0
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "scheduledStart", content: startContent, trigger: trigger)
         center.delegate = self
@@ -198,7 +211,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         var dateComponentsEnd = DateComponents()
         dateComponentsEnd.hour = end
-        dateComponentsEnd.minute = 30
+        dateComponentsEnd.minute = 0
         let endTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsEnd, repeats: true)
         let endRequest = UNNotificationRequest(identifier: "scheduledEnd", content: endContent, trigger: endTrigger)
         center.add(endRequest)

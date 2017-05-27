@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(UserDefaults(suiteName: "group.com.lukejmann.foo")?.url(forKey: "empty")!.absoluteString)
         
         if UserDefaults.standard.bool(forKey: "hasLoaded"){
-            Domain.reloadDomains()
+//            Domain.reloadDomains()
         }
         Suggestion.loadInitialSuggestions()
 

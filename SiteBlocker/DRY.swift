@@ -90,10 +90,20 @@ struct ExtensionManager {
                 print("Failed writing to URL: \(String(describing: url2)), Error: " + error.localizedDescription)
             }
             
+            let url3 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("lockIn.json")
+            
+            do {
+                try data.write(to: url3!)
+            } catch let error as NSError {
+                print("Failed writing to URL: \(String(describing: url3)), Error: " + error.localizedDescription)
+            }
+
+            
 
             let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
             if let userDefaults = userDefaults {
                 userDefaults.set(url, forKey: "blockerList")
+                userDefaults.set(url3, forKey: "lockIn")
                 userDefaults.set(url2, forKey: "empty")
             }
         }

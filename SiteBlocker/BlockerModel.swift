@@ -110,6 +110,24 @@ class Domain:NSObject,NSCoding {
         ExtensionManager.reload()
     }
     
+    static func switchOnLockIn(site: String) {
+        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "lockIn")
+
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadLockIn")
+        var string = "*"
+        string.append(site)
+        let jsonString = "[{\"action\":{\"type\":\"block\"},\"trigger\":{\"url-filter\":\".*.\",\"unless-domain\":[\"*\(site)\"]}}]"
+        print(jsonString)
+        let data = jsonString.data(using: .utf8)
+        try! data?.write(to: url!)
+        ExtensionManager.reload()
+        
+    }
+    static func switchOffLockIn() {
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(false, forKey: "loadLockIn")
+        ExtensionManager.reload()
+    }
+    
 }
 
 

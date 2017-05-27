@@ -13,6 +13,8 @@
 		481AB5811ED8CFF0007E09BA /* PaperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481AB5801ED8CFEF007E09BA /* PaperSwitch.swift */; };
 		481BE5CD1ECFC8600099C724 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 481BE5CC1ECFC8600099C724 /* blockerList.json */; };
 		4820E52B1ED99528004DD271 /* empty.json in Resources */ = {isa = PBXBuildFile; fileRef = 4820E52A1ED99528004DD271 /* empty.json */; };
+		4820E52D1ED9D66A004DD271 /* RxKeyboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4820E52C1ED9D66A004DD271 /* RxKeyboard.framework */; };
+		4820E52F1ED9D66F004DD271 /* PaperSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4820E52E1ED9D66F004DD271 /* PaperSwitch.framework */; };
 		48218A831ECE66A4003F82F9 /* blockerList.json in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8B1ECCF24A00A0E13A /* blockerList.json */; };
 		4861EFA31ED6DAD400BC368A /* SwipeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4861EFA21ED6DAD400BC368A /* SwipeNavigationController.swift */; };
 		48670A771ECD149900F2765E /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48670A761ECD149900F2765E /* BlockerModel.swift */; };
@@ -31,7 +33,6 @@
 		4897CDA01ECD0A9A00A0E13A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9B1ECD0A9500A0E13A /* RxSwift.framework */; };
 		4897CDA11ECD0A9A00A0E13A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9C1ECD0A9500A0E13A /* SnapKit.framework */; };
 		4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9D1ECD0A9500A0E13A /* SwiftyJSON.framework */; };
-		48D0679D1ED23BA600AB1B1C /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48D0679C1ED23BA600AB1B1C /* Hero.framework */; };
 		48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,8 @@
 		481AB5801ED8CFEF007E09BA /* PaperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperSwitch.swift; sourceTree = "<group>"; };
 		481BE5CC1ECFC8600099C724 /* blockerList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
 		4820E52A1ED99528004DD271 /* empty.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty.json; sourceTree = "<group>"; };
+		4820E52C1ED9D66A004DD271 /* RxKeyboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxKeyboard.framework; path = Carthage/Build/iOS/RxKeyboard.framework; sourceTree = "<group>"; };
+		4820E52E1ED9D66F004DD271 /* PaperSwitch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PaperSwitch.framework; path = Carthage/Build/iOS/PaperSwitch.framework; sourceTree = "<group>"; };
 		4861EFA21ED6DAD400BC368A /* SwipeNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipeNavigationController.swift; path = ../SwipeNavigationController.swift; sourceTree = "<group>"; };
 		48670A761ECD149900F2765E /* BlockerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		48670A791ECD1B9200F2765E /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
@@ -103,8 +106,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4897CD9F1ECD0A9A00A0E13A /* RxCocoa.framework in Frameworks */,
-				48D0679D1ED23BA600AB1B1C /* Hero.framework in Frameworks */,
 				4897CDA01ECD0A9A00A0E13A /* RxSwift.framework in Frameworks */,
+				4820E52D1ED9D66A004DD271 /* RxKeyboard.framework in Frameworks */,
+				4820E52F1ED9D66F004DD271 /* PaperSwitch.framework in Frameworks */,
 				4897CDA11ECD0A9A00A0E13A /* SnapKit.framework in Frameworks */,
 				4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */,
 			);
@@ -174,6 +178,8 @@
 		4897CD981ECD0A8F00A0E13A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4820E52E1ED9D66F004DD271 /* PaperSwitch.framework */,
+				4820E52C1ED9D66A004DD271 /* RxKeyboard.framework */,
 				48D0679C1ED23BA600AB1B1C /* Hero.framework */,
 				4897CD9A1ECD0A9500A0E13A /* RxCocoa.framework */,
 				4897CD9B1ECD0A9500A0E13A /* RxSwift.framework */,
@@ -315,8 +321,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Hero.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/PaperSwitch.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxKeyboard.framework",
 			);
 			name = Cart;
 			outputPaths = (
