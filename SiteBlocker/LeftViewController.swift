@@ -168,7 +168,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     }
     
     private func scheduleNotification (start: Int, end: Int){
-        
+        Domain.switchToOff()
+
         
         let center = UNUserNotificationCenter.current()
         
@@ -181,9 +182,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         var dateComponents = DateComponents()
         dateComponents.hour = start
-        dateComponents.minute = 10
+        dateComponents.minute = 29
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "scheduledStart", content: startContent, trigger: trigger)
+        center.delegate = self
         center.add(request)
         
         
@@ -196,7 +198,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         var dateComponentsEnd = DateComponents()
         dateComponentsEnd.hour = end
-        dateComponentsEnd.minute = 11
+        dateComponentsEnd.minute = 30
         let endTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsEnd, repeats: true)
         let endRequest = UNNotificationRequest(identifier: "scheduledEnd", content: endContent, trigger: endTrigger)
         center.add(endRequest)
@@ -205,10 +207,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     private func triggerNotifications(seconds: Int){
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
-            
-
-            
-            
             let center = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.alert, .sound];
             
@@ -893,7 +891,7 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
         Domain.switchToOn()
         }
         else {
-            Domain.switchToOn()
+            Domain.switchToOff()
         }
     }
     
@@ -902,7 +900,7 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
             Domain.switchToOn()
         }
         else {
-            Domain.switchToOn()
+            Domain.switchToOff()
         }
     }
 }
