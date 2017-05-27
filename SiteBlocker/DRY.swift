@@ -2,7 +2,7 @@ import SwiftyJSON
 import SafariServices
 
 extension JSON{
-
+    
     static func makeProperFormat(json: JSON) -> String {
         var string = json.description
             .replacingOccurrences(of: "\n", with: "")
@@ -69,26 +69,44 @@ extension JSON{
 
 struct ExtensionManager {
     static func setupJSON() {
-
+        
         if UserDefaults.standard.bool(forKey: "hasLoaded"){ return }
         else {
             UserDefaults.standard.set(true, forKey: "hasLoaded")
-        let data = try! Data(contentsOf: (Bundle.main.url(forResource: "blockerList", withExtension: "json")!))
-          let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("blockerList.json")
-        
-        do {
-            try data.write(to: url!)
-        } catch let error as NSError {
-            print("Failed writing to URL: \(String(describing: url)), Error: " + error.localizedDescription)
-        }
-        
-        
-        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
-        if let userDefaults = userDefaults {
-            userDefaults.set(url, forKey: "foo")
-        }
-        }
+            let data = try! Data(contentsOf: (Bundle.main.url(forResource: "blockerList", withExtension: "json")!))
+            let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("blockerList.json")
+            
+            do {
+                try data.write(to: url!)
+            } catch let error as NSError {
+                print("Failed writing to URL: \(String(describing: url)), Error: " + error.localizedDescription)
+            }
+            
+            let url2 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("empty.json")
+            
+            do {
+                try data.write(to: url2!)
+            } catch let error as NSError {
+                print("Failed writing to URL: \(String(describing: url2)), Error: " + error.localizedDescription)
+            }
+            
+            
 
+            
+            
+            
+            
+            
+            
+            
+            
+            let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+            if let userDefaults = userDefaults {
+                userDefaults.set(url, forKey: "blockerList")
+                userDefaults.set(url2, forKey: "empty")
+            }
+        }
+        
     }
     static func reload() {
         let identifierHosts = "com.lukejmann.SiteBlocker.Extension"

@@ -103,40 +103,35 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             Int(self.minutesNumberLabel.text!)! * 60 +
             Int(self.secondsNumberLabel.text!)!
             
-            self.triggerNotifications(days: Int(self.dayNumberLabel.text!)!,
-                                      hours:Int(self.hoursNumberLabel.text!)!,
-                                      minutes: Int(self.minutesNumberLabel.text!)!,
-                                      seconds: Int(self.secondsNumberLabel.text!)!)
+            self.triggerNotifications(seconds: seconds)
         }
         
     }
     
-    private func triggerNotifications(days:Int,hours:Int, minutes: Int, seconds: Int){
+    private func triggerNotifications(seconds: Int){
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
-            let today = Date()
-            let calendar = NSCalendar.current
-            let components = calendar.dateComponents([.day, .hour, .minute,.second], from: today)
+            let center = UNUserNotificationCenter.current()
+            let options: UNAuthorizationOptions = [.alert, .sound];
             
-            var dateComp:DateComponents = DateComponents()
-            dateComp.second = components.second! + seconds
-            dateComp.minute = components.minute! + minutes
-            dateComp.hour = components.hour! + hours
-            dateComp.day = components.day! + days
-            let date = calendar.date(from: dateComp)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MM yyyy hh:mm:ss"
-            let fireDate = dateFormatter.string(from: date!)
-            print("fireDate: \(fireDate)")
-            let localNotificationSilent = UILocalNotification()
-            localNotificationSilent.fireDate = date
-            // no need to set time zone Remove bellow line
-            localNotificationSilent.timeZone = NSCalendar.current.timeZone
-            localNotificationSilent.fireDate = date
-            localNotificationSilent.repeatInterval = .day
-            localNotificationSilent.alertBody = "Started!"
-            localNotificationSilent.alertAction = "swipe to hear!"
-            localNotificationSilent.category = "PLAY_CATEGORY"
-            UIApplication.shared.scheduleLocalNotification(localNotificationSilent)
+            let content = UNMutableNotificationContent()
+            content.title = "Timer Done"
+            content.body = "Sites are now unlocked"
+            content.sound = UNNotificationSound.default()
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
+                                                            repeats: false)
+            let identifier = "TimerLocalNotification"
+            let request = UNNotificationRequest(identifier: identifier,
+                                                content: content, trigger: trigger)
+           center.delegate = self
+            center.add(request, withCompletionHandler: { (error) in
+                if let error = error {
+                    // Something went wrong
+                }
+                else {
+                Domain.switchToOn()
+                }
+            })
+            
             
         }
     }
@@ -379,7 +374,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     private func setupTimerView() {
         timerBox.addSubview(timerLabel)
         timerLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
-        timerLabel.text = "Timer"
+//        timerLabel.text = "Timer"
+        timerLabel.text = "\(UserDefaults.standard.bool(forKey: "test"))"
         timerLabel.textAlignment = .center
         timerLabel.textColor = UIColor.customBlack()
         timerLabel.snp.makeConstraints { (make) in
@@ -689,16 +685,14 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
 }
 
 extension LeftViewController: UNUserNotificationCenterDelegate {
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent: UNNotification,
+                                withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
+        withCompletionHandler([.alert, .sound, .badge])
+        UserDefaults.standard.set(true, forKey: "test")
         
-        print("Notification being triggered")
-        //You can either present alert ,sound or increase badge while the app is in foreground too with ios 10
-        //to distinguish between notifications
-        //        if notification.request.identifier == requestIdentifier{
-        //            
-        //            completionHandler( [.alert,.sound,.badge])
-        //            
-        //        }
     }
-    
 }
+
+
+

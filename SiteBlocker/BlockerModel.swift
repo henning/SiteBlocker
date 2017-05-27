@@ -40,7 +40,7 @@ class Domain:NSObject,NSCoding {
     
     func add() {
         
-        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "foo")
+        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "blockerList")
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
@@ -59,7 +59,7 @@ class Domain:NSObject,NSCoding {
     }
     
     func remove() {
-        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "foo")
+        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "blockerList")
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
@@ -98,6 +98,16 @@ class Domain:NSObject,NSCoding {
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: domains.value)
         userDefaults.set(encodedData, forKey: "domains")
         userDefaults.synchronize()
+    }
+    
+    static func switchToOff() {
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadEmpty")
+        ExtensionManager.reload()
+    }
+    
+    static func switchToOn() {
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(false, forKey: "loadEmpty")
+        ExtensionManager.reload()
     }
     
 }
