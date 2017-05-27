@@ -78,6 +78,30 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         lockInBox.isHidden = true
         
+        let stopBlockingAction = UNNotificationAction(
+            identifier: "stopBlocking",
+            title: "Stop Blocking",
+            options: [])
+        let startBlockingAction = UNNotificationAction(
+            identifier: "startBlocking",
+            title: "Start Blocking",
+            options: [])
+        
+        let startBlockingCategory = UNNotificationCategory(
+            identifier: "startBlockingCategory",
+            actions: [startBlockingAction],
+            intentIdentifiers: [],
+            options: [])
+        
+        let endBlockingCategory = UNNotificationCategory(
+            identifier: "endBlockingCategory",
+            actions: [stopBlockingAction],
+            intentIdentifiers: [],
+            options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([startBlockingCategory,endBlockingCategory])
+        
+        
         
         setupMainViews()
         setupTimerView()
@@ -132,10 +156,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         scheduleButton.rx.tap.subscribe { _ in
             let end = Int(
-                (self.scheduleStartNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
+                (self.scheduleEndNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
             )
             let start = Int(
-                (self.scheduleEndNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
+                (self.scheduleStartNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
             )
             self.scheduleNotification(start: start!, end: end!)
         
@@ -152,11 +176,12 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         let startContent = UNMutableNotificationContent()
         startContent.title = "Time to start blocking!"
         startContent.body = "To block sites, either tap the notification or the notification button"
+        startContent.categoryIdentifier = "startBlockingCategory"
         startContent.sound = UNNotificationSound.default()
         
         var dateComponents = DateComponents()
         dateComponents.hour = start
-        dateComponents.minute = 26
+        dateComponents.minute = 10
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         let request = UNNotificationRequest(identifier: "scheduledStart", content: startContent, trigger: trigger)
         center.add(request)
@@ -166,39 +191,22 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         let endContent = UNMutableNotificationContent()
         endContent.title = "Blocking time is over!"
         endContent.body = "To unblock sites, either tap the notification or the notification button"
+        endContent.categoryIdentifier = "endBlockingCategory"
         endContent.sound = UNNotificationSound.default()
         
         var dateComponentsEnd = DateComponents()
         dateComponentsEnd.hour = end
+        dateComponentsEnd.minute = 11
         let endTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsEnd, repeats: true)
         let endRequest = UNNotificationRequest(identifier: "scheduledEnd", content: endContent, trigger: endTrigger)
         center.add(endRequest)
-
-        
-        
-
-        
-        
-        
 
     }
     
     private func triggerNotifications(seconds: Int){
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
             
-            let stopBlockingAction = UNNotificationAction(
-                identifier: "stopBlocking",
-                title: "Stop Blocking",
-                options: [])
-            
-            let alarmCategory = UNNotificationCategory(
-                identifier: "timer.category",
-                actions: [stopBlockingAction],
-                intentIdentifiers: [],
-                options: [])
-            
-            UNUserNotificationCenter.current().setNotificationCategories([alarmCategory])
-            
+
             
             
             let center = UNUserNotificationCenter.current()
@@ -208,7 +216,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             content.title = "Timer Done"
             content.body = "To unblock sites, either tap the notification or the notification button"
             content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = "timer.category"
+            content.categoryIdentifier = "stopBlocking"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
                                                             repeats: false)
             let identifier = "TimerLocalNotification"
@@ -881,14 +889,21 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent: UNNotification,
                                 withCompletionHandler: @escaping (UNNotificationPresentationOptions)->()) {
-        UserDefaults.standard.set(true, forKey: "test")
-        withCompletionHandler([.alert, .sound, .badge])
-        Domain.switchToOff()
+        if willPresent.request.content.categoryIdentifier == "startBlockingCategory"{
+        Domain.switchToOn()
+        }
+        else {
+            Domain.switchToOn()
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void){
-        
-        Domain.switchToOff()
+        if response.notification.request.content.categoryIdentifier == "startBlockingCategory"{
+            Domain.switchToOn()
+        }
+        else {
+            Domain.switchToOn()
+        }
     }
 }
 
