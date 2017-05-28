@@ -29,8 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let snapVC = SwipeNavigationController(centerViewController: CenterViewController())
-        snapVC.leftViewController = LeftViewController()
+        let snapVC = SwipeNavigationController(centerViewController: RightViewController())
+//        snapVC.leftViewController = LeftViewController()
+//        snapVC.rightViewController = RightViewController()
         self.window?.rootViewController = snapVC
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()

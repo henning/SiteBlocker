@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-import Hero
 
 
 class CenterViewController: UIViewController {
@@ -281,7 +280,7 @@ class CenterViewController: UIViewController {
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if correctFormat(string: self.addNewTextBox.text!){
+        if CenterViewController.correctFormat(string: self.addNewTextBox.text!){
             let d = Domain(simpleAddress: self.addNewTextBox.text!)
             domains.value.append(d)
             d.add()
@@ -293,7 +292,7 @@ class CenterViewController: UIViewController {
         return false
     }
     
-    private func correctFormat(string:String)->Bool{
+    static func correctFormat(string:String)->Bool{
         let s = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
         let characterSet = CharacterSet(charactersIn: s).inverted
         let words = string.components(separatedBy: characterSet)

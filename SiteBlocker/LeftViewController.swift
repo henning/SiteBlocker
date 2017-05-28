@@ -80,6 +80,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let constantLabel = UILabel()
     var constantSwitch = PaperSwitch(view: UIView(), color: UIColor.purple)
     let constantSwitchBind = Variable(false)
+    let timerWarningLabel = UILabel()
+    let scheduleWarningLabel = UILabel()
+    let lockInWarningLabel = UILabel()
+
     
     
     override func viewDidLoad() {
@@ -205,8 +209,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 Int(self.hoursNumberLabel.text!)! * 3600 +
                 Int(self.minutesNumberLabel.text!)! * 60 +
                 Int(self.secondsNumberLabel.text!)!
-            
+            if seconds == 0 {
+                self.showErrorMessage(label: self.timerWarningLabel)
+            }
+            else {
+                self.hideErrorMessage(label: self.timerWarningLabel)
             self.triggerNotifications(seconds: seconds)
+            }
             }.addDisposableTo(disposeBag)
         
         scheduleButton.rx.tap.subscribe { _ in
@@ -239,7 +248,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                     start = 0
                 }
             }
+            if start == end {
+                self.showErrorMessage(label:self.scheduleWarningLabel)
+            }
+            else {
+                self.hideErrorMessage(label: self.scheduleWarningLabel)
             self.scheduleNotification(start: start!, end: end!)
+            }
         
         }.addDisposableTo(disposeBag)
         RxKeyboard.instance.frame
@@ -251,11 +266,32 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             Domain.switchOnLockIn(site: self.lockInTextBox.text!)
         }.addDisposableTo(disposeBag)
         lockInButton.rx.tap.subscribe{ _ in
+            if CenterViewController.correctFormat(string: self.lockInTextBox.text!){
+                self.hideErrorMessage(label: self.lockInWarningLabel)
             self.lockInTextBox.resignFirstResponder()
             self.showPopUp(title: "Lock In Mode Activated", body: "Only the specifed site can be loaded.")
             Domain.switchOnLockIn(site: self.lockInTextBox.text!)
+            }
+            else {
+                self.showErrorMessage(label: self.lockInWarningLabel)
+
+            }
         }.addDisposableTo(disposeBag)
     }
+    
+    
+    private func showErrorMessage(label:UILabel){
+        UIView.animate(withDuration: 0.5) {
+            label.alpha = 1.0
+        }
+    }
+    
+    private func hideErrorMessage(label:UILabel){
+        UIView.animate(withDuration: 0.5) {
+            label.alpha = 0
+        }
+    }
+
     
     private func bindSwitches() {
         
@@ -609,6 +645,18 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalTo(34)
         }
         
+        lockInBox.addSubview(lockInWarningLabel)
+        lockInWarningLabel.textColor = UIColor.customWhite()
+        lockInWarningLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
+        lockInWarningLabel.text = "Make sure the address is in the following format: \"domain.com(or .org, etc.)\""
+        lockInWarningLabel.alpha = 0
+        lockInWarningLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(lockInTextBox.snp.top).offset(-4)
+            make.height.equalTo(22)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+        }
+        
     }
     
     private func setupScheduleView() {
@@ -764,7 +812,17 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.width.equalTo(pickerContainer.snp.width).multipliedBy(0.8)
         }
         
-        
+        scheduleBox.addSubview(scheduleWarningLabel)
+        scheduleWarningLabel.textColor = UIColor.customWhite()
+        scheduleWarningLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
+        scheduleWarningLabel.text = "Please enter a valid range"
+        scheduleWarningLabel.alpha = 0
+        scheduleWarningLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(scheduleStartNumberLabel.snp.top).offset(-4)
+            make.height.equalTo(22)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+        }
         
         
         
@@ -1016,6 +1074,17 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         pickerViewsToHide.append(pickerHoursLabel)
         pickerViewsToHide.append(timerPicker)
         
+        timerBox.addSubview(timerWarningLabel)
+        timerWarningLabel.textColor = UIColor.customWhite()
+        timerWarningLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
+        timerWarningLabel.text = "Please enter a valid time"
+        timerWarningLabel.alpha = 0
+        timerWarningLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(dayView.snp.top).offset(-4)
+            make.height.equalTo(22)
+            make.left.equalTo(timerBox.snp.left).offset(12)
+            make.right.equalTo(timerBox.snp.right).offset(-12)
+        }
         
     }
     
