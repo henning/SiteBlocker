@@ -71,6 +71,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let scheduleEndTimePickerLabel = UILabel()
     var pickerViewsToHide = [UIView]()
     let hours = ["12 A.M.", "1 A.M.", "2 A.M.", "3 A.M.", "4 A.M.", "5 A.M.", "6 A.M.", "7 A.M.", "8 A.M.", "9 A.M.", "10 A.M.", "11 A.M.", "12 P.M.","1 P.M.","2 P.M.","3 P.M.","4 P.M.","5 P.M.","6 P.M.","7 P.M.","8 P.M.","9 P.M.","10 P.M.","11 P.M.",]
+    let timerSwitchBind = Variable(false)
+    let scheduleSwitchBind = Variable(false)
+    let lockInBoxBind = Variable(false)
     
     
     
@@ -109,6 +112,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         setupScheduleView()
         setupLockInView()
         bindSwitchs()
+        bindSwitches()
     }
     
     
@@ -195,11 +199,61 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             .disposed(by: disposeBag)
         lockInTextBox.rx.controlEvent(.editingDidEndOnExit).subscribe { _ in
             Domain.switchOnLockIn(site: self.lockInTextBox.text!)
-        }
+        }.addDisposableTo(disposeBag)
         lockInButton.rx.tap.subscribe{ _ in
             self.lockInTextBox.resignFirstResponder()
             Domain.switchOnLockIn(site: self.lockInTextBox.text!)
-        }
+        }.addDisposableTo(disposeBag)
+    }
+    
+    private func bindSwitches() {
+        
+        timerSwitch.rx.isOn.bind(to: timerSwitchBind).addDisposableTo(disposeBag)
+        scheduleSwitch.rx.isOn.bind(to: scheduleSwitchBind).addDisposableTo(disposeBag)
+        lockInSwitch.rx.isOn.bind(to: lockInBoxBind).addDisposableTo(disposeBag)
+
+        
+        timerSwitchBind.asObservable().subscribe { isOn in
+            if isOn.element! {
+                self.timerStartButton.isEnabled = true
+                self.timerButton.isEnabled = true
+                self.scheduleSwitchBind.value = false
+                self.lockInBoxBind.value = false
+            }
+            else {
+                self.timerSwitch.setOn(false, animated: true)
+                self.timerStartButton.isEnabled = false
+                self.timerButton.isEnabled = false
+            }
+        }.addDisposableTo(disposeBag)
+        scheduleSwitchBind.asObservable().subscribe { isOn in
+            if isOn.element! {
+                self.scheduleButton.isEnabled = true
+                self.scheduleStartTimeButton.isEnabled = true
+                self.scheduleEndTimeButton.isEnabled = true
+                self.timerSwitchBind.value = false
+                self.lockInBoxBind.value = false
+            }
+            else {
+                self.scheduleSwitch.setOn(false, animated: true)
+                self.scheduleButton.isEnabled = false
+                self.scheduleStartTimeButton.isEnabled = false
+                self.scheduleEndTimeButton.isEnabled = false
+            }
+        }.addDisposableTo(disposeBag)
+        lockInBoxBind.asObservable().subscribe { isOn in
+            if isOn.element! {
+                self.lockInButton.isEnabled = true
+                self.lockInTextBox.isEnabled = true
+                self.scheduleSwitchBind.value = false
+                self.timerSwitchBind.value = false
+            }
+            else {
+                self.lockInSwitch.setOn(false, animated: true)
+                self.lockInButton.isEnabled = false
+                self.lockInTextBox.isEnabled = false
+            }
+        }.addDisposableTo(disposeBag)
     }
     
     
@@ -211,9 +265,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         let calendar = Calendar.current
         
         let hour = calendar.component(.hour, from: date)
-        if start <= hour && hour < end {
+        
+        if (start<end && start <= hour && hour < end) || (start>end && start >= hour && hour<end) {
             Domain.switchToOn()
+
         }
+        
+       
         
         let center = UNUserNotificationCenter.current()
         

@@ -45,6 +45,9 @@ public protocol SwipeNavigationControllerDelegate: class {
 /// SwipeNavigationController Class
 open class SwipeNavigationController: UIViewController {
     
+    override open var prefersStatusBarHidden: Bool {
+        return true
+    }    
     // Mark: - Properties
     /*
      * The whole magic to this implementation:

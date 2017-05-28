@@ -15,10 +15,21 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         
         
         let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+        
         let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
+        let loadLockIn = userDefaults?.bool(forKey: "loadLockIn")
+
         
         if loadEmpty!{
             let url =  userDefaults?.url(forKey: "empty")
+            let attachment = NSItemProvider(contentsOf: url)
+            let item = NSExtensionItem()
+            item.attachments = [attachment]
+            context.completeRequest(returningItems: [item], completionHandler: nil)
+            return
+        }
+        if loadLockIn! {
+            let url =  userDefaults?.url(forKey: "lockIn")
             let attachment = NSItemProvider(contentsOf: url)
             let item = NSExtensionItem()
             item.attachments = [attachment]
