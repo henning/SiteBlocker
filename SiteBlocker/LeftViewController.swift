@@ -74,15 +74,23 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let timerSwitchBind = Variable(false)
     let scheduleSwitchBind = Variable(false)
     let lockInBoxBind = Variable(false)
-    
-    
+    let scrollView = UIScrollView()
+
     
     override func viewDidLoad() {
         timerSwitch = PaperSwitch(view: timerBox, color: UIColor.customGreen())
         scheduleSwitch = PaperSwitch(view: scheduleBox, color: UIColor.customGreen())
         lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.customGreen())
 
-        
+        if UserDefaults.standard.bool(forKey: "timerSwitch"){
+            timerSwitch.setOn(true, animated: false)
+        }
+        if UserDefaults.standard.bool(forKey: "scheduleSwitch"){
+            scheduleSwitch.setOn(true, animated: false)
+        }
+        if UserDefaults.standard.bool(forKey: "lockInSwitch"){
+            lockInSwitch.setOn(true, animated: false)
+        }
         
         let stopBlockingAction = UNNotificationAction(
             identifier: "stopBlocking",
@@ -215,12 +223,15 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         timerSwitchBind.asObservable().subscribe { isOn in
             if isOn.element! {
+                UserDefaults.standard.set(true, forKey: "timerSwitch")
+                Domain.switchToOff()
                 self.timerStartButton.isEnabled = true
                 self.timerButton.isEnabled = true
                 self.scheduleSwitchBind.value = false
                 self.lockInBoxBind.value = false
             }
             else {
+                UserDefaults.standard.set(false, forKey: "timerSwitch")
                 self.timerSwitch.setOn(false, animated: true)
                 self.timerStartButton.isEnabled = false
                 self.timerButton.isEnabled = false
@@ -228,6 +239,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }.addDisposableTo(disposeBag)
         scheduleSwitchBind.asObservable().subscribe { isOn in
             if isOn.element! {
+                UserDefaults.standard.set(true, forKey: "scheduleSwitch")
+                Domain.switchToOff()
                 self.scheduleButton.isEnabled = true
                 self.scheduleStartTimeButton.isEnabled = true
                 self.scheduleEndTimeButton.isEnabled = true
@@ -235,6 +248,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.lockInBoxBind.value = false
             }
             else {
+                UserDefaults.standard.set(false, forKey: "scheduleSwitch")
                 self.scheduleSwitch.setOn(false, animated: true)
                 self.scheduleButton.isEnabled = false
                 self.scheduleStartTimeButton.isEnabled = false
@@ -242,13 +256,17 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             }
         }.addDisposableTo(disposeBag)
         lockInBoxBind.asObservable().subscribe { isOn in
+            Domain.switchToOff()
             if isOn.element! {
+                UserDefaults.standard.set(true, forKey: "lockInSwitch")
                 self.lockInButton.isEnabled = true
                 self.lockInTextBox.isEnabled = true
                 self.scheduleSwitchBind.value = false
                 self.timerSwitchBind.value = false
             }
             else {
+                UserDefaults.standard.set(false, forKey: "lockInSwitch")
+                Domain.switchToOff()
                 self.lockInSwitch.setOn(false, animated: true)
                 self.lockInButton.isEnabled = false
                 self.lockInTextBox.isEnabled = false
@@ -464,7 +482,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         
         lockInBox.addSubview(lockInSwitch)
-        lockInSwitch.setOn(false, animated: false)
         lockInSwitch.snp.makeConstraints { (make) in
             make.top.equalTo(lockInLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
@@ -541,7 +558,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.width.equalTo(240)
         }
         scheduleBox.addSubview(scheduleSwitch)
-        scheduleSwitch.setOn(false, animated: false)
         scheduleSwitch.snp.makeConstraints { (make) in
             make.top.equalTo(scheduleLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
@@ -687,7 +703,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.width.equalTo(80)
         }
         timerBox.addSubview(timerSwitch)
-        timerSwitch.setOn(false, animated: false)
         timerSwitch.snp.makeConstraints { (make) in
             make.top.equalTo(timerLabel.snp.bottom).offset(5)
             make.centerX.equalToSuperview()
