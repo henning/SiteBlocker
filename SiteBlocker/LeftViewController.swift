@@ -20,6 +20,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let timerBox = UIView()
     let scheduleBox = UIView()
     let lockInBox = UIView()
+    let constantBox = UIView()
     var timerSwitch = PaperSwitch(view: UIView(), color: UIColor.orange)
     var scheduleSwitch = PaperSwitch(view: UIView(), color: UIColor.orange)
     var lockInSwitch = PaperSwitch(view: UIView(), color: UIColor.purple)
@@ -75,12 +76,17 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let scheduleSwitchBind = Variable(false)
     let lockInBoxBind = Variable(false)
     let scrollView = UIScrollView()
-
+    let constantLabel = UILabel()
+    var constantSwitch = PaperSwitch(view: UIView(), color: UIColor.purple)
+    let constantSwitchBind = Variable(false)
+    
     
     override func viewDidLoad() {
         timerSwitch = PaperSwitch(view: timerBox, color: UIColor.customGreen())
         scheduleSwitch = PaperSwitch(view: scheduleBox, color: UIColor.customGreen())
         lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.customGreen())
+        constantSwitch = PaperSwitch(view: constantBox, color: UIColor.customGreen())
+
 
         if UserDefaults.standard.bool(forKey: "timerSwitch"){
             timerSwitch.setOn(true, animated: false)
@@ -91,7 +97,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         if UserDefaults.standard.bool(forKey: "lockInSwitch"){
             lockInSwitch.setOn(true, animated: false)
         }
-        
+        if UserDefaults.standard.bool(forKey: "constantSwitch"){
+            constantSwitch.setOn(true, animated: false)
+        }
         let stopBlockingAction = UNNotificationAction(
             identifier: "stopBlocking",
             title: "Stop Blocking",
@@ -121,7 +129,19 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         setupLockInView()
         bindSwitchs()
         bindSwitches()
+        
+        scrollView.isUserInteractionEnabled = true
+        
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.isDirectionalLockEnabled = true
+        let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
+    }
+  
     
     
     
@@ -219,6 +239,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         timerSwitch.rx.isOn.bind(to: timerSwitchBind).addDisposableTo(disposeBag)
         scheduleSwitch.rx.isOn.bind(to: scheduleSwitchBind).addDisposableTo(disposeBag)
         lockInSwitch.rx.isOn.bind(to: lockInBoxBind).addDisposableTo(disposeBag)
+        constantSwitch.rx.isOn.bind(to: constantSwitchBind).addDisposableTo(disposeBag)
+
 
         
         timerSwitchBind.asObservable().subscribe { isOn in
@@ -229,6 +251,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.timerButton.isEnabled = true
                 self.scheduleSwitchBind.value = false
                 self.lockInBoxBind.value = false
+                self.constantSwitchBind.value = false
+
             }
             else {
                 UserDefaults.standard.set(false, forKey: "timerSwitch")
@@ -236,7 +260,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.timerStartButton.isEnabled = false
                 self.timerButton.isEnabled = false
             }
-        }.addDisposableTo(disposeBag)
+//            self.evaluateSwitches()
+            }.addDisposableTo(disposeBag)
         scheduleSwitchBind.asObservable().subscribe { isOn in
             if isOn.element! {
                 UserDefaults.standard.set(true, forKey: "scheduleSwitch")
@@ -246,6 +271,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.scheduleEndTimeButton.isEnabled = true
                 self.timerSwitchBind.value = false
                 self.lockInBoxBind.value = false
+                self.constantSwitchBind.value = false
+
             }
             else {
                 UserDefaults.standard.set(false, forKey: "scheduleSwitch")
@@ -254,7 +281,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.scheduleStartTimeButton.isEnabled = false
                 self.scheduleEndTimeButton.isEnabled = false
             }
-        }.addDisposableTo(disposeBag)
+//            self.evaluateSwitches()
+            }.addDisposableTo(disposeBag)
         lockInBoxBind.asObservable().subscribe { isOn in
             Domain.switchToOff()
             if isOn.element! {
@@ -263,6 +291,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.lockInTextBox.isEnabled = true
                 self.scheduleSwitchBind.value = false
                 self.timerSwitchBind.value = false
+                self.constantSwitchBind.value = false
+
             }
             else {
                 UserDefaults.standard.set(false, forKey: "lockInSwitch")
@@ -270,8 +300,31 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.lockInSwitch.setOn(false, animated: true)
                 self.lockInButton.isEnabled = false
                 self.lockInTextBox.isEnabled = false
+                
             }
-        }.addDisposableTo(disposeBag)
+//            self.evaluateSwitches()
+            }.addDisposableTo(disposeBag)
+        constantSwitchBind.asObservable().subscribe { isOn in
+            Domain.switchToOff()
+            if isOn.element! {
+                UserDefaults.standard.set(true, forKey: "constantSwitch")
+                self.scheduleSwitchBind.value = false
+                self.timerSwitchBind.value = false
+                self.lockInBoxBind.value = false
+                Domain.switchToOn()
+            }
+            else {
+                UserDefaults.standard.set(false, forKey: "constantSwitch")
+                Domain.switchToOff()
+                self.constantSwitch.setOn(false, animated: true)
+            }
+            }.addDisposableTo(disposeBag)
+    }
+    
+    private func evaluateSwitches() {
+        if !(scheduleSwitch.isOn || timerSwitch.isOn ||  lockInSwitch.isOn) {
+            constantSwitch.setOn(true, animated: true)
+        }
     }
     
     
@@ -973,38 +1026,78 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     
     private func setupMainViews(){
-        view.addSubview(timerBox)
-        view.addSubview(scheduleBox)
-        view.addSubview(lockInBox)
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        
+        scrollView.addSubview(timerBox)
+        scrollView.addSubview(scheduleBox)
+        scrollView.addSubview(lockInBox)
+        scrollView.addSubview(constantBox)
+        
+        constantBox.layer.borderColor = UIColor.customBlack().cgColor
+        constantBox.layer.borderWidth = 1
+        constantBox.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.height.equalTo(100)
+            make.left.equalToSuperview().offset(-1)
+            make.width.equalToSuperview().offset(2)
+        }
+        
+        
+        constantBox.addSubview(constantLabel)
+        constantLabel.text = "Always On"
+        constantLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        constantLabel.textColor = UIColor.customBlack()
+        constantLabel.textAlignment = .center
+        constantLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(16)
+            make.height.equalTo(30)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(200)
+        }
+        constantBox.addSubview(constantSwitch)
+        constantSwitch.snp.makeConstraints { (make) in
+            make.top.equalTo(constantLabel.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+        }
+        
+        
+        
         
         timerBox.layer.borderColor = UIColor.customBlack().cgColor
         timerBox.layer.borderWidth = 1
 //        timerBox.backgroundColor = UIColor.customWhite()
         timerBox.snp.makeConstraints { (make) in
-            make.top.equalToSuperview()
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(3)
+            make.top.equalTo(self.constantBox.snp.bottom).offset(-1)
+            make.left.equalToSuperview().offset(-1)
+            make.width.equalToSuperview().offset(2)
+            make.height.equalTo(view.snp.height).dividedBy(3)
         }
         
         scheduleBox.layer.borderColor = UIColor.customBlack().cgColor
 //        scheduleBox.backgroundColor = UIColor.customWhite()
         scheduleBox.layer.borderWidth = 1
         scheduleBox.snp.makeConstraints { (make) in
-            make.top.equalTo(timerBox.snp.bottom)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(3)
+            make.top.equalTo(timerBox.snp.bottom).offset(-1)
+            make.left.equalToSuperview().offset(-1)
+            make.width.equalToSuperview().offset(2)
+            make.height.equalTo(view.snp.height).dividedBy(3)
         }
         
         lockInBox.layer.borderColor = UIColor.customBlack().cgColor
 //        lockInBox.backgroundColor = UIColor.customWhite()
         lockInBox.layer.borderWidth = 1
         lockInBox.snp.makeConstraints { (make) in
-            make.top.equalTo(scheduleBox.snp.bottom)
-            make.left.equalToSuperview()
-            make.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(3)
+            make.top.equalTo(scheduleBox.snp.bottom).offset(-1)
+            make.left.equalToSuperview().offset(-1)
+            make.width.equalToSuperview().offset(2)
+            make.height.equalTo(view.snp.height).dividedBy(3)
         }
         
     }

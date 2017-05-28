@@ -1,0 +1,10 @@
+framework module PaperSwitch {
+  umbrella header "PaperSwitch.h"
+
+  export *
+  module * { export * }
+}
+
+module PaperSwitch.Swift {
+    header "PaperSwitch-Swift.h"
+}
