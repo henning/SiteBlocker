@@ -12,6 +12,7 @@ import UserNotifications
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import SCLAlertView
 
 
 
@@ -142,6 +143,27 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
     }
   
+    private func showPopUp(title:String, body:String){
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "AvenirNext-Regular", size: 20)!,
+            kTextFont: UIFont(name: "AvenirNext-Regular", size: 14)!,
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        let responder = alert.showSuccess(title, subTitle: body)
+        
+        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            responder.close()
+        }
+
+        
+        
+        
+        
+    }
+    
     
     
     
@@ -230,6 +252,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }.addDisposableTo(disposeBag)
         lockInButton.rx.tap.subscribe{ _ in
             self.lockInTextBox.resignFirstResponder()
+            self.showPopUp(title: "Lock In Mode Activated", body: "Only the specifed site can be loaded.")
             Domain.switchOnLockIn(site: self.lockInTextBox.text!)
         }.addDisposableTo(disposeBag)
     }
@@ -375,11 +398,14 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         let endTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponentsEnd, repeats: true)
         let endRequest = UNNotificationRequest(identifier: "scheduledEnd", content: endContent, trigger: endTrigger)
         center.add(endRequest)
+        showPopUp(title: "Schedule Set", body: "Sites will be blocked within the specified interval.")
 
     }
     
     private func triggerNotifications(seconds: Int){
+        
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
+            self.showPopUp(title: "Timer Set", body: "Sites will be blocked for the specified time period.")
             let center = UNUserNotificationCenter.current()
             let options: UNAuthorizationOptions = [.alert, .sound];
             
@@ -408,6 +434,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert]) { (granted, error) in
             if granted {
@@ -774,6 +802,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.centerX.equalTo(timerBox.snp.centerX)
             make.height.equalTo(43)
         }
+
+        timerStartButton.dropShadow()
         
         
         timerBox.addSubview(dayView)
@@ -1124,6 +1154,23 @@ extension LeftViewController: UNUserNotificationCenterDelegate {
         else {
             Domain.switchToOff()
         }
+    }
+    
+    
+}
+
+extension UIView {
+    
+    func dropShadow() {
+        
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOffset = CGSize(width: -1, height: 1)
+        self.layer.shadowRadius = 1
+        
+        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+//        self.layer.shouldRasterize = true
     }
 }
 

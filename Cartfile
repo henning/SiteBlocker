@@ -2,6 +2,5 @@ github "ReactiveX/RxSwift" ~> 3.0
 github "devxoul/RxKeyboard"
 github "SwiftyJSON/SwiftyJSON"
 github "SnapKit/SnapKit" ~> 3.0
-github "lkzhao/Hero"
 github "Ramotion/paper-switch"
-
+github "vikmeup/SCLAlertView-Swift" "master"
