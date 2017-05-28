@@ -13,6 +13,7 @@ import SwiftyJSON
 
 var domains: Variable<[Domain]> = Variable([])
 
+
 class Domain:NSObject,NSCoding {
     var contentBlockerAddress: String = ""
     var simpleAddress: String = ""

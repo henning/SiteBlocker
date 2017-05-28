@@ -24,6 +24,7 @@ class CenterViewController: UIViewController {
     var disposeBag = DisposeBag()
     var errorMessage = UILabel()
     let backgroundButton = UIButton()
+    var connectedIndicatorLabel = UILabel()
     
     
     
@@ -62,13 +63,32 @@ class CenterViewController: UIViewController {
         self.backgroundButton.rx.tap.subscribe{ _ in
         self.shrinkTextBox()
         }
-        
+    }
+    
+    private func bindIndicator() {
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadEmpty").subscribe{ bool in
+            self.reloadIndicator()
+        }.addDisposableTo(disposeBag)
+    }
+    
+    private func reloadIndicator() {
+        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+        let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
+        if loadEmpty! {
+            connectedIndicatorLabel.backgroundColor = UIColor.customOrange()
+            connectedIndicatorLabel.text = "Sites not blocked"
+        }
+        else {
+            connectedIndicatorLabel.backgroundColor = UIColor.customGreen()
+            connectedIndicatorLabel.text = "Sites currently blocked"
+        }
     }
     
 //MARK:- Beginning views
     override func viewDidLoad() {
         bindAddButtonTap()
         bindTableView()
+        bindIndicator()
         setupViews()
 
     }
@@ -193,7 +213,21 @@ class CenterViewController: UIViewController {
         view.bringSubview(toFront: backgroundButton)
         view.bringSubview(toFront: addNewView)
         
-
+        view.addSubview(connectedIndicatorLabel)
+        
+        connectedIndicatorLabel.text = "Blocker Connected"
+        connectedIndicatorLabel.textAlignment = .center
+        connectedIndicatorLabel.textColor = UIColor.customWhite()
+        connectedIndicatorLabel.backgroundColor = UIColor.customGreen()
+        connectedIndicatorLabel.font = UIFont(name: "AvenirNext-Regular", size: 14)
+        
+        connectedIndicatorLabel.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
     }
     
     

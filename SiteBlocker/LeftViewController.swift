@@ -75,7 +75,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     
     override func viewDidLoad() {
-        
+        timerSwitch = PaperSwitch(view: timerBox, color: UIColor.customGreen())
+        scheduleSwitch = PaperSwitch(view: scheduleBox, color: UIColor.customGreen())
+        lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.customGreen())
+
         
         
         let stopBlockingAction = UNNotificationAction(
@@ -98,10 +101,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             actions: [stopBlockingAction],
             intentIdentifiers: [],
             options: [])
-        
+
         UNUserNotificationCenter.current().setNotificationCategories([startBlockingCategory,endBlockingCategory])
-        
-        
         
         setupMainViews()
         setupTimerView()
@@ -155,15 +156,38 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             }.addDisposableTo(disposeBag)
         
         scheduleButton.rx.tap.subscribe { _ in
-            let end = Int(
+            let startPM = self.scheduleStartNumberLabel.text?.contains("P.M.")
+            let endPM = self.scheduleEndNumberLabel.text?.contains("P.M.")
+
+            var end = Int(
                 (self.scheduleEndNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
             )
-            let start = Int(
+            if endPM! {
+                if end != 12{
+                end! += 12
+                }
+            }
+            else {
+                if end == 12 {
+                    end = 0
+                }
+            }
+            var start = Int(
                 (self.scheduleStartNumberLabel.text?.replacingOccurrences(of: " A.M.", with: "").replacingOccurrences(of: " P.M.", with: ""))!
             )
+            if startPM! {
+                if start != 12{
+                    start! += 12
+                }
+            }
+            else {
+                if start == 12 {
+                    start = 0
+                }
+            }
             self.scheduleNotification(start: start!, end: end!)
         
-        }
+        }.addDisposableTo(disposeBag)
         RxKeyboard.instance.frame
             .drive(onNext: { frame in
                 self.view.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY-frame.height, width: self.view.frame.width, height: self.view.frame.height)
@@ -183,6 +207,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     private func scheduleNotification (start: Int, end: Int){
         Domain.switchToOff()
 
+        let date = Date()
+        let calendar = Calendar.current
+        
+        let hour = calendar.component(.hour, from: date)
+        if start <= hour && hour < end {
+            Domain.switchToOn()
+        }
         
         let center = UNUserNotificationCenter.current()
         
@@ -350,9 +381,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     private func setupLockInView() {
         lockInBox.addSubview(lockInButton)
         lockInButton.layer.cornerRadius = 12
-        lockInButton.backgroundColor = UIColor.customPurple()
+        lockInButton.backgroundColor = UIColor.customLightBlue()
         lockInButton.setTitle("Start", for: .normal)
-        lockInButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        lockInButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 22)
         lockInButton.setTitleColor(UIColor.customWhite(), for: .normal)
         lockInButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(-10)
@@ -427,10 +458,11 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     private func setupScheduleView() {
         scheduleBox.addSubview(scheduleButton)
         scheduleButton.layer.cornerRadius = 12
-        scheduleButton.backgroundColor = UIColor.customPurple()
+        scheduleButton.backgroundColor = UIColor.customLightBlue()
         scheduleButton.setTitle("Start", for: .normal)
-        scheduleButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        scheduleButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 22)
         scheduleButton.setTitleColor(UIColor.customWhite(), for: .normal)
+        scheduleButton.setTitleColor(UIColor.customLightBlue(), for: .selected)
         scheduleButton.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview().offset(-10)
             make.width.equalTo(144)
@@ -485,9 +517,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         scheduleEndNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 38)
         scheduleEndIDLabel.font = UIFont(name: "AvenirNext-Regular", size: 18)
         scheduleStartIDLabel.text = "Start"
-        scheduleStartNumberLabel.text = "8 A.M."
-        scheduleEndNumberLabel.text = "9 P.M."
+        scheduleStartNumberLabel.text = "12 A.M."
+        scheduleEndNumberLabel.text = "12 A.M."
         scheduleEndIDLabel.text = "End"
+        scheduleStartIDLabel.textColor = UIColor.customBlack()
+        scheduleStartNumberLabel.textColor = UIColor.customBlack()
+        scheduleEndNumberLabel.textColor = UIColor.customBlack()
+        scheduleEndIDLabel.textColor = UIColor.customBlack()
         
         
         scheduleStartNumberLabel.snp.makeConstraints { (make) in
@@ -513,7 +549,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.left.equalToSuperview()
             make.right.equalToSuperview()
         }
-        //MARK:- Better here
         scheduleStartView.addSubview(scheduleStartTimeButton)
         scheduleStartTimeButton.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -552,6 +587,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         scheduleStartTimePickerLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14)
         scheduleEndTimePickerLabel.textAlignment = .center
         scheduleStartTimePickerLabel.textAlignment = .center
+        scheduleEndTimePickerLabel.textColor = UIColor.customBlack()
+        scheduleStartTimePickerLabel.textColor = UIColor.customBlack()
         
         pickerViewsToHide.append(scheduleEndTimePickerLabel)
         pickerViewsToHide.append(scheduleStartTimePickerLabel)
@@ -582,8 +619,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     private func setupTimerView() {
         timerBox.addSubview(timerLabel)
         timerLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
-        //        timerLabel.text = "Timer"
-        timerLabel.text = "\(UserDefaults.standard.bool(forKey: "test"))"
+                timerLabel.text = "Timer"
         timerLabel.textAlignment = .center
         timerLabel.textColor = UIColor.customBlack()
         timerLabel.snp.makeConstraints { (make) in
@@ -602,9 +638,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         timerBox.addSubview(timerStartButton)
         timerStartButton.layer.cornerRadius = 12
-        timerStartButton.backgroundColor = UIColor.customPurple()
+        timerStartButton.backgroundColor = UIColor.customLightBlue()
         timerStartButton.setTitle("Start", for: .normal)
-        timerStartButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 24)
+        timerStartButton.titleLabel?.font = UIFont(name: "AvenirNext-Regular", size: 22)
         timerStartButton.setTitleColor(UIColor.customWhite(), for: .normal)
         timerStartButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(timerBox.snp.bottom).offset(-10)
@@ -741,7 +777,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         //MARK: - HERE!!!!
         timerBox.addSubview(timerButton)
-        timerButton.backgroundColor = UIColor.clear
         timerButton.snp.makeConstraints { (make) in
             make.top.equalTo(hoursView.snp.top)
             make.bottom.equalTo(hoursView.snp.bottom)
@@ -780,6 +815,12 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         pickerHoursLabel.textAlignment = .center
         pickerMinutesLabel.textAlignment = .center
         pickerSecondsLabel.textAlignment = .center
+        
+        pickerDayLabel.textColor = UIColor.customBlack()
+        pickerHoursLabel.textColor = UIColor.customBlack()
+        pickerMinutesLabel.textColor = UIColor.customBlack()
+        pickerSecondsLabel.textColor = UIColor.customBlack()
+        
         pickerDayLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(2)
             make.left.equalToSuperview()
@@ -862,9 +903,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         view.addSubview(timerBox)
         view.addSubview(scheduleBox)
         view.addSubview(lockInBox)
+        
         timerBox.layer.borderColor = UIColor.customBlack().cgColor
-        timerBox.layer.borderWidth = 4
-        timerBox.backgroundColor = UIColor.customWhite()
+        timerBox.layer.borderWidth = 1
+//        timerBox.backgroundColor = UIColor.customWhite()
         timerBox.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
             make.left.equalToSuperview()
@@ -873,8 +915,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         
         scheduleBox.layer.borderColor = UIColor.customBlack().cgColor
-        scheduleBox.backgroundColor = UIColor.customWhite()
-        scheduleBox.layer.borderWidth = 4
+//        scheduleBox.backgroundColor = UIColor.customWhite()
+        scheduleBox.layer.borderWidth = 1
         scheduleBox.snp.makeConstraints { (make) in
             make.top.equalTo(timerBox.snp.bottom)
             make.left.equalToSuperview()
@@ -883,8 +925,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         
         lockInBox.layer.borderColor = UIColor.customBlack().cgColor
-        lockInBox.backgroundColor = UIColor.customWhite()
-        lockInBox.layer.borderWidth = 4
+//        lockInBox.backgroundColor = UIColor.customWhite()
+        lockInBox.layer.borderWidth = 1
         lockInBox.snp.makeConstraints { (make) in
             make.top.equalTo(scheduleBox.snp.bottom)
             make.left.equalToSuperview()
@@ -893,6 +935,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         
     }
+    
     
 }
 

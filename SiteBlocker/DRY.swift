@@ -132,4 +132,19 @@ extension UIColor {
     static func customPurple() -> UIColor {
         return UIColor(red: 94/255, green: 53/255, blue: 93/255, alpha: 1)
     }
+    static func customBlue() -> UIColor {
+        return UIColor(red: 82/255, green: 150/255, blue: 213/255, alpha: 1)
+    }
+    static func customGreen() ->UIColor {
+        return UIColor(red: 101/255, green: 201/255, blue: 122/255, alpha: 1)
+    }
+    static func customLightPurple() -> UIColor {
+        return UIColor(red: 88/255, green: 54/255, blue: 92/255, alpha: 1)
+    }
+    static func customLightBlue() -> UIColor {
+        return UIColor(red: 67/255, green: 126/255, blue: 180/255, alpha: 1)
+    }
+    static func customOrange() -> UIColor {
+        return UIColor(red: 216/255, green: 132/255, blue: 58/255, alpha: 1)
+    }
 }
