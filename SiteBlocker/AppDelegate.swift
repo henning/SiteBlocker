@@ -20,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print(UserDefaults(suiteName: "group.com.lukejmann.foo")?.url(forKey: "empty")!.absoluteString)
         
         if UserDefaults.standard.bool(forKey: "hasLoaded"){
-//            Domain.reloadDomains()
+            Domain.reloadDomains()
+        }
+        else {
+            UserDefaults.standard.set(true, forKey: "constantSwitch")
         }
         Suggestion.loadInitialSuggestions()
 
@@ -29,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let snapVC = SwipeNavigationController(centerViewController: RightViewController())
-//        snapVC.leftViewController = LeftViewController()
-//        snapVC.rightViewController = RightViewController()
+        let snapVC = SwipeNavigationController(centerViewController: CenterViewController())
+        snapVC.leftViewController = LeftViewController()
+        snapVC.rightViewController = RightViewController()
         self.window?.rootViewController = snapVC
         self.window?.backgroundColor = UIColor.white
         self.window?.makeKeyAndVisible()

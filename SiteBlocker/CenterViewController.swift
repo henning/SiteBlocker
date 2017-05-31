@@ -89,9 +89,16 @@ class CenterViewController: UIViewController {
         bindTableView()
         bindIndicator()
         setupViews()
+        
+//        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+//        }
+
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        present(OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil), animated: true, completion: nil)
+    }
     
     func setupViews(){
         

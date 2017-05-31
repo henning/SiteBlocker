@@ -87,6 +87,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     
     override func viewDidLoad() {
+
         timerSwitch = PaperSwitch(view: timerBox, color: UIColor.customGreen())
         scheduleSwitch = PaperSwitch(view: scheduleBox, color: UIColor.customGreen())
         lockInSwitch = PaperSwitch(view: lockInBox, color: UIColor.customGreen())
