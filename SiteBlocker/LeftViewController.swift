@@ -13,7 +13,6 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 import SCLAlertView
-import Device
 
 
 

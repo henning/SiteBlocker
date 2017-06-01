@@ -164,7 +164,7 @@ class PageTwo:OBPageViewController {
         notificationsButton.snp.makeConstraints { (make) in
             make.top.equalTo(view.frame.height * (3/4))
             make.centerX.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(40)
             make.width.equalTo(500)
         }
         contentBlockingButton.snp.makeConstraints { (make) in

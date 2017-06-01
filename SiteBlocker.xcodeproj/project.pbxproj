@@ -36,7 +36,6 @@
 		4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9D1ECD0A9500A0E13A /* SwiftyJSON.framework */; };
 		489B9F471EDB3392009CA587 /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B9F461EDB3392009CA587 /* SCLAlertView.framework */; };
 		48C5B7F21EDE1E6F00FCC3DE /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C5B7F11EDE1E6F00FCC3DE /* OnboardingViewController.swift */; };
-		48DA76EC1EE0A26F00836534 /* Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DA76EB1EE0A26F00836534 /* Device.framework */; };
 		48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -120,7 +119,6 @@
 				4820E52D1ED9D66A004DD271 /* RxKeyboard.framework in Frameworks */,
 				4820E52F1ED9D66F004DD271 /* PaperSwitch.framework in Frameworks */,
 				4897CDA11ECD0A9A00A0E13A /* SnapKit.framework in Frameworks */,
-				48DA76EC1EE0A26F00836534 /* Device.framework in Frameworks */,
 				4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,7 +338,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/PaperSwitch.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxKeyboard.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SCLAlertView.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Device.framework",
 			);
 			name = Cart;
 			outputPaths = (
