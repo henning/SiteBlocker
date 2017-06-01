@@ -9,6 +9,9 @@
 import UIKit
 
 class OnboardingViewController: UIPageViewController,UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    let pageOne = PageOne()
+    let pageTwo = PageTwo()
+    let pageThree = PageThree()
     var index = 0
     @available(iOS 5.0, *)
     public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?{
@@ -56,6 +59,10 @@ class OnboardingViewController: UIPageViewController,UIPageViewControllerDataSou
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        pages = [pageOne,pageTwo,pageThree]
+        for page in pages {
+            page.pageVC = self
+        }
         dataSource = self
         delegate = self
         reloadInputViews()
@@ -66,7 +73,7 @@ class OnboardingViewController: UIPageViewController,UIPageViewControllerDataSou
         return true
     }
     
-    let pages = [PageOne(),PageTwo(),PageThree()]
+    var pages:[OBPageViewController] = []
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         
@@ -81,6 +88,7 @@ class OBPageViewController: UIViewController {
     let mainTextLabel = UILabel()
    var nextButton = UIButton()
     let imageView = UIImageView()
+    var pageVC:OnboardingViewController? = nil
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.customBlack()
@@ -119,6 +127,7 @@ class OBPageViewController: UIViewController {
             make.top.equalToSuperview().offset(50)
         }
         
+        
     }
 }
 
@@ -130,6 +139,9 @@ class PageOne: OBPageViewController{
         nextButton.setTitle("Next", for: .normal)
         mainTextLabel.text = "Welcome to Site Blocker! This is an app desinged for blocking Safari websites."
         imageView.image = #imageLiteral(resourceName: "tempiPhone")
+        super.nextButton.rx.tap.subscribe { _ in
+            self.pageVC?.setViewControllers([(self.pageVC?.pageTwo)!], direction: .forward, animated: true, completion: nil)
+        }
     }
 }
 
@@ -169,8 +181,9 @@ class PageTwo:OBPageViewController {
         notificationsButton.setTitleColor(UIColor.customGrey(), for: .normal)
         contentBlockingButton.setTitleColor(UIColor.customGrey(), for: .normal)
         actualNextButton.setTitleColor(UIColor.customGrey(), for: .normal)
-
-
+        actualNextButton.rx.tap.subscribe { _ in
+            self.pageVC?.setViewControllers([(self.pageVC?.pageThree)!], direction: .forward, animated: true, completion: nil)
+        }
 
     }
 }
@@ -181,5 +194,8 @@ class PageThree:OBPageViewController {
         nextButton.setTitle("Lets Go!", for: .normal)
         mainTextLabel.text = "Help! I can't block apps!                                                                         Unfortunately, due to Apple restrictions this is impossible. If you really want to prevent usage of these sites, try using the web version. Not only can you control your usage, but you also get an environment with less distractions."
         imageView.image = #imageLiteral(resourceName: "tempiPhone")
+        nextButton.rx.tap.subscribe { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
