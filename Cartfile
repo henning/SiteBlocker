@@ -4,3 +4,5 @@ github "SwiftyJSON/SwiftyJSON"
 github "SnapKit/SnapKit" ~> 3.0
 github "Ramotion/paper-switch"
 github "vikmeup/SCLAlertView-Swift" "master"
+github "Ekhoo/Device" ~> 3.0.1
+

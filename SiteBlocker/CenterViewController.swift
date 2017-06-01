@@ -24,6 +24,8 @@ class CenterViewController: UIViewController {
     var errorMessage = UILabel()
     let backgroundButton = UIButton()
     var connectedIndicatorLabel = UILabel()
+    var expanded = false
+    var contracted = true
     
     
     
@@ -117,6 +119,8 @@ class CenterViewController: UIViewController {
         //MARK: - Add New View
         addNewView.autoresizesSubviews = false
         addNewView.translatesAutoresizingMaskIntoConstraints = false
+                        self.addNewView.layer.cornerRadius = 12
+
         addNewView.snp.makeConstraints { (make) -> Void in
             make.left.equalTo(view.snp.left).offset(16)
             make.right.equalTo(view.snp.right).offset(-16)
@@ -186,7 +190,7 @@ class CenterViewController: UIViewController {
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(addNewView.snp.top).offset(60 + 10)
-            make.height.equalTo(1950 * 0.15)
+            make.height.equalTo(350)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
@@ -240,51 +244,44 @@ class CenterViewController: UIViewController {
     
     //MARK:- Show/hide animations
     private func expandTextBox() {
+
         backgroundButton.isEnabled = true
-        view.bringSubview(toFront: backgroundButton)
-        view.bringSubview(toFront: addNewView)
-        var count = 0
-        for i in 0..<2000{
-            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                let origFrame = self.addNewView.frame
-                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height + 0.15)
-                self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(count)/2000)
-                self.addNewLabel.alpha = CGFloat(2000-count)/2000
-                self.addNewView.frame = newFrame
-                self.addNewView.layer.cornerRadius = 12
-                self.addNewTableView.separatorColor = self.addNewView.backgroundColor
-                count += 1
+        UIView.animate(withDuration: 0.5, animations: {
+            self.addNewView.frame = CGRect(x: self.addNewView.frame.minX,
+                                           y: self.addNewView.frame.minY,
+                                           width: self.addNewView.frame.width,
+                                           height: 350)
+                            self.addNewView.backgroundColor = UIColor.customWhite(alpha: 1.0)
+                            self.addNewLabel.alpha = 0
+
+        }) { (done) in
+            if done {
+                self.expanded = true
             }
         }
-        
         
     }
     
     func shrinkTextBox() {
-        if addNewView.frame.height > 200 {
             backgroundButton.isEnabled = false
             hideErrorMessage()
-            var count = 0
-            for i in 0..<2000{
-                let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    let origFrame = self.addNewView.frame
-                    let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-                    self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(2000-count)/2000)
-                    self.addNewLabel.alpha = CGFloat(count)/2000
-                    self.addNewView.frame = newFrame
-                    self.addNewView.layer.cornerRadius = 12
-                    self.addNewTableView.separatorColor = self.addNewView.backgroundColor
-                    count += 1
-                    if count == 2000 {
-                        self.addNewTextBox.resignFirstResponder()
-                        self.addNewTextBox.text = nil
-                    }
-                }
+
+        UIView.animate(withDuration: 0.3, animations: {
+            self.addNewView.frame = CGRect(x: self.addNewView.frame.minX,
+                                           y: self.addNewView.frame.minY,
+                                           width: self.addNewView.frame.width,
+                                           height: 60)
+            self.addNewView.backgroundColor = UIColor.customWhite(alpha: 0)
+            self.addNewLabel.alpha = 1.0
+            self.addNewTextBox.resignFirstResponder()
+            self.addNewTextBox.text = nil
+            
+        }) { (done) in
+            if done {
+
+                                        self.contracted = true
             }
         }
-        
     }
     
     
@@ -324,6 +321,15 @@ class CenterViewController: UIViewController {
         }
     }
     
+    private func checkStatus() {
+        print("Expanded: \(expanded)")
+        print("Contracted: \(contracted)")
+        print("")
+        print("")
+        print("")
+        print("")
+
+    }
     
     
     

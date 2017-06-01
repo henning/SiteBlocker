@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import RxKeyboard
 import SCLAlertView
+import Device
 
 
 
@@ -614,28 +615,24 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         lockInBox.addSubview(lockInDescription)
         lockInDescription.font = UIFont(name: "AvenirNext-Regular", size: 12)
-        lockInDescription.minimumScaleFactor = 0.4
-        lockInDescription.text = "Enable this mode in order to only permit usage of the specified page"
-        lockInDescription.textColor = UIColor.customBlack()
+        lockInDescription.adjustsFontSizeToFitWidth = true
         lockInDescription.textAlignment = .center
+        lockInDescription.numberOfLines = 2
+        lockInDescription.lineBreakMode = .byWordWrapping
+        lockInDescription.text = "Enable this mode in order to only permit usage of the specified page."
+        lockInDescription.textColor = UIColor.customBlack()
+
         lockInDescription.snp.makeConstraints { (make) in
             make.top.equalTo(lockInSwitch.snp.bottom).offset(2)
-            make.height.equalTo(20)
+            make.height.equalTo(40)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().offset(40)
+            make.width.equalToSuperview().multipliedBy(0.9)
+            
         }
-        
+        lockInDescription.numberOfLines = 2
+
         lockInBox.addSubview(lockInSecondLabel)
-        lockInSecondLabel.font = UIFont(name: "AvenirNext-Regular", size: 26)
-        lockInSecondLabel.text = "Site to Lock Into:"
-        lockInSecondLabel.textColor = UIColor.customBlack()
-        lockInSecondLabel.textAlignment = .center
-        lockInSecondLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(lockInDescription.snp.bottom).offset(2)
-            make.height.equalTo(30)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(240)
-        }
+
         
         lockInBox.addSubview(lockInTextBox)
         lockInTextBox.autocapitalizationType = .none
@@ -652,6 +649,18 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(34)
         }
+        lockInSecondLabel.font = UIFont(name: "AvenirNext-Regular", size: 26)
+        lockInSecondLabel.text = "Site to Lock Into:"
+        lockInSecondLabel.textColor = UIColor.customBlack()
+        lockInSecondLabel.textAlignment = .center
+        lockInSecondLabel.numberOfLines = 2
+        lockInSecondLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(lockInTextBox.snp.top).offset(-10)
+            make.height.equalTo(30)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.7)
+            
+        }
         
         lockInBox.addSubview(lockInWarningLabel)
         lockInWarningLabel.textColor = UIColor.customWhite()
@@ -665,7 +674,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalToSuperview().offset(-12)
         }
         
-        lockInSwitch.rx.isOn.subscribe { isOn in
+        lockInBoxBind.asObservable().subscribe { isOn in
             if !isOn.element! {
                 self.lockInLabel.textColor = UIColor.customDarkGrey()
                 self.lockInSecondLabel.textColor = UIColor.customDarkGrey()
@@ -863,9 +872,24 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }
         
         
-        scheduleSwitch.rx.isOn.subscribe { isOn in
-            
-        }
+        scheduleSwitchBind.asObservable().subscribe { isOn in
+            if !isOn.element!{
+                self.scheduleStartNumberLabel.textColor = UIColor.customGrey()
+                self.scheduleEndNumberLabel.textColor = UIColor.customGrey()
+                self.scheduleEndIDLabel.textColor = UIColor.customGrey()
+                self.scheduleStartIDLabel.textColor = UIColor.customDarkGrey()
+                self.scheduleLabel.textColor = UIColor.customDarkGrey()
+                self.scheduleButton.alpha = 0.7
+            }
+            else {
+                self.scheduleStartNumberLabel.textColor = UIColor.customBlack()
+                self.scheduleEndNumberLabel.textColor = UIColor.customBlack()
+                self.scheduleEndIDLabel.textColor = UIColor.customBlack()
+                self.scheduleStartIDLabel.textColor = UIColor.customBlack()
+                self.scheduleLabel.textColor = UIColor.customBlack()
+                self.scheduleButton.alpha = 1.0
+            }
+        }.addDisposableTo(disposeBag)
         
         
         
@@ -1154,6 +1178,34 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalTo(timerBox.snp.right).offset(-12)
         }
         
+        timerSwitchBind.asObservable().subscribe { isOn in
+            if !isOn.element! {
+                self.timerLabel.textColor = UIColor.customDarkGrey()
+                self.dayNumberLabel.textColor = UIColor.customDarkGrey()
+                self.dayIDLabel.textColor = UIColor.customDarkGrey()
+                self.hoursNumberLabel.textColor = UIColor.customDarkGrey()
+                self.hoursIDLabel.textColor = UIColor.customDarkGrey()
+                self.minutesNumberLabel.textColor = UIColor.customDarkGrey()
+                self.minutesIDLabel.textColor = UIColor.customDarkGrey()
+                self.secondsIDLabel.textColor = UIColor.customDarkGrey()
+                self.secondsNumberLabel.textColor = UIColor.customDarkGrey()
+                self.timerStartButton.alpha = 0.7
+
+            }
+            else {
+                self.timerLabel.textColor = UIColor.customBlack()
+                self.dayNumberLabel.textColor = UIColor.customBlack()
+                self.dayIDLabel.textColor = UIColor.customBlack()
+                self.hoursNumberLabel.textColor = UIColor.customBlack()
+                self.hoursIDLabel.textColor = UIColor.customBlack()
+                self.minutesNumberLabel.textColor = UIColor.customBlack()
+                self.minutesIDLabel.textColor = UIColor.customBlack()
+                self.secondsNumberLabel.textColor = UIColor.customBlack()
+                self.secondsIDLabel.textColor = UIColor.customBlack()
+                self.timerStartButton.alpha = 1.0
+            }
+        }
+        
         
     }
     
@@ -1194,6 +1246,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     
     
     private func setupMainViews(){
+        
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -1235,6 +1288,15 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.centerX.equalToSuperview()
         }
         
+        constantSwitchBind.asObservable().subscribe { isOn in
+            if !isOn.element! {
+                self.constantLabel.textColor = UIColor.customDarkGrey()
+            }
+            else {
+                self.constantLabel.textColor = UIColor.customBlack()
+            }
+        }
+        
         timerBox.layer.borderColor = UIColor.customBlack().cgColor
         timerBox.layer.borderWidth = 1
 //        timerBox.backgroundColor = UIColor.customWhite()
@@ -1242,9 +1304,10 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.top.equalTo(self.constantBox.snp.bottom).offset(-1)
             make.left.equalToSuperview().offset(-1)
             make.width.equalToSuperview().offset(2)
-            make.height.equalTo(view.snp.height).dividedBy(3)
+            make.height.equalTo(240)
         }
-        
+    
+    
         scheduleBox.layer.borderColor = UIColor.customBlack().cgColor
 //        scheduleBox.backgroundColor = UIColor.customWhite()
         scheduleBox.layer.borderWidth = 1
@@ -1252,8 +1315,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.top.equalTo(timerBox.snp.bottom).offset(-1)
             make.left.equalToSuperview().offset(-1)
             make.width.equalToSuperview().offset(2)
-            make.height.equalTo(view.snp.height).dividedBy(3)
-        }
+            make.height.equalTo(240)}
         
         lockInBox.layer.borderColor = UIColor.customBlack().cgColor
 //        lockInBox.backgroundColor = UIColor.customWhite()
@@ -1262,8 +1324,8 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.top.equalTo(scheduleBox.snp.bottom).offset(-1)
             make.left.equalToSuperview().offset(-1)
             make.width.equalToSuperview().offset(2)
-            make.height.equalTo(view.snp.height).dividedBy(3)
-        }
+            make.height.equalTo(260)
+                   }
     }
 }
 

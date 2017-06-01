@@ -33,6 +33,7 @@ class CustomTableCell: UITableViewCell{
         containerView.addSubview(simpleLabel)
         simpleLabel.font = UIFont(name: "AvenirNext-Regular", size: 24)
         simpleLabel.textColor = UIColor.customBlack()
+        simpleLabel.adjustsFontSizeToFitWidth = true
         self.simpleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(containerView.snp.left).offset(10)
             make.right.equalTo(containerView.snp.right).offset(-10)
