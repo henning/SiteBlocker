@@ -144,13 +144,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
         
-        UserDefaults.standard.set(true, forKey: "hasLoaded")
 
     }
     override func viewWillAppear(_ animated: Bool) {
         let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
     }
+
   
     private func showPopUp(title:String, body:String){
         
@@ -490,6 +490,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 UserDefaults.standard.set(false, forKey: "grantedPNP")
             }
         }
+        UserDefaults.standard.set(true, forKey: "hasLoaded")
     }
     
     

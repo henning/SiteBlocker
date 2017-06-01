@@ -104,9 +104,9 @@ class OBPageViewController: UIViewController {
         view.addSubview(mainTextLabel)
         mainTextLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(nextButton.snp.top).offset(-10)
-            make.width.equalToSuperview().multipliedBy(0.7)
-            make.height.equalToSuperview().multipliedBy(0.4)
+            make.top.equalTo(view.snp.centerY)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.bottom.equalTo(nextButton.snp.top).offset(-20)
         }
         mainTextLabel.font = UIFont(name: "AvenirNext-Regular", size: 20)
         mainTextLabel.adjustsFontSizeToFitWidth = true
@@ -121,11 +121,13 @@ class OBPageViewController: UIViewController {
         view.addSubview(imageView)
         imageView.contentMode = .scaleAspectFit
         imageView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(mainTextLabel.snp.top)
+            make.bottom.equalTo(mainTextLabel.snp.top).offset(-20)
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.7)
-            make.top.equalToSuperview().offset(50)
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.top.equalToSuperview().offset(20)
         }
+        mainTextLabel.sizeToFit()
+        mainTextLabel.adjustsFontSizeToFitWidth = true
         
         
     }
@@ -138,7 +140,7 @@ class PageOne: OBPageViewController{
         super.viewDidLoad()
         nextButton.setTitle("Next", for: .normal)
         mainTextLabel.text = "Welcome to Site Blocker! This is an app desinged for blocking Safari websites."
-        imageView.image = #imageLiteral(resourceName: "tempiPhone")
+        imageView.image = #imageLiteral(resourceName: "Page1")
         super.nextButton.rx.tap.subscribe { _ in
             self.pageVC?.setViewControllers([(self.pageVC?.pageTwo)!], direction: .forward, animated: true, completion: nil)
         }
@@ -155,7 +157,7 @@ class PageTwo:OBPageViewController {
         mainTextLabel.text = "To get started, we'll need two things. First, notifactions to alert you when a sessions is done (you need to interact with the notificatin for the session to end). Second, you need to enable this app as a content blocker in Safari."
         contentBlockingButton.setTitle("Content Blocker Settings", for: .normal)
         actualNextButton.setTitle("Next", for: .normal)
-        imageView.image = #imageLiteral(resourceName: "tempiPhone")
+        imageView.image = #imageLiteral(resourceName: "Page2")
         view.addSubview(notificationsButton)
         view.addSubview(contentBlockingButton)
         view.addSubview(actualNextButton)
@@ -181,6 +183,9 @@ class PageTwo:OBPageViewController {
         notificationsButton.setTitleColor(UIColor.customGrey(), for: .normal)
         contentBlockingButton.setTitleColor(UIColor.customGrey(), for: .normal)
         actualNextButton.setTitleColor(UIColor.customGrey(), for: .normal)
+        
+
+        
         actualNextButton.rx.tap.subscribe { _ in
             self.pageVC?.setViewControllers([(self.pageVC?.pageThree)!], direction: .forward, animated: true, completion: nil)
         }
@@ -193,7 +198,7 @@ class PageThree:OBPageViewController {
         super.viewDidLoad()
         nextButton.setTitle("Lets Go!", for: .normal)
         mainTextLabel.text = "Help! I can't block apps!                                                                         Unfortunately, due to Apple restrictions this is impossible. If you really want to prevent usage of these sites, try using the web version. Not only can you control your usage, but you also get an environment with less distractions."
-        imageView.image = #imageLiteral(resourceName: "tempiPhone")
+        imageView.image = #imageLiteral(resourceName: "Page3")
         nextButton.rx.tap.subscribe { _ in
             self.dismiss(animated: true, completion: nil)
         }
