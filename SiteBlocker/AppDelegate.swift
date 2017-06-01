@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(true, forKey: "constantSwitch")
         }
         Suggestion.loadInitialSuggestions()
+        Suggestion.bindSuggestionsToDomains()
 
         ExtensionManager.setupJSON()
         ExtensionManager.reload()

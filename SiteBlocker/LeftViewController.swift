@@ -206,6 +206,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         
         timerStartButton.rx.tap.subscribe { _ in
+            Domain.switchOffLockIn()
             let seconds = Int(self.dayNumberLabel.text!)! * 86400 +
                 Int(self.hoursNumberLabel.text!)! * 3600 +
                 Int(self.minutesNumberLabel.text!)! * 60 +
@@ -220,6 +221,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             }.addDisposableTo(disposeBag)
         
         scheduleButton.rx.tap.subscribe { _ in
+            Domain.switchOffLockIn()
             let startPM = self.scheduleStartNumberLabel.text?.contains("P.M.")
             let endPM = self.scheduleEndNumberLabel.text?.contains("P.M.")
 
@@ -305,6 +307,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         timerSwitchBind.asObservable().subscribe { isOn in
             if isOn.element! {
+                
                 UserDefaults.standard.set(true, forKey: "timerSwitch")
                 Domain.switchToOff()
                 self.timerStartButton.isEnabled = true
@@ -367,6 +370,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         constantSwitchBind.asObservable().subscribe { isOn in
             Domain.switchToOff()
             if isOn.element! {
+                Domain.switchOffLockIn()
                 UserDefaults.standard.set(true, forKey: "constantSwitch")
                 self.scheduleSwitchBind.value = false
                 self.timerSwitchBind.value = false
@@ -450,7 +454,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             content.title = "Timer Done"
             content.body = "To unblock sites, either tap the notification or the notification button"
             content.sound = UNNotificationSound.default()
-            content.categoryIdentifier = "stopBlocking"
+            content.categoryIdentifier = "endBlockingCategory"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
                                                             repeats: false)
             let identifier = "TimerLocalNotification"

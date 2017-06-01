@@ -114,7 +114,6 @@ class Domain:NSObject,NSCoding {
     
     static func switchOnLockIn(site: String) {
         let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "lockIn")
-
         UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadLockIn")
         var string = "*"
         string.append(site)

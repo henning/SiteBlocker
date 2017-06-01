@@ -18,7 +18,7 @@ class Suggestion: Equatable {
     var title: String
     var shouldShow:Bool {
         didSet{
-            Suggestion.bindSuggestionsToLoad()
+            Suggestion.sortSuggestions()
         }
     }
     
@@ -75,11 +75,11 @@ class Suggestion: Equatable {
             }
         }
         
-        Suggestion.bindSuggestionsToLoad()
+        Suggestion.sortSuggestions()
         
     }
     
-     static func bindSuggestionsToLoad() {
+     static func sortSuggestions() {
             for suggestion in suggestions.value {
                 if !suggestion.shouldShow{
                     for sug in suggestionsToLoad.value {
@@ -90,6 +90,26 @@ class Suggestion: Equatable {
                 }
         }
         
+    }
+    
+    static func bindSuggestionsToDomains() {
+//        domains.asObservable().subscribe { _ in
+//            for suggestion in suggestions.value {
+//                var shouldAdd = false
+//                for domain in domains.value {
+//                    if domain.simpleAddress == suggestion.title {
+//                        break
+//                    }
+//                    else {
+//                        shouldAdd = true
+//                    }
+//                }
+//                if shouldAdd {
+//                    suggestion.shouldShow = true
+//                }
+//            }
+//            Suggestion.sortSuggestions()
+//        }.addDisposableTo(DisposeBag())
     }
 }
 

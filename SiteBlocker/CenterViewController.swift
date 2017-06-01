@@ -89,9 +89,6 @@ class CenterViewController: UIViewController {
         bindTableView()
         bindIndicator()
         setupViews()
-
-
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -187,7 +184,7 @@ class CenterViewController: UIViewController {
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(addNewView.snp.top).offset(60 + 10)
-            make.bottom.equalTo(addNewView.snp.bottom).offset(2000 * 0.15)
+            make.height.equalTo(1950 * 0.15)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
@@ -263,6 +260,7 @@ class CenterViewController: UIViewController {
     }
     
     func shrinkTextBox() {
+        if addNewView.frame.height > 200 {
         backgroundButton.isEnabled = false
         hideErrorMessage()
         var count = 0
@@ -283,7 +281,7 @@ class CenterViewController: UIViewController {
                 }
             }
         }
-        
+        }
         
     }
     
