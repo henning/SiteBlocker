@@ -88,10 +88,11 @@ class Domain:NSObject,NSCoding {
     
     static func reloadDomains() {
         let userDefaults = UserDefaults.standard
-        let decoded  = userDefaults.object(forKey: "domains") as! Data
+        if let decoded  = userDefaults.object(forKey: "domains") as? Data{
         let decodedTeams = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! [Domain]
         domains = Variable(decodedTeams)
         Suggestion.loadInitialSuggestions()
+        }
     }
     
     static func setDomains() {

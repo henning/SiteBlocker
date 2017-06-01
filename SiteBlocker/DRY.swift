@@ -147,4 +147,8 @@ extension UIColor {
     static func customOrange() -> UIColor {
         return UIColor(red: 216/255, green: 132/255, blue: 58/255, alpha: 1)
     }
+    
+    static func customGrey() -> UIColor {
+        return UIColor(red: 190/255, green: 195/255, blue: 199/255, alpha: 1)
+    }
 }
