@@ -60,14 +60,14 @@ class CenterViewController: UIViewController {
             }.addDisposableTo(disposeBag)
         
         self.backgroundButton.rx.tap.subscribe{ _ in
-        self.shrinkTextBox()
+            self.shrinkTextBox()
         }
     }
     
     private func bindIndicator() {
         UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadEmpty").subscribe{ bool in
             self.reloadIndicator()
-        }.addDisposableTo(disposeBag)
+            }.addDisposableTo(disposeBag)
     }
     
     private func reloadIndicator() {
@@ -83,7 +83,7 @@ class CenterViewController: UIViewController {
         }
     }
     
-//MARK:- Beginning views
+    //MARK:- Beginning views
     override func viewDidLoad() {
         bindAddButtonTap()
         bindTableView()
@@ -93,10 +93,12 @@ class CenterViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
-                if !UserDefaults.standard.bool(forKey: "hasLoaded"){
-        present(OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil), animated: true, completion: nil)
-
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            present(OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil), animated: true, completion: nil)
+            
         }
+
+        
     }
     
     func setupViews(){
@@ -146,7 +148,7 @@ class CenterViewController: UIViewController {
             make.size.equalTo(addNewTextBox.snp.size)
             make.left.equalTo(addNewTextBox.snp.left)
             make.top.equalTo(addNewTextBox.snp.top)
-
+            
         }
         
         
@@ -212,7 +214,7 @@ class CenterViewController: UIViewController {
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
             make.bottom.equalTo(view.snp.bottom)
-
+            
         }
         
         view.bringSubview(toFront: backgroundButton)
@@ -255,32 +257,32 @@ class CenterViewController: UIViewController {
                 count += 1
             }
         }
-
+        
         
     }
     
     func shrinkTextBox() {
         if addNewView.frame.height > 200 {
-        backgroundButton.isEnabled = false
-        hideErrorMessage()
-        var count = 0
-        for i in 0..<2000{
-            let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
-            DispatchQueue.main.asyncAfter(deadline: when) {
-                let origFrame = self.addNewView.frame
-                let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
-                self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(2000-count)/2000)
-                self.addNewLabel.alpha = CGFloat(count)/2000
-                self.addNewView.frame = newFrame
-                self.addNewView.layer.cornerRadius = 12
-                self.addNewTableView.separatorColor = self.addNewView.backgroundColor
-                count += 1
-                if count == 2000 {
-                    self.addNewTextBox.resignFirstResponder()
-                    self.addNewTextBox.text = nil
+            backgroundButton.isEnabled = false
+            hideErrorMessage()
+            var count = 0
+            for i in 0..<2000{
+                let when = DispatchTime.now() + .milliseconds(Int(Double(i)*0.125))
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    let origFrame = self.addNewView.frame
+                    let newFrame = CGRect(x: origFrame.minX, y: origFrame.minY, width: origFrame.width, height: origFrame.height - 0.15)
+                    self.addNewView.backgroundColor = UIColor.customWhite(alpha: CGFloat(2000-count)/2000)
+                    self.addNewLabel.alpha = CGFloat(count)/2000
+                    self.addNewView.frame = newFrame
+                    self.addNewView.layer.cornerRadius = 12
+                    self.addNewTableView.separatorColor = self.addNewView.backgroundColor
+                    count += 1
+                    if count == 2000 {
+                        self.addNewTextBox.resignFirstResponder()
+                        self.addNewTextBox.text = nil
+                    }
                 }
             }
-        }
         }
         
     }
@@ -303,7 +305,7 @@ class CenterViewController: UIViewController {
         let s = "abcdefghijklmnopqrstuvwkyzABCDEFGHIJKLMNOPQRSTUVWXYZ."
         let characterSet = CharacterSet(charactersIn: s).inverted
         let words = string.components(separatedBy: characterSet)
-        if words.count > 1 || words[0] == ""{
+        if words.count > 1 || words[0] == "" || !words[0].contains("."){
             return false
         }
         return true
@@ -321,9 +323,9 @@ class CenterViewController: UIViewController {
             self.errorMessage.alpha = 0
         }
     }
-
     
-
+    
+    
     
 }
 

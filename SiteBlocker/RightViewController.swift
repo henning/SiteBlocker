@@ -49,9 +49,9 @@ import SCLAlertView
                 showCloseButton: false
             )
             let alert = SCLAlertView(appearance: appearance)
-            let responder = alert.showInfo("Opening Settings", subTitle: "Enable Push Notifications for Site Blocker")
+            let responder = alert.showInfo("Opening Settings", subTitle: "Go to Safari->Content Blockers and enable Site Blocker")
             
-            let when = DispatchTime.now() + 3 // change 2 to desired number of seconds
+            let when = DispatchTime.now() + 3
             DispatchQueue.main.asyncAfter(deadline: when) {
                 responder.close()
                 UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
@@ -65,9 +65,9 @@ import SCLAlertView
                 showCloseButton: false
             )
             let alert = SCLAlertView(appearance: appearance)
-            let responder = alert.showInfo("Opening Settings", subTitle: "Go to Safari->Content Blockers and enable Site Blocker")
+            let responder = alert.showInfo("Opening Settings", subTitle: "Enable Push Notifications for Site Blocker")
             
-            let when = DispatchTime.now() + 3 // change 2 to desired number of seconds
+            let when = DispatchTime.now() + 3 
             DispatchQueue.main.asyncAfter(deadline: when) {
                 responder.close()
                 UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)

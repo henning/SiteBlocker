@@ -142,6 +142,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         scrollView.isDirectionalLockEnabled = true
         let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
         scrollView.contentSize = CGSize(width: self.view.frame.width, height: height)
+        
+        UserDefaults.standard.set(true, forKey: "hasLoaded")
+
     }
     override func viewWillAppear(_ animated: Bool) {
         let height =  constantBox.frame.height + timerBox.frame.height + scheduleBox.frame.height + lockInBox.frame.height
@@ -544,23 +547,23 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             
             switch component {
             case 0:
-                dayNumberLabel.text = "\(row)"
+                UserDefaults.standard.set("\(row)", forKey: "dayNumberText")
             case 1:
-                hoursNumberLabel.text = "\(row)"
+                UserDefaults.standard.set("\(row)", forKey: "hoursNumberText")
             case 2:
-                minutesNumberLabel.text = "\(row)"
+                UserDefaults.standard.set("\(row)", forKey: "minutesNumberText")
             case 3:
-                secondsNumberLabel.text = "\(row)"
+                UserDefaults.standard.set("\(row)", forKey: "secondsNumberText")
             default:
                 break
             }
         }
         if pickerView == scheduleStartTimePicker{
-            scheduleStartNumberLabel.text = hours[row]
+            UserDefaults.standard.set(hours[row], forKey: "startNumberText")
             
         }
         if pickerView == scheduleEndTimePicker{
-            scheduleEndNumberLabel.text = hours[row]
+            UserDefaults.standard.set(hours[row], forKey: "endNumberText")
             
         }
     }
@@ -662,6 +665,21 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalToSuperview().offset(-12)
         }
         
+        lockInSwitch.rx.isOn.subscribe { isOn in
+            if !isOn.element! {
+                self.lockInLabel.textColor = UIColor.customDarkGrey()
+                self.lockInSecondLabel.textColor = UIColor.customDarkGrey()
+                self.lockInButton.alpha = 0.7
+                self.lockInTextBox.layer.borderColor = UIColor.customDarkGrey().cgColor
+            }
+            else {
+                self.lockInLabel.textColor = UIColor.customBlack()
+                self.lockInSecondLabel.textColor = UIColor.customBlack()
+                self.lockInButton.alpha = 1.0
+                self.lockInTextBox.layer.borderColor = UIColor.customBlack().cgColor
+            }
+        }
+        
     }
     
     private func setupScheduleView() {
@@ -725,8 +743,23 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         scheduleEndNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 38)
         scheduleEndIDLabel.font = UIFont(name: "AvenirNext-Regular", size: 18)
         scheduleStartIDLabel.text = "Start"
-        scheduleStartNumberLabel.text = "12 A.M."
-        scheduleEndNumberLabel.text = "12 A.M."
+        
+        let defaults = UserDefaults.standard
+        _ = defaults.rx.observe(String.self, "startNumberText").subscribe(onNext: { value in
+            self.scheduleStartNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            UserDefaults.standard.set("12 A.M.", forKey: "startNumberText")
+        }
+        
+        _ = defaults.rx.observe(String.self, "endNumberText").subscribe(onNext: { value in
+            self.scheduleEndNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            UserDefaults.standard.set("12 A.M.", forKey: "endNumberText")
+        }
+      
+        
         scheduleEndIDLabel.text = "End"
         scheduleStartIDLabel.textColor = UIColor.customBlack()
         scheduleStartNumberLabel.textColor = UIColor.customBlack()
@@ -827,6 +860,11 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalTo(22)
             make.left.equalToSuperview().offset(12)
             make.right.equalToSuperview().offset(-12)
+        }
+        
+        
+        scheduleSwitch.rx.isOn.subscribe { isOn in
+            
         }
         
         
@@ -956,7 +994,14 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalToSuperview().multipliedBy(0.2)
             make.centerX.equalToSuperview()
         }
-        dayNumberLabel.text = "0"
+        
+        let defaults = UserDefaults.standard
+        _ = defaults.rx.observe(String.self, "dayNumberText").subscribe(onNext: { value in
+            self.dayNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+        UserDefaults.standard.set("0", forKey: "dayNumberText")
+        }
         dayNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         dayNumberLabel.textColor = UIColor.customBlack()
         dayNumberLabel.snp.makeConstraints { (make) in
@@ -965,7 +1010,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        hoursNumberLabel.text = "0"
+        
+        _ = defaults.rx.observe(String.self, "hoursNumberText").subscribe(onNext: { value in
+            self.hoursNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            UserDefaults.standard.set("0", forKey: "hoursNumberText")
+        }
         hoursNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         hoursNumberLabel.textColor = UIColor.customBlack()
         hoursNumberLabel.snp.makeConstraints { (make) in
@@ -974,7 +1025,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        minutesNumberLabel.text = "0"
+        
+        _ = defaults.rx.observe(String.self, "minutesNumberText").subscribe(onNext: { value in
+            self.minutesNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            UserDefaults.standard.set("0", forKey: "minutesNumberText")
+        }
         minutesNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         minutesNumberLabel.textColor = UIColor.customBlack()
         minutesNumberLabel.snp.makeConstraints { (make) in
@@ -983,7 +1040,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.height.equalToSuperview().multipliedBy(0.7)
             make.centerX.equalToSuperview()
         }
-        secondsNumberLabel.text = "0"
+        
+        _ = defaults.rx.observe(String.self, "secondsNumberText").subscribe(onNext: { value in
+            self.secondsNumberLabel.text = value
+        })
+        if !UserDefaults.standard.bool(forKey: "hasLoaded"){
+            UserDefaults.standard.set("0", forKey: "secondsNumberText")
+        }
         secondsNumberLabel.font = UIFont(name: "AvenirNext-Regular", size: 62)
         secondsNumberLabel.textColor = UIColor.customBlack()
         secondsNumberLabel.snp.makeConstraints { (make) in
@@ -1091,6 +1154,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalTo(timerBox.snp.right).offset(-12)
         }
         
+        
     }
     
     private func showPickerView(picker: UIPickerView, labels: [UILabel]?) {
@@ -1171,9 +1235,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.centerX.equalToSuperview()
         }
         
-        
-        
-        
         timerBox.layer.borderColor = UIColor.customBlack().cgColor
         timerBox.layer.borderWidth = 1
 //        timerBox.backgroundColor = UIColor.customWhite()
@@ -1203,10 +1264,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.width.equalToSuperview().offset(2)
             make.height.equalTo(view.snp.height).dividedBy(3)
         }
-        
     }
-    
-    
 }
 
 extension LeftViewController: UNUserNotificationCenterDelegate {

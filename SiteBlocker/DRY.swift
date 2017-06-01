@@ -72,7 +72,6 @@ struct ExtensionManager {
         
         if UserDefaults.standard.bool(forKey: "hasLoaded"){ return }
         else {
-            UserDefaults.standard.set(true, forKey: "hasLoaded")
             let data = try! Data(contentsOf: (Bundle.main.url(forResource: "blockerList", withExtension: "json")!))
             let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("blockerList.json")
             
@@ -150,5 +149,9 @@ extension UIColor {
     
     static func customGrey() -> UIColor {
         return UIColor(red: 190/255, green: 195/255, blue: 199/255, alpha: 1)
+    }
+    
+    static func customDarkGrey() ->UIColor {
+        return UIColor(red: 129/255, green: 140/255, blue: 141/255, alpha: 1)
     }
 }
