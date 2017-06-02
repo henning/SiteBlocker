@@ -321,6 +321,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
 
             }
             else {
+                Domain.switchToOff()
                 UserDefaults.standard.set(false, forKey: "timerSwitch")
                 self.timerSwitch.setOn(false, animated: true)
                 self.timerStartButton.isEnabled = false
@@ -447,6 +448,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     }
     
     private func triggerNotifications(seconds: Int){
+        Domain.switchToOn()
         
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
             self.showPopUp(title: "Timer Set", body: "Sites will be blocked for the specified time period.")
@@ -489,7 +491,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 UserDefaults.standard.set(false, forKey: "grantedPNP")
             }
         }
-        UserDefaults.standard.set(true, forKey: "hasLoaded")
     }
     
     

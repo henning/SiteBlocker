@@ -99,6 +99,8 @@ class CenterViewController: UIViewController {
             present(OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil), animated: true, completion: nil)
             
         }
+        UserDefaults.standard.set(true, forKey: "hasLoaded")
+
 
         
     }
