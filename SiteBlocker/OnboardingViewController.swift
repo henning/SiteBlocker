@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import RxCocoa
+import SCLAlertView
+import UserNotifications
+
 
 class OnboardingViewController: UIPageViewController,UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     let pageOne = PageOne()
@@ -184,12 +188,28 @@ class PageTwo:OBPageViewController {
         contentBlockingButton.setTitleColor(UIColor.customGrey(), for: .normal)
         actualNextButton.setTitleColor(UIColor.customGrey(), for: .normal)
         
-
-        
         actualNextButton.rx.tap.subscribe { _ in
             self.pageVC?.setViewControllers([(self.pageVC?.pageThree)!], direction: .forward, animated: true, completion: nil)
         }
-
+            
+            notificationsButton.rx.tap.subscribe { _ in
+                let center = UNUserNotificationCenter.current()
+                center.requestAuthorization(options: [.alert]) { (granted, error) in
+                    if granted {
+                        UserDefaults.standard.set(true, forKey: "grantedPNP")
+                    }
+                    else {
+                        UserDefaults.standard.set(false, forKey: "grantedPNP")
+                    }
+                }
+            }
+        
+        contentBlockingButton.rx.tap.subscribe { _ in
+            LinkOpener.openContentBlockerSettings()
+        }
+        
+        
+        
     }
 }
 

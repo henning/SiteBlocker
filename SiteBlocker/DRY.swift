@@ -1,5 +1,6 @@
 import SwiftyJSON
 import SafariServices
+import SCLAlertView
 
 extension JSON{
     
@@ -153,5 +154,45 @@ extension UIColor {
     
     static func customDarkGrey() ->UIColor {
         return UIColor(red: 129/255, green: 140/255, blue: 141/255, alpha: 1)
+    }
+}
+
+
+
+struct LinkOpener {
+    static func openContentBlockerSettings() {
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "AvenirNext-Regular", size: 20)!,
+            kTextFont: UIFont(name: "AvenirNext-Regular", size: 14)!,
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        let responder = alert.showInfo("Opening Settings", subTitle: "Go to Safari->Content Blockers and enable Site Blocker")
+        
+        let when = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            responder.close()
+            let settingsUrl = NSURL(string:UIApplicationOpenSettingsURLString) as! URL
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)        }
+    }
+    
+    static func openNotificationSettings() {
+        let appearance = SCLAlertView.SCLAppearance(
+            kTitleFont: UIFont(name: "AvenirNext-Regular", size: 20)!,
+            kTextFont: UIFont(name: "AvenirNext-Regular", size: 14)!,
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        let responder = alert.showInfo("Opening Settings", subTitle: "Enable Push Notifications for Site Blocker")
+        
+        let when = DispatchTime.now() + 3
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            responder.close()
+            let settingsUrl = NSURL(string:UIApplicationOpenSettingsURLString) as! URL
+            UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)        }
+    }
+    
+    static func openLink(link: String) {
+        UIApplication.shared.openURL(URL(string:link)!)
     }
 }

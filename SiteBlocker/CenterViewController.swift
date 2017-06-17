@@ -70,11 +70,21 @@ class CenterViewController: UIViewController {
         UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadEmpty").subscribe{ bool in
             self.reloadIndicator()
             }.addDisposableTo(disposeBag)
+        
+        UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadLockIn").subscribe{ bool in
+            self.reloadIndicator()
+            }.addDisposableTo(disposeBag)
     }
     
     private func reloadIndicator() {
         let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
         let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
+        let lockIn = userDefaults?.bool(forKey: "loadLockIn")
+        if lockIn! {
+            connectedIndicatorLabel.backgroundColor = UIColor.customGreen()
+            connectedIndicatorLabel.text = "Lock-In Mode enabled"
+        }
+        else {
         if loadEmpty! {
             connectedIndicatorLabel.backgroundColor = UIColor.customOrange()
             connectedIndicatorLabel.text = "Sites not blocked"
@@ -83,6 +93,8 @@ class CenterViewController: UIViewController {
             connectedIndicatorLabel.backgroundColor = UIColor.customGreen()
             connectedIndicatorLabel.text = "Sites currently blocked"
         }
+        }
+        
     }
     
     //MARK:- Beginning views
@@ -91,6 +103,20 @@ class CenterViewController: UIViewController {
         bindTableView()
         bindIndicator()
         setupViews()
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            if let endDate = UserDefaults.standard.object(forKey: "timerDate") as? Date{
+                let timeLeft = endDate.timeIntervalSinceNow
+                if timeLeft.isLess(than: 0){
+                    UserDefaults.standard.set(nil, forKey: "timerDate")
+                    return
+                }
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.day, .hour, .minute, .second]
+                formatter.unitsStyle = .abbreviated
+                 self.connectedIndicatorLabel.text = " Blocking sites for: \(formatter.string(from: timeLeft)!)"
+                self.connectedIndicatorLabel.backgroundColor = UIColor.customGreen()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,8 +126,6 @@ class CenterViewController: UIViewController {
             
         }
         UserDefaults.standard.set(true, forKey: "hasLoaded")
-
-
         
     }
     
@@ -248,19 +272,21 @@ class CenterViewController: UIViewController {
     private func expandTextBox() {
 
         backgroundButton.isEnabled = true
-        UIView.animate(withDuration: 0.5, animations: {
+        let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
             self.addNewView.frame = CGRect(x: self.addNewView.frame.minX,
                                            y: self.addNewView.frame.minY,
                                            width: self.addNewView.frame.width,
                                            height: 350)
-                            self.addNewView.backgroundColor = UIColor.customWhite(alpha: 1.0)
-                            self.addNewLabel.alpha = 0
-
-        }) { (done) in
-            if done {
-                self.expanded = true
-            }
+            self.addNewView.backgroundColor = UIColor.customWhite(alpha: 1.0)
+            self.addNewLabel.alpha = 0
+            
         }
+        animator.addCompletion { _ in
+//            if done {
+                self.expanded = true
+//            }
+        }
+        animator.startAnimation()
         
     }
     

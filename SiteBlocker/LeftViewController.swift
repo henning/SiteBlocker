@@ -12,6 +12,7 @@ import UserNotifications
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import Device
 import SCLAlertView
 
 
@@ -55,7 +56,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let timerButton = UIButton()
     let disposeBag = DisposeBag()
     let timerPicker = UIPickerView()
-    let pickerContainer = UIVisualEffectView(effect: UIBlurEffect())
+    let pickerContainer = UIView()
     let pickerDayLabel = UILabel()
     let pickerDayView = UIView()
     let pickerHoursLabel = UILabel()
@@ -75,7 +76,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let hours = ["12 A.M.", "1 A.M.", "2 A.M.", "3 A.M.", "4 A.M.", "5 A.M.", "6 A.M.", "7 A.M.", "8 A.M.", "9 A.M.", "10 A.M.", "11 A.M.", "12 P.M.","1 P.M.","2 P.M.","3 P.M.","4 P.M.","5 P.M.","6 P.M.","7 P.M.","8 P.M.","9 P.M.","10 P.M.","11 P.M.",]
     let timerSwitchBind = Variable(false)
     let scheduleSwitchBind = Variable(false)
-    let lockInBoxBind = Variable(false)
+    let lockInSwitchBind = Variable(false)
     let scrollView = UIScrollView()
     let constantLabel = UILabel()
     var constantSwitch = PaperSwitch(view: UIView(), color: UIColor.purple)
@@ -166,8 +167,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             responder.close()
         }
 
-        
-        
         
         
     }
@@ -265,7 +264,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         }.addDisposableTo(disposeBag)
         RxKeyboard.instance.frame
             .drive(onNext: { frame in
-                self.view.frame = CGRect(x: self.view.frame.minX, y: self.view.frame.minY-frame.height, width: self.view.frame.width, height: self.view.frame.height)
+                self.view.frame = CGRect(x: self.view.frame.minX, y: frame.minY - self.view.frame.height, width: self.view.frame.width, height: self.view.frame.height)
             })
             .disposed(by: disposeBag)
         lockInTextBox.rx.controlEvent(.editingDidEndOnExit).subscribe { _ in
@@ -303,7 +302,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         
         timerSwitch.rx.isOn.bind(to: timerSwitchBind).addDisposableTo(disposeBag)
         scheduleSwitch.rx.isOn.bind(to: scheduleSwitchBind).addDisposableTo(disposeBag)
-        lockInSwitch.rx.isOn.bind(to: lockInBoxBind).addDisposableTo(disposeBag)
+        lockInSwitch.rx.isOn.bind(to: lockInSwitchBind).addDisposableTo(disposeBag)
         constantSwitch.rx.isOn.bind(to: constantSwitchBind).addDisposableTo(disposeBag)
 
 
@@ -316,12 +315,13 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.timerStartButton.isEnabled = true
                 self.timerButton.isEnabled = true
                 self.scheduleSwitchBind.value = false
-                self.lockInBoxBind.value = false
+                self.lockInSwitchBind.value = false
                 self.constantSwitchBind.value = false
 
             }
             else {
                 Domain.switchToOff()
+                UserDefaults.standard.set(nil, forKey:"timerDate")
                 UserDefaults.standard.set(false, forKey: "timerSwitch")
                 self.timerSwitch.setOn(false, animated: true)
                 self.timerStartButton.isEnabled = false
@@ -337,7 +337,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.scheduleStartTimeButton.isEnabled = true
                 self.scheduleEndTimeButton.isEnabled = true
                 self.timerSwitchBind.value = false
-                self.lockInBoxBind.value = false
+                self.lockInSwitchBind.value = false
                 self.constantSwitchBind.value = false
 
             }
@@ -350,7 +350,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             }
 //            self.evaluateSwitches()
             }.addDisposableTo(disposeBag)
-        lockInBoxBind.asObservable().subscribe { isOn in
+        lockInSwitchBind.asObservable().subscribe { isOn in
             Domain.switchToOff()
             if isOn.element! {
                 UserDefaults.standard.set(true, forKey: "lockInSwitch")
@@ -359,10 +359,14 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.scheduleSwitchBind.value = false
                 self.timerSwitchBind.value = false
                 self.constantSwitchBind.value = false
-
+                
+                if let site = UserDefaults.standard.string(forKey: "lockInSiteToLoad") {
+                    Domain.switchOnLockIn(site: site)
+                }
             }
             else {
                 UserDefaults.standard.set(false, forKey: "lockInSwitch")
+                Domain.switchOffLockIn()
                 Domain.switchToOff()
                 self.lockInSwitch.setOn(false, animated: true)
                 self.lockInButton.isEnabled = false
@@ -378,7 +382,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 UserDefaults.standard.set(true, forKey: "constantSwitch")
                 self.scheduleSwitchBind.value = false
                 self.timerSwitchBind.value = false
-                self.lockInBoxBind.value = false
+                self.lockInSwitchBind.value = false
                 Domain.switchToOn()
             }
             else {
@@ -462,6 +466,11 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             content.categoryIdentifier = "endBlockingCategory"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds),
                                                             repeats: false)
+            let date = Date(timeIntervalSinceNow: TimeInterval(seconds))
+            UserDefaults.standard.set(date, forKey:"timerDate")
+            
+            
+            
             let identifier = "TimerLocalNotification"
             let request = UNNotificationRequest(identifier: identifier,
                                                 content: content, trigger: trigger)
@@ -478,21 +487,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options: [.alert]) { (granted, error) in
-            if granted {
-                UserDefaults.standard.set(true, forKey: "grantedPNP")
-            }
-            else {
-                UserDefaults.standard.set(false, forKey: "grantedPNP")
-            }
-        }
-    }
-    
+ 
     
     
     //MARK:- Timer Picker Delegate
@@ -650,19 +645,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(34)
         }
-        lockInSecondLabel.font = UIFont(name: "AvenirNext-Regular", size: 26)
-        lockInSecondLabel.text = "Site to Lock Into:"
-        lockInSecondLabel.textColor = UIColor.customBlack()
-        lockInSecondLabel.textAlignment = .center
-        lockInSecondLabel.numberOfLines = 2
-        lockInSecondLabel.snp.makeConstraints { (make) in
-            make.bottom.equalTo(lockInTextBox.snp.top).offset(-10)
-            make.height.equalTo(30)
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.7)
-            
-        }
-        
         lockInBox.addSubview(lockInWarningLabel)
         lockInWarningLabel.textColor = UIColor.customWhite()
         lockInWarningLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 9)
@@ -671,11 +653,25 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         lockInWarningLabel.snp.makeConstraints { (make) in
             make.bottom.equalTo(lockInTextBox.snp.top).offset(-4)
             make.height.equalTo(22)
-            make.left.equalToSuperview().offset(12)
+            make.left.equalTo(lockInTextBox.snp.left)
             make.right.equalToSuperview().offset(-12)
         }
+        lockInSecondLabel.font = UIFont(name: "AvenirNext-Regular", size: 26)
+        lockInSecondLabel.text = "Site to Lock Into:"
+        lockInSecondLabel.textColor = UIColor.customBlack()
+        lockInSecondLabel.textAlignment = .center
+        lockInSecondLabel.numberOfLines = 2
+        lockInSecondLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(lockInWarningLabel.snp.top).offset(5)
+            make.height.equalTo(30)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.7)
+            
+        }
         
-        lockInBoxBind.asObservable().subscribe { isOn in
+        
+        
+        lockInSwitchBind.asObservable().subscribe { isOn in
             if !isOn.element! {
                 self.lockInLabel.textColor = UIColor.customDarkGrey()
                 self.lockInSecondLabel.textColor = UIColor.customDarkGrey()
@@ -688,6 +684,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.lockInButton.alpha = 1.0
                 self.lockInTextBox.layer.borderColor = UIColor.customBlack().cgColor
             }
+        }
+        if let site = UserDefaults.standard.string(forKey: "lockInSiteToLoad") {
+            lockInTextBox.text = site
         }
         
     }
@@ -1325,9 +1324,16 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             make.top.equalTo(scheduleBox.snp.bottom).offset(-1)
             make.left.equalToSuperview().offset(-1)
             make.width.equalToSuperview().offset(2)
-            make.height.equalTo(260)
+            make.height.equalTo(275)
                    }
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        pickerContainer.addSubview(blurEffectView)
+        pickerContainer.isHidden = false
     }
+    
 }
 
 extension LeftViewController: UNUserNotificationCenterDelegate {

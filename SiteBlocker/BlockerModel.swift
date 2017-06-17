@@ -115,6 +115,7 @@ class Domain:NSObject,NSCoding {
     static func switchOnLockIn(site: String) {
         let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "lockIn")
         UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadLockIn")
+        UserDefaults.standard.set(site, forKey: "lockInSiteToLoad")
         var string = "*"
         string.append(site)
         let jsonString = "[{\"action\":{\"type\":\"block\"},\"trigger\":{\"url-filter\":\".*.\",\"unless-domain\":[\"*\(site)\"]}}]"

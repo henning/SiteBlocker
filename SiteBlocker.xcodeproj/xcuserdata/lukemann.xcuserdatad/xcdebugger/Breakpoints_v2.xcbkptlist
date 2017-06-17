@@ -9,169 +9,44 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/RightViewController.swift"
-            timestampString = "517709283.866746"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.532179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "setupViews()"
+            startingLineNumber = "1064"
+            endingLineNumber = "1064"
+            landmarkName = "setupTimerView()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/RightViewController.swift"
-            timestampString = "517709283.866746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "setupViews()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/RightViewController.swift"
-            timestampString = "517708661.852414"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/RightViewController.swift"
-            timestampString = "517709283.866746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "setupViews()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/RightViewController.swift"
-            timestampString = "517709619.725864"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/OnboardingViewController.swift"
-            timestampString = "518008184.687355"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "OnboardingViewController"
-            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "SiteBlocker.OnboardingViewController.__deallocating_deinit"
+                  symbolName = "SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
                   moduleName = "SiteBlocker"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukemann/SiteBlocker/SiteBlocker/OnboardingViewController.swift"
-                  timestampString = "517873985.923053"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519328957.891527"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "1054"
+                  endingLineNumber = "1054"
+                  offsetFromSymbolStart = "10845">
                </Location>
                <Location
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "SiteBlocker.OnboardingViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; SiteBlocker.OnboardingViewController"
+                  symbolName = "closure #16 (Swift.Optional&lt;Swift.String&gt;) -&gt; () in SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
                   moduleName = "SiteBlocker"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukemann/SiteBlocker/SiteBlocker/OnboardingViewController.swift"
-                  timestampString = "517873985.92673"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519328957.895102"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11"
-                  offsetFromSymbolStart = "118">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SiteBlocker.OnboardingViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; SiteBlocker.OnboardingViewController"
-                  moduleName = "SiteBlocker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukemann/SiteBlocker/SiteBlocker/OnboardingViewController.swift"
-                  timestampString = "517873985.929999"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "23">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SiteBlocker.OnboardingViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;SiteBlocker.OnboardingViewController&gt;"
-                  moduleName = "SiteBlocker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukemann/SiteBlocker/SiteBlocker/OnboardingViewController.swift"
-                  timestampString = "517873985.93276"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SiteBlocker.OnboardingViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;SiteBlocker.OnboardingViewController&gt;"
-                  moduleName = "SiteBlocker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/lukemann/SiteBlocker/SiteBlocker/OnboardingViewController.swift"
-                  timestampString = "517873985.935648"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11"
-                  offsetFromSymbolStart = "105">
+                  startingLineNumber = "1055"
+                  endingLineNumber = "1055"
+                  offsetFromSymbolStart = "40">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -182,13 +57,61 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/OnboardingViewController.swift"
-            timestampString = "518008184.687355"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.533319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "viewDidLoad()"
+            startingLineNumber = "1104"
+            endingLineNumber = "1104"
+            landmarkName = "setupTimerView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519332122.292712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1094"
+                  endingLineNumber = "1094"
+                  offsetFromSymbolStart = "14827">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #21 (SnapKit.ConstraintMaker) -&gt; () in SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519332122.296711"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1095"
+                  endingLineNumber = "1095"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.534254"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1135"
+            endingLineNumber = "1135"
+            landmarkName = "setupTimerView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -198,108 +121,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/OnboardingViewController.swift"
-            timestampString = "518008184.687355"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "pageViewController(_:viewControllerAfter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/OnboardingViewController.swift"
-            timestampString = "518046500.533105"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/OnboardingViewController.swift"
-            timestampString = "518046578.489032"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/BlockerModel.swift"
-            timestampString = "518012191.42649"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "switchOnLockIn(site:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "SiteBlocker/LeftViewController.swift"
-            timestampString = "518038497.330806"
+            timestampString = "519355496.535158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
-            landmarkName = "bindSwitchs()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/LeftViewController.swift"
-            timestampString = "518038497.330806"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "bindSwitchs()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SiteBlocker/LeftViewController.swift"
-            timestampString = "518055814.184742"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1019"
-            endingLineNumber = "1019"
+            startingLineNumber = "1105"
+            endingLineNumber = "1105"
             landmarkName = "setupTimerView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -311,12 +138,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SiteBlocker/LeftViewController.swift"
-            timestampString = "518055814.184742"
+            timestampString = "519355496.536073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1018"
-            endingLineNumber = "1018"
+            startingLineNumber = "1355"
+            endingLineNumber = "1355"
+            landmarkName = "userNotificationCenter(_:willPresent:withCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.537133"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1111"
+            endingLineNumber = "1111"
             landmarkName = "setupTimerView()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519332184.39562"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1101"
+                  endingLineNumber = "1101"
+                  offsetFromSymbolStart = "15166">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #22 (SnapKit.ConstraintMaker) -&gt; () in SiteBlocker.LeftViewController.(setupTimerView in _15C239EEE99750CF6B8B3038496BC74D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/LeftViewController.swift"
+                  timestampString = "519332184.399066"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1102"
+                  endingLineNumber = "1102"
+                  offsetFromSymbolStart = "17">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.538005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1108"
+            endingLineNumber = "1108"
+            landmarkName = "setupTimerView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.538866"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1112"
+            endingLineNumber = "1112"
+            landmarkName = "setupTimerView()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/LeftViewController.swift"
+            timestampString = "519355496.539722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
+            landmarkName = "triggerNotifications(seconds:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -327,12 +250,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SiteBlocker/CenterViewController.swift"
-            timestampString = "518055298.4502"
+            timestampString = "519354715.483945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
-            landmarkName = "expandTextBox()"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "reloadIndicator()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/CenterViewController.swift"
+            timestampString = "519354715.484138"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "reloadIndicator()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/CenterViewController.swift"
+            timestampString = "519354715.484295"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "bindIndicator()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SiteBlocker.CenterViewController.(bindIndicator in _CD24E6E037E74C44DB8217694204261D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/CenterViewController.swift"
+                  timestampString = "519340850.706905"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "1437">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (RxSwift.Event&lt;Swift.Optional&lt;Swift.Bool&gt;&gt;) -&gt; () in SiteBlocker.CenterViewController.(bindIndicator in _CD24E6E037E74C44DB8217694204261D)() -&gt; ()"
+                  moduleName = "SiteBlocker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lukemann/Desktop/SiteBlocker/SiteBlocker/CenterViewController.swift"
+                  timestampString = "519340850.711123"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/CenterViewController.swift"
+            timestampString = "519354715.484431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "bindIndicator()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SiteBlocker/CenterViewController.swift"
+            timestampString = "519354715.484567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "bindIndicator()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
