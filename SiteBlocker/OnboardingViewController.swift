@@ -8,6 +8,7 @@
 
 import UIKit
 import RxCocoa
+import RxSwift
 import SCLAlertView
 import UserNotifications
 
@@ -93,6 +94,7 @@ class OBPageViewController: UIViewController {
    var nextButton = UIButton()
     let imageView = UIImageView()
     var pageVC:OnboardingViewController? = nil
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         view.backgroundColor = UIColor.customBlack()
@@ -147,7 +149,7 @@ class PageOne: OBPageViewController{
         imageView.image = #imageLiteral(resourceName: "Page1")
         super.nextButton.rx.tap.subscribe { _ in
             self.pageVC?.setViewControllers([(self.pageVC?.pageTwo)!], direction: .forward, animated: true, completion: nil)
-        }
+            }.addDisposableTo(disposeBag)
     }
 }
 
@@ -190,7 +192,7 @@ class PageTwo:OBPageViewController {
         
         actualNextButton.rx.tap.subscribe { _ in
             self.pageVC?.setViewControllers([(self.pageVC?.pageThree)!], direction: .forward, animated: true, completion: nil)
-        }
+        }.addDisposableTo(disposeBag)
             
             notificationsButton.rx.tap.subscribe { _ in
                 let center = UNUserNotificationCenter.current()
@@ -202,11 +204,11 @@ class PageTwo:OBPageViewController {
                         UserDefaults.standard.set(false, forKey: "grantedPNP")
                     }
                 }
-            }
+            }.addDisposableTo(disposeBag)
         
         contentBlockingButton.rx.tap.subscribe { _ in
             LinkOpener.openContentBlockerSettings()
-        }
+        }.addDisposableTo(disposeBag)
         
         
         
@@ -221,6 +223,6 @@ class PageThree:OBPageViewController {
         imageView.image = #imageLiteral(resourceName: "Page3")
         nextButton.rx.tap.subscribe { _ in
             self.dismiss(animated: true, completion: nil)
-        }
+        }.addDisposableTo(disposeBag)
     }
 }

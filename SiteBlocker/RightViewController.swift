@@ -16,6 +16,11 @@ import SCLAlertView
     let likeGroupView = TableGroup()
     let dontLikeGroupView = TableGroup()
     let aboutGroupView = TableGroup()
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        CenterViewController.singleton.addNewTextBox.resignFirstResponder()
+    }
 
      override func viewDidLoad() {
         self.view.translatesAutoresizingMaskIntoConstraints = false
@@ -65,10 +70,21 @@ import SCLAlertView
         likeGroupView.title1 = "Recommend the app"
         likeGroupView.title2 = "Leave a good review"
         likeGroupView.action1 = { _ in
-            LinkOpener.openLink(link: "Put Something Here")
+            
+            let link = [URL(string: "https://itunes.apple.com/us/app/site-blocker/id1249703032?ls=1&mt=8")!]
+            let activityVC = UIActivityViewController(activityItems: link, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+            
+            
         }
         likeGroupView.action2 = { _ in
-            LinkOpener.openLink(link: "Put Something Here")
+            guard let url = URL(string : "itms-apps://itunes.apple.com/app/id1249703032") else {
+                return
+            }
+            guard #available(iOS 10, *) else {
+                return
+            }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
         likeGroupView.subtitle = "I really like the app"
         likeGroupView.snp.makeConstraints { (make) in
@@ -83,11 +99,10 @@ import SCLAlertView
         dontLikeGroupView.title1 = "Report A Bug"
         dontLikeGroupView.title2 = "Suggest A Feature"
         dontLikeGroupView.action1 = { _ in
-            LinkOpener.openLink(link: "Put Something Here")
+            LinkOpener.openLink(link: "https://goo.gl/forms/yU0c8hNjgNBf0ly72")
         }
         dontLikeGroupView.action2 = { _ in
-            LinkOpener.openLink(link: "Put Something Here")
-            
+            LinkOpener.openLink(link: "https://goo.gl/forms/6Yt3lV78366veAyf1")
         }
         dontLikeGroupView.subtitle = "The app could be better"
         dontLikeGroupView.snp.makeConstraints { (make) in
@@ -103,7 +118,7 @@ import SCLAlertView
         aboutGroupView.title1 = "App Website"
         aboutGroupView.title2 = "Luke Mann Website"
         aboutGroupView.action1 = { _ in
-            LinkOpener.openLink(link: "Put Something Here")
+            LinkOpener.openLink(link: "http://lukejmann.com/SiteBlocker")
         }
         aboutGroupView.action2 = { _ in
             LinkOpener.openLink(link: "http://lukejmann.com")

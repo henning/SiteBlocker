@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let snapVC = SwipeNavigationController(centerViewController: CenterViewController())
+        let snapVC = SwipeNavigationController(centerViewController: CenterViewController.singleton)
         snapVC.leftViewController = LeftViewController()
         snapVC.rightViewController = RightViewController()
         self.window?.rootViewController = snapVC

@@ -86,6 +86,9 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
     let lockInWarningLabel = UILabel()
 
     
+    override func viewDidAppear(_ animated: Bool) {
+        CenterViewController.singleton.addNewTextBox.resignFirstResponder()
+    }
     
     override func viewDidLoad() {
 
@@ -457,8 +460,6 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
         if UserDefaults.standard.bool(forKey: "grantedPNP"){
             self.showPopUp(title: "Timer Set", body: "Sites will be blocked for the specified time period.")
             let center = UNUserNotificationCenter.current()
-            let options: UNAuthorizationOptions = [.alert, .sound];
-            
             let content = UNMutableNotificationContent()
             content.title = "Timer Done"
             content.body = "To unblock sites, either tap the notification or the notification button"
@@ -476,7 +477,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                                                 content: content, trigger: trigger)
             center.delegate = self
             center.add(request, withCompletionHandler: { (error) in
-                if let error = error {
+                if error != nil {
                     // Something went wrong
                 }
                 else {
@@ -684,7 +685,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.lockInButton.alpha = 1.0
                 self.lockInTextBox.layer.borderColor = UIColor.customBlack().cgColor
             }
-        }
+        }.addDisposableTo(disposeBag)
         if let site = UserDefaults.standard.string(forKey: "lockInSiteToLoad") {
             lockInTextBox.text = site
         }
@@ -1204,15 +1205,15 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
                 self.secondsIDLabel.textColor = UIColor.customBlack()
                 self.timerStartButton.alpha = 1.0
             }
-        }
+        }.addDisposableTo(disposeBag)
         
         
     }
     
     private func showPickerView(picker: UIPickerView, labels: [UILabel]?) {
-        pickerViewsToHide.map {$0.isHidden = true}
+        let _ = pickerViewsToHide.map {$0.isHidden = true}
         if let labels = labels {
-            labels.map{$0.isHidden = false}
+         let _ = labels.map{$0.isHidden = false}
         }
         picker.isHidden = false
         pickerTapOffButton.isEnabled = true
@@ -1236,7 +1237,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             
         }) { (done) in
             if done {
-                self.pickerViewsToHide.map {$0.isHidden = true}
+                let _ = self.pickerViewsToHide.map {$0.isHidden = true}
             }
         }
         
@@ -1295,7 +1296,7 @@ class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDel
             else {
                 self.constantLabel.textColor = UIColor.customBlack()
             }
-        }
+        }.addDisposableTo(disposeBag)
         
         timerBox.layer.borderColor = UIColor.customBlack().cgColor
         timerBox.layer.borderWidth = 1
@@ -1371,7 +1372,6 @@ extension UIView {
         self.layer.shadowRadius = 1
         
         self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-//        self.layer.shouldRasterize = true
     }
 }
 

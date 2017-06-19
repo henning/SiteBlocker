@@ -14,6 +14,9 @@ import RxCocoa
 
 class CenterViewController: UIViewController {
     
+    
+    static let singleton = CenterViewController()
+    
     var addNewTextBox = UITextField()
     var addNewView = UIView()
     var separatorLine = UIView()
@@ -216,7 +219,7 @@ class CenterViewController: UIViewController {
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(addNewView.snp.top).offset(60 + 10)
-            make.height.equalTo(350)
+            make.height.equalTo(275)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
@@ -272,7 +275,7 @@ class CenterViewController: UIViewController {
     private func expandTextBox() {
 
         backgroundButton.isEnabled = true
-        let animator = UIViewPropertyAnimator(duration: 0.5, curve: .easeIn) {
+        let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeIn) {
             self.addNewView.frame = CGRect(x: self.addNewView.frame.minX,
                                            y: self.addNewView.frame.minY,
                                            width: self.addNewView.frame.width,

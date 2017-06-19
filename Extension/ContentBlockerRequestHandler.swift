@@ -23,7 +23,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             let url =  userDefaults?.url(forKey: "lockIn")
             let attachment = NSItemProvider(contentsOf: url)
             let item = NSExtensionItem()
-            item.attachments = [attachment]
+            item.attachments = [attachment as Any]
             context.completeRequest(returningItems: [item], completionHandler: nil)
             return
         }
@@ -31,7 +31,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
             let url =  userDefaults?.url(forKey: "empty")
             let attachment = NSItemProvider(contentsOf: url)
             let item = NSExtensionItem()
-            item.attachments = [attachment]
+            item.attachments = [attachment as Any]
             context.completeRequest(returningItems: [item], completionHandler: nil)
             return
         }
@@ -39,7 +39,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let url =  userDefaults?.url(forKey: "blockerList")
         let attachment = NSItemProvider(contentsOf: url)
         let item = NSExtensionItem()
-        item.attachments = [attachment]
+        item.attachments = [attachment as Any]
         context.completeRequest(returningItems: [item], completionHandler: nil)
     }
     
