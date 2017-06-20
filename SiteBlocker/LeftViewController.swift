@@ -12,12 +12,11 @@ import UserNotifications
 import RxSwift
 import RxCocoa
 import RxKeyboard
-import Device
 import SCLAlertView
 
-
-
 class LeftViewController:UIViewController,UIPickerViewDataSource,UIPickerViewDelegate {
+    
+    static let singleton = LeftViewController()
     
     let timerBox = UIView()
     let scheduleBox = UIView()

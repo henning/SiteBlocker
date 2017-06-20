@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-//        print(UserDefaults(suiteName: "group.com.lukejmann.foo")?.url(forKey: "empty")!.absoluteString)
         
         if UserDefaults.standard.bool(forKey: "hasLoaded"){
             Domain.reloadDomains()
@@ -34,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let snapVC = SwipeNavigationController(centerViewController: CenterViewController.singleton)
-        snapVC.leftViewController = LeftViewController()
+        snapVC.leftViewController = LeftViewController.singleton
         snapVC.rightViewController = RightViewController()
         self.window?.rootViewController = snapVC
         self.window?.backgroundColor = UIColor.white

@@ -41,7 +41,7 @@ class Domain:NSObject,NSCoding {
     
     func add() {
         
-        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "blockerList")
+        let url = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.url(forKey: "blockerList")
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
@@ -60,7 +60,7 @@ class Domain:NSObject,NSCoding {
     }
     
     func remove() {
-        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "blockerList")
+        let url = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.url(forKey: "blockerList")
         let origData = try! Data(contentsOf: url!)
         var json = JSON(origData)
         let jsonElement = JSON([
@@ -103,18 +103,18 @@ class Domain:NSObject,NSCoding {
     }
     
     static func switchToOff() {
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadEmpty")
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.set(true, forKey: "loadEmpty")
         ExtensionManager.reload()
     }
     
     static func switchToOn() {
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(false, forKey: "loadEmpty")
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.set(false, forKey: "loadEmpty")
         ExtensionManager.reload()
     }
     
     static func switchOnLockIn(site: String) {
-        let url = UserDefaults(suiteName: "group.com.lukejmann.foo")!.url(forKey: "lockIn")
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(true, forKey: "loadLockIn")
+        let url = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.url(forKey: "lockIn")
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.set(true, forKey: "loadLockIn")
         UserDefaults.standard.set(site, forKey: "lockInSiteToLoad")
         var string = "*"
         string.append(site)
@@ -126,7 +126,7 @@ class Domain:NSObject,NSCoding {
         
     }
     static func switchOffLockIn() {
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.set(false, forKey: "loadLockIn")
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.set(false, forKey: "loadLockIn")
         ExtensionManager.reload()
     }
     

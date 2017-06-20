@@ -14,7 +14,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
         
         
-        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")
         
         let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
         let loadLockIn = userDefaults?.bool(forKey: "≈")

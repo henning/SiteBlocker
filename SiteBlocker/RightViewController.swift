@@ -20,15 +20,13 @@ import SCLAlertView
     
     override func viewDidAppear(_ animated: Bool) {
         CenterViewController.singleton.addNewTextBox.resignFirstResponder()
+        LeftViewController.singleton.lockInTextBox.resignFirstResponder()
+        
     }
 
      override func viewDidLoad() {
         self.view.translatesAutoresizingMaskIntoConstraints = false
         self.view.layoutIfNeeded()
-
-        print(view.snp.height)
-        print(view.frame.width.squareRoot())
-        
 
         view.backgroundColor = UIColor.customWhite()
         
@@ -41,7 +39,7 @@ import SCLAlertView
             make.top.equalToSuperview().offset(12)
             make.left.equalToSuperview()
             make.right.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(736/41)
+            make.height.equalToSuperview().dividedBy(600/41)
         }
 
         

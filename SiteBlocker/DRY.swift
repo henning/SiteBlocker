@@ -74,7 +74,7 @@ struct ExtensionManager {
         if UserDefaults.standard.bool(forKey: "hasLoaded"){ return }
         else {
             let data = try! Data(contentsOf: (Bundle.main.url(forResource: "blockerList", withExtension: "json")!))
-            let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("blockerList.json")
+            let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.SiteBlocker")?.appendingPathComponent("blockerList.json")
             
             do {
                 try data.write(to: url!)
@@ -82,7 +82,7 @@ struct ExtensionManager {
                 print("Failed writing to URL: \(String(describing: url)), Error: " + error.localizedDescription)
             }
             
-            let url2 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("empty.json")
+            let url2 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.SiteBlocker")?.appendingPathComponent("empty.json")
             
             do {
                 try data.write(to: url2!)
@@ -90,7 +90,7 @@ struct ExtensionManager {
                 print("Failed writing to URL: \(String(describing: url2)), Error: " + error.localizedDescription)
             }
             
-            let url3 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.foo")?.appendingPathComponent("lockIn.json")
+            let url3 = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.lukejmann.SiteBlocker")?.appendingPathComponent("lockIn.json")
             
             do {
                 try data.write(to: url3!)
@@ -100,7 +100,7 @@ struct ExtensionManager {
 
             
 
-            let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+            let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")
             if let userDefaults = userDefaults {
                 userDefaults.set(url, forKey: "blockerList")
                 userDefaults.set(url3, forKey: "lockIn")

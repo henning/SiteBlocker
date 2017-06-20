@@ -1,5 +1,5 @@
 github "ReactiveX/RxSwift" ~> 3.0
-github "devxoul/RxKeyboard"
+github "devxoul/RxKeyboard" ~> 3.0
 github "SwiftyJSON/SwiftyJSON"
 github "SnapKit/SnapKit" ~> 3.0
 github "Ramotion/paper-switch"

@@ -31,6 +31,14 @@ class CenterViewController: UIViewController {
     var contracted = true
     
     
+    let tableHeight: CGFloat = {
+        print(UIScreen.main.bounds.height)
+        if UIScreen.main.bounds.height < 569 {
+            return 300
+        }
+        print("Not SE")
+        return 350
+    }()
     
     
     //MARK:- Bindings
@@ -70,17 +78,17 @@ class CenterViewController: UIViewController {
     }
     
     private func bindIndicator() {
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadEmpty").subscribe{ bool in
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.rx.observe(Bool.self, "loadEmpty").subscribe{ bool in
             self.reloadIndicator()
             }.addDisposableTo(disposeBag)
         
-        UserDefaults(suiteName: "group.com.lukejmann.foo")!.rx.observe(Bool.self, "loadLockIn").subscribe{ bool in
+        UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")!.rx.observe(Bool.self, "loadLockIn").subscribe{ bool in
             self.reloadIndicator()
             }.addDisposableTo(disposeBag)
     }
     
     private func reloadIndicator() {
-        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.foo")
+        let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")
         let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
         let lockIn = userDefaults?.bool(forKey: "loadLockIn")
         if lockIn! {
@@ -123,6 +131,8 @@ class CenterViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        LeftViewController.singleton.lockInTextBox.resignFirstResponder()
         
         if !UserDefaults.standard.bool(forKey: "hasLoaded"){
             present(OnboardingViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil), animated: true, completion: nil)
@@ -219,7 +229,7 @@ class CenterViewController: UIViewController {
         addNewTableView.allowsSelection = false
         addNewTableView.snp.makeConstraints({ (make) in
             make.top.equalTo(addNewView.snp.top).offset(60 + 10)
-            make.height.equalTo(275)
+            make.height.equalTo(tableHeight - 75)
             make.left.equalTo(addNewView.snp.left).offset(4)
             make.right.equalTo(addNewView.snp.right).offset(-4)
         })
@@ -279,7 +289,7 @@ class CenterViewController: UIViewController {
             self.addNewView.frame = CGRect(x: self.addNewView.frame.minX,
                                            y: self.addNewView.frame.minY,
                                            width: self.addNewView.frame.width,
-                                           height: 350)
+                                           height: self.tableHeight)
             self.addNewView.backgroundColor = UIColor.customWhite(alpha: 1.0)
             self.addNewLabel.alpha = 0
             

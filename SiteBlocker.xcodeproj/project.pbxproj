@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4807B5BB1EF5A7EB008FC474 /* GoogleService-Info (2).plist in Resources */ = {isa = PBXBuildFile; fileRef = 4807B5BA1EF5A7EB008FC474 /* GoogleService-Info (2).plist */; };
 		48090AE91EDB69D70071D7B2 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48090AE81EDB69D70071D7B2 /* RightViewController.swift */; };
 		481A05E81ECF1E8600AA0D74 /* blockerList.json in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8B1ECCF24A00A0E13A /* blockerList.json */; };
 		481A05E91ECF1E8C00AA0D74 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 4897CD8B1ECCF24A00A0E13A /* blockerList.json */; };
@@ -22,26 +21,26 @@
 		48670A771ECD149900F2765E /* BlockerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48670A761ECD149900F2765E /* BlockerModel.swift */; };
 		48670A7A1ECD1B9200F2765E /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48670A791ECD1B9200F2765E /* Cells.swift */; };
 		487DDCD61ED0084500C9A217 /* DRY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487DDCD51ED0084500C9A217 /* DRY.swift */; };
+		4883D17F1EF8824A009AB865 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4883D17E1EF8824A009AB865 /* LaunchScreen.xib */; };
 		4887C7511ED6DBC1005653FA /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4887C7501ED6DBC1005653FA /* LeftViewController.swift */; };
 		489560B61ECE94E800674432 /* blockerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 4897CD8B1ECCF24A00A0E13A /* blockerList.json */; };
-		489560B71ECE961600674432 /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift */; };
-		489560B81ECE961E00674432 /* ContentBlockerRequestHandler.swift in Resources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift */; };
+		489560B71ECE961600674432 /* ContentBlockRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift */; };
+		489560B81ECE961E00674432 /* ContentBlockRequestHandler.swift in Resources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift */; };
 		4897CD741ECCF23300A0E13A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD731ECCF23300A0E13A /* AppDelegate.swift */; };
 		4897CD761ECCF23300A0E13A /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD751ECCF23300A0E13A /* CenterViewController.swift */; };
-		4897CD7B1ECCF23400A0E13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4897CD7A1ECCF23400A0E13A /* Assets.xcassets */; };
-		4897CD8E1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift */; };
-		4897CD921ECCF24A00A0E13A /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4897CD891ECCF24A00A0E13A /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4897CD8E1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4897CD8D1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift */; };
 		4897CD9F1ECD0A9A00A0E13A /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9A1ECD0A9500A0E13A /* RxCocoa.framework */; };
 		4897CDA01ECD0A9A00A0E13A /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9B1ECD0A9500A0E13A /* RxSwift.framework */; };
 		4897CDA11ECD0A9A00A0E13A /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9C1ECD0A9500A0E13A /* SnapKit.framework */; };
 		4897CDA21ECD0A9A00A0E13A /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4897CD9D1ECD0A9500A0E13A /* SwiftyJSON.framework */; };
 		489B9F471EDB3392009CA587 /* SCLAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489B9F461EDB3392009CA587 /* SCLAlertView.framework */; };
 		48C5B7F21EDE1E6F00FCC3DE /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C5B7F11EDE1E6F00FCC3DE /* OnboardingViewController.swift */; };
+		48D273B91EF8A99100FE05C7 /* Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4897CD891ECCF24A00A0E13A /* Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4897CD901ECCF24A00A0E13A /* PBXContainerItemProxy */ = {
+		48D273BA1EF8A99100FE05C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4897CD681ECCF23300A0E13A /* Project object */;
 			proxyType = 1;
@@ -61,13 +60,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4897CD961ECCF24A00A0E13A /* Embed App Extensions */ = {
+		48D273BC1EF8A99100FE05C7 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				4897CD921ECCF24A00A0E13A /* Extension.appex in Embed App Extensions */,
+				48D273B91EF8A99100FE05C7 /* Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -76,7 +75,6 @@
 
 /* Begin PBXFileReference section */
 		480145491ECE7AAE00581461 /* SiteBlocker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SiteBlocker.entitlements; sourceTree = "<group>"; };
-		4807B5BA1EF5A7EB008FC474 /* GoogleService-Info (2).plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info (2).plist"; path = "../../../Downloads/GoogleService-Info (2).plist"; sourceTree = "<group>"; };
 		48090AE81EDB69D70071D7B2 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
 		481AB5801ED8CFEF007E09BA /* PaperSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaperSwitch.swift; sourceTree = "<group>"; };
 		481BE5CC1ECFC8600099C724 /* blockerList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
@@ -87,15 +85,16 @@
 		48670A761ECD149900F2765E /* BlockerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockerModel.swift; sourceTree = "<group>"; };
 		48670A791ECD1B9200F2765E /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		487DDCD51ED0084500C9A217 /* DRY.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DRY.swift; sourceTree = "<group>"; };
+		4883D17E1EF8824A009AB865 /* LaunchScreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		4883D1821EF88348009AB865 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4887C7501ED6DBC1005653FA /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftViewController.swift; sourceTree = "<group>"; };
 		4897CD701ECCF23300A0E13A /* SiteBlocker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SiteBlocker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4897CD731ECCF23300A0E13A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4897CD751ECCF23300A0E13A /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
-		4897CD7A1ECCF23400A0E13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4897CD7F1ECCF23400A0E13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4897CD891ECCF24A00A0E13A /* Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Extension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4897CD8B1ECCF24A00A0E13A /* blockerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = blockerList.json; sourceTree = "<group>"; };
-		4897CD8D1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockerRequestHandler.swift; sourceTree = "<group>"; };
+		4897CD8D1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentBlockRequestHandler.swift; sourceTree = "<group>"; };
 		4897CD8F1ECCF24A00A0E13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4897CD971ECCFAB900A0E13A /* Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Extension.entitlements; sourceTree = "<group>"; };
 		4897CD9A1ECD0A9500A0E13A /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -159,9 +158,10 @@
 				4897CD731ECCF23300A0E13A /* AppDelegate.swift */,
 				4897CD751ECCF23300A0E13A /* CenterViewController.swift */,
 				4887C7501ED6DBC1005653FA /* LeftViewController.swift */,
-				4897CD7A1ECCF23400A0E13A /* Assets.xcassets */,
+				48C5B7F11EDE1E6F00FCC3DE /* OnboardingViewController.swift */,
+				48090AE81EDB69D70071D7B2 /* RightViewController.swift */,
+				4883D1821EF88348009AB865 /* Assets.xcassets */,
 				4897CD7F1ECCF23400A0E13A /* Info.plist */,
-				4807B5BA1EF5A7EB008FC474 /* GoogleService-Info (2).plist */,
 				48670A761ECD149900F2765E /* BlockerModel.swift */,
 				48670A791ECD1B9200F2765E /* Cells.swift */,
 				481BE5CC1ECFC8600099C724 /* blockerList.json */,
@@ -169,8 +169,7 @@
 				48E219F21ED3B2D900B9BDCC /* SuggestionModel.swift */,
 				4861EFA21ED6DAD400BC368A /* SwipeNavigationController.swift */,
 				481AB5801ED8CFEF007E09BA /* PaperSwitch.swift */,
-				48090AE81EDB69D70071D7B2 /* RightViewController.swift */,
-				48C5B7F11EDE1E6F00FCC3DE /* OnboardingViewController.swift */,
+				4883D17E1EF8824A009AB865 /* LaunchScreen.xib */,
 			);
 			path = SiteBlocker;
 			sourceTree = "<group>";
@@ -180,7 +179,7 @@
 			children = (
 				4897CD971ECCFAB900A0E13A /* Extension.entitlements */,
 				4897CD8B1ECCF24A00A0E13A /* blockerList.json */,
-				4897CD8D1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift */,
+				4897CD8D1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift */,
 				4897CD8F1ECCF24A00A0E13A /* Info.plist */,
 				4820E52A1ED99528004DD271 /* empty.json */,
 			);
@@ -212,14 +211,14 @@
 				4897CD6C1ECCF23300A0E13A /* Sources */,
 				4897CD6D1ECCF23300A0E13A /* Frameworks */,
 				4897CD6E1ECCF23300A0E13A /* Resources */,
-				4897CD961ECCF24A00A0E13A /* Embed App Extensions */,
 				4897CDA31ECD0AA000A0E13A /* Cart */,
 				481A05EA1ECF1E9D00AA0D74 /* CopyFiles */,
+				48D273BC1EF8A99100FE05C7 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4897CD911ECCF24A00A0E13A /* PBXTargetDependency */,
+				48D273BB1EF8A99100FE05C7 /* PBXTargetDependency */,
 			);
 			name = SiteBlocker;
 			productName = SiteBlocker;
@@ -305,11 +304,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4883D17F1EF8824A009AB865 /* LaunchScreen.xib in Resources */,
 				481BE5CD1ECFC8600099C724 /* blockerList.json in Resources */,
-				489560B81ECE961E00674432 /* ContentBlockerRequestHandler.swift in Resources */,
+				489560B81ECE961E00674432 /* ContentBlockRequestHandler.swift in Resources */,
 				489560B61ECE94E800674432 /* blockerList.json in Resources */,
-				4807B5BB1EF5A7EB008FC474 /* GoogleService-Info (2).plist in Resources */,
-				4897CD7B1ECCF23400A0E13A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +353,7 @@
 			files = (
 				48C5B7F21EDE1E6F00FCC3DE /* OnboardingViewController.swift in Sources */,
 				48E219F31ED3B2D900B9BDCC /* SuggestionModel.swift in Sources */,
-				489560B71ECE961600674432 /* ContentBlockerRequestHandler.swift in Sources */,
+				489560B71ECE961600674432 /* ContentBlockRequestHandler.swift in Sources */,
 				48218A831ECE66A4003F82F9 /* blockerList.json in Sources */,
 				4887C7511ED6DBC1005653FA /* LeftViewController.swift in Sources */,
 				4897CD761ECCF23300A0E13A /* CenterViewController.swift in Sources */,
@@ -374,17 +372,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				481A05E81ECF1E8600AA0D74 /* blockerList.json in Sources */,
-				4897CD8E1ECCF24A00A0E13A /* ContentBlockerRequestHandler.swift in Sources */,
+				4897CD8E1ECCF24A00A0E13A /* ContentBlockRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4897CD911ECCF24A00A0E13A /* PBXTargetDependency */ = {
+		48D273BB1EF8A99100FE05C7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4897CD881ECCF24A00A0E13A /* Extension */;
-			targetProxy = 4897CD901ECCF24A00A0E13A /* PBXContainerItemProxy */;
+			targetProxy = 48D273BA1EF8A99100FE05C7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -499,6 +497,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukejmann.SiteBlocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -519,6 +519,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.lukejmann.SiteBlocker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};

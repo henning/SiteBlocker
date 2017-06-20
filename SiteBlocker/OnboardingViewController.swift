@@ -121,7 +121,7 @@ class OBPageViewController: UIViewController {
         mainTextLabel.textAlignment = .center
         
         nextButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)!
-        nextButton.setTitleColor(UIColor.customGrey(), for: .normal)
+        nextButton.setTitleColor(UIColor.customWhite(), for: .normal)
 
         
         view.addSubview(imageView)
@@ -157,9 +157,14 @@ class PageTwo:OBPageViewController {
     let notificationsButton = UIButton()
     let contentBlockingButton = UIButton()
     let actualNextButton = UIButton()
+    
+    var hasPressedButton1 = false
+    var hasPressedButton2 = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        notificationsButton.setTitle("Notifications Settings", for: .normal)
+        notificationsButton.setTitle("Notification Settings", for: .normal)
         mainTextLabel.text = "To get started, we'll need two things. First, notifactions to alert you when a sessions is done (you need to interact with the notificatin for the session to end). Second, you need to enable this app as a content blocker in Safari."
         contentBlockingButton.setTitle("Content Blocker Settings", for: .normal)
         actualNextButton.setTitle("Next", for: .normal)
@@ -167,6 +172,7 @@ class PageTwo:OBPageViewController {
         view.addSubview(notificationsButton)
         view.addSubview(contentBlockingButton)
         view.addSubview(actualNextButton)
+        self.actualNextButton.isEnabled = false
         notificationsButton.snp.makeConstraints { (make) in
             make.top.equalTo(view.frame.height * (3/4))
             make.centerX.equalToSuperview()
@@ -186,15 +192,21 @@ class PageTwo:OBPageViewController {
         contentBlockingButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)!
         actualNextButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)!
         notificationsButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)!
-        notificationsButton.setTitleColor(UIColor.customGrey(), for: .normal)
-        contentBlockingButton.setTitleColor(UIColor.customGrey(), for: .normal)
+        notificationsButton.setTitleColor(UIColor.customWhite(), for: .normal)
+        contentBlockingButton.setTitleColor(UIColor.customWhite(), for: .normal)
         actualNextButton.setTitleColor(UIColor.customGrey(), for: .normal)
         
         actualNextButton.rx.tap.subscribe { _ in
+            
             self.pageVC?.setViewControllers([(self.pageVC?.pageThree)!], direction: .forward, animated: true, completion: nil)
         }.addDisposableTo(disposeBag)
             
             notificationsButton.rx.tap.subscribe { _ in
+                self.hasPressedButton1 = true
+                if self.hasPressedButton1 && self.hasPressedButton2 {
+                    self.actualNextButton.setTitleColor(UIColor.customWhite(), for: .normal)
+                    self.actualNextButton.isEnabled = true
+                }
                 let center = UNUserNotificationCenter.current()
                 center.requestAuthorization(options: [.alert]) { (granted, error) in
                     if granted {
@@ -207,10 +219,13 @@ class PageTwo:OBPageViewController {
             }.addDisposableTo(disposeBag)
         
         contentBlockingButton.rx.tap.subscribe { _ in
+            self.hasPressedButton2 = true
+            if self.hasPressedButton1 && self.hasPressedButton2 {
+                self.actualNextButton.setTitleColor(UIColor.customWhite(), for: .normal)
+                self.actualNextButton.isEnabled = true
+            }
             LinkOpener.openContentBlockerSettings()
         }.addDisposableTo(disposeBag)
-        
-        
         
     }
 }
@@ -226,3 +241,4 @@ class PageThree:OBPageViewController {
         }.addDisposableTo(disposeBag)
     }
 }
+
