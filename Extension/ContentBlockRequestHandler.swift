@@ -17,7 +17,7 @@ class ContentBlockerRequestHandler: NSObject, NSExtensionRequestHandling {
         let userDefaults = UserDefaults(suiteName: "group.com.lukejmann.SiteBlocker")
         
         let loadEmpty = userDefaults?.bool(forKey: "loadEmpty")
-        let loadLockIn = userDefaults?.bool(forKey: "≈")
+        let loadLockIn = userDefaults?.bool(forKey: "loadLockIn")
 
         if loadLockIn! {
             let url =  userDefaults?.url(forKey: "lockIn")
